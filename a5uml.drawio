@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36" version="24.8.8">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="1195" dy="654" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3140" pageHeight="2000" math="0" shadow="0">
+    <mxGraphModel dx="2049" dy="1121" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3140" pageHeight="2000" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
@@ -106,16 +106,16 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="xHiWEumnkp8T0ZaLCuRG-91" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;BiQuadris&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- board1: Board&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- board2: Board&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;- devModeOn: bool&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;- bonusFeaturesOn: bool&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;- currentPlayer: int&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;- gameOver: bool&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;- specialAction: bool&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;+ moveBlockHorizontal(int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;+ moveBlockDown(int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;+ rotateBlockClockwise(int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;+ rotateBlockCounterClockwise(int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;+ dropBlock(int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;+ holdBlock(): void&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;+ restartBoard(): void&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;+ heavyEffect(): void&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;+ levelUp(int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;+ levelDown(int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;+ random(): void&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;+ noRandom(string): void&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;+ force(): void&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;+ replaceCurrentBlock(char): void&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;+ setBonusFeaturesOn(): void&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;+ blind(): void&lt;br&gt;+ getVisualGrid(int): std::vector&amp;lt;std::vector&amp;lt;VisualAttributes *&amp;gt;&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+ getCurrentBlock(int): std::pair&amp;lt;std::vector&amp;lt;std::pair&amp;lt;int, int&amp;gt;&amp;gt;, VisualAttributes *&amp;gt;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+ getNextBlock(int): std::pair&amp;lt;std::vector&amp;lt;std::pair&amp;lt;int, int&amp;gt;&amp;gt;, VisualAttributes *&amp;gt;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+ getHeldBlock(int): std::pair&amp;lt;std::vector&amp;lt;std::pair&amp;lt;int, int&amp;gt;&amp;gt;, VisualAttributes *&amp;gt;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+ getBlockBacklog(int): std::vector&amp;lt;&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;std::pair&amp;lt;std::vector&amp;lt;std::pair&amp;lt;int, int&amp;gt;&amp;gt;, VisualAttributes *&amp;gt;&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+ getCurrentScore(int): int&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+ getHighScore(int): int&lt;/span&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="1380" y="1420" width="450" height="490" as="geometry" />
+          <mxGeometry x="1372.5" y="1430" width="520" height="490" as="geometry" />
         </mxCell>
         <mxCell id="xHiWEumnkp8T0ZaLCuRG-93" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Board&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;- game: ManageGameStateProxy&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- currentLevel: Level&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;- width: int&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;- height: int&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- currentScore: int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- highScore: int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- numBlocksPlacedWithoutClearing: int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;- currentBlock:&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;std::unique_ptr&amp;lt;Block&amp;gt;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;- nextBlock:&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;std::unique_ptr&amp;lt;Block&amp;gt;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;- blockOnHold:&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;std::unique_ptr&amp;lt;Block&amp;gt;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;- allowedToHold:&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;std::unique_ptr&amp;lt;Block&amp;gt;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;- currentBlockHeavyEffect: bool&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- grid: std::vector&amp;lt;&lt;span style=&quot;background-color: initial;&quot;&gt;std::&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;vector&amp;lt;&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;std::shared_ptr&amp;lt;BlockCell&amp;gt;&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;/span&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;+ cellAvailable(int, int): bool&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;+ insertBlockCell(int, int, std::shared_ptr&amp;lt;BlockCell&amp;gt;): void&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;+ increaseScore(int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;+ moveBlockHorizontal(int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;+ moveBlockDown(int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;+ rotateBlockClockwise(int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;+ rotateBlockCounterClockwise(int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;+ dropBlock(int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;+ holdBlock(): void&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;+ getBlockDropPreview():&amp;nbsp;&lt;span style=&quot;text-wrap-mode: nowrap; background-color: initial;&quot;&gt;std::vector&amp;lt;std::pair&amp;lt;int, int&amp;gt;&amp;gt;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;&lt;span style=&quot;text-wrap-mode: nowrap; background-color: initial;&quot;&gt;+ restart() : void&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;+ levelUp(int) : void&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;+ levelDown(int): void&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;+ setHeavyEffect(): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;direction=south;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="850" y="1430" width="470" height="450" as="geometry" />
         </mxCell>
         <mxCell id="xHiWEumnkp8T0ZaLCuRG-95" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;ConsoleView&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- displayProxy: DisplayProxy &amp;amp;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ render(): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="2240" y="1680.5" width="240" height="90" as="geometry" />
+          <mxGeometry x="2275" y="1669.5" width="240" height="90" as="geometry" />
         </mxCell>
         <mxCell id="xHiWEumnkp8T0ZaLCuRG-96" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;GraphicsView&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-&amp;nbsp;&lt;span style=&quot;background-color: initial;&quot;&gt;displayProxy: DisplayProxy &amp;amp;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;- board1previousGrid:&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;std::vector&amp;lt;std::vector&amp;lt;int&amp;gt;&amp;gt;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;board2previousGrid:&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;std::vector&amp;lt;std::vector&amp;lt;int&amp;gt;&amp;gt;&lt;/span&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ render(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ fillRectangle(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ drawString(): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="2577.5" y="1630.5" width="275" height="140" as="geometry" />
+          <mxGeometry x="2612.5" y="1619.5" width="275" height="140" as="geometry" />
         </mxCell>
         <mxCell id="RzOuaV8a0XBnqdEBW30R-1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;Command&amp;lt;Dependency&amp;gt;&lt;/i&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- dependency: Dependency &amp;amp;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- commandName: string&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- hasArgs: bool&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ &lt;i&gt;execute&lt;/i&gt;(int): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ execute(int, vector&amp;lt;string&amp;gt;): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="1660" y="411" width="240" height="120" as="geometry" />
@@ -200,7 +200,7 @@
           <mxGeometry x="2660" y="600" width="110" height="50" as="geometry" />
         </mxCell>
         <mxCell id="RzOuaV8a0XBnqdEBW30R-41" value="Subject" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="1915" y="1822" width="270" height="120" as="geometry" />
+          <mxGeometry x="1950" y="1811" width="270" height="120" as="geometry" />
         </mxCell>
         <mxCell id="RzOuaV8a0XBnqdEBW30R-42" value="- observers: vector&amp;lt;std::shared_ptr&amp;lt;Observer&amp;gt;&amp;gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="RzOuaV8a0XBnqdEBW30R-41" vertex="1">
           <mxGeometry y="26" width="270" height="24" as="geometry" />
@@ -212,7 +212,7 @@
           <mxGeometry y="58" width="270" height="62" as="geometry" />
         </mxCell>
         <mxCell id="RzOuaV8a0XBnqdEBW30R-45" value="Observer" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="2500" y="1856" width="160" height="52" as="geometry" />
+          <mxGeometry x="2535" y="1845" width="160" height="52" as="geometry" />
         </mxCell>
         <mxCell id="RzOuaV8a0XBnqdEBW30R-48" value="+ notify(): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="RzOuaV8a0XBnqdEBW30R-45" vertex="1">
           <mxGeometry y="26" width="160" height="26" as="geometry" />
@@ -294,14 +294,14 @@
         </mxCell>
         <mxCell id="RzOuaV8a0XBnqdEBW30R-104" value="" style="endArrow=block;endSize=10;endFill=0;shadow=0;strokeWidth=1;rounded=0;curved=0;edgeStyle=elbowEdgeStyle;elbow=vertical;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="xHiWEumnkp8T0ZaLCuRG-95" target="RzOuaV8a0XBnqdEBW30R-45" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
-            <mxPoint x="2375" y="1750" as="sourcePoint" />
-            <mxPoint x="2425" y="1750" as="targetPoint" />
+            <mxPoint x="2410" y="1739" as="sourcePoint" />
+            <mxPoint x="2460" y="1739" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="RzOuaV8a0XBnqdEBW30R-105" value="" style="endArrow=block;endSize=10;endFill=0;shadow=0;strokeWidth=1;rounded=0;curved=0;edgeStyle=elbowEdgeStyle;elbow=vertical;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="xHiWEumnkp8T0ZaLCuRG-96" target="RzOuaV8a0XBnqdEBW30R-45" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
-            <mxPoint x="2725" y="1646" as="sourcePoint" />
-            <mxPoint x="2805" y="1610" as="targetPoint" />
+            <mxPoint x="2760" y="1635" as="sourcePoint" />
+            <mxPoint x="2840" y="1599" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="RzOuaV8a0XBnqdEBW30R-108" value="" style="endArrow=block;endSize=10;endFill=0;shadow=0;strokeWidth=1;rounded=0;curved=0;edgeStyle=elbowEdgeStyle;elbow=vertical;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="RzOuaV8a0XBnqdEBW30R-28" target="RzOuaV8a0XBnqdEBW30R-10" edge="1">
@@ -999,26 +999,26 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="wFKSXW86APxbTFOxJpED-0" value="DisplayProxy" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="1930" y="1430" width="600" height="150" as="geometry" />
+          <mxGeometry x="1965" y="1419" width="600" height="150" as="geometry" />
         </mxCell>
         <mxCell id="wFKSXW86APxbTFOxJpED-1" value="&lt;div&gt;+ getCurrentPlayer(): int&lt;/div&gt;+ getVisualGrid(int): std::vector&amp;lt;std::vector&amp;lt;VisualAttributes *&amp;gt;&amp;gt;&lt;div&gt;+ getCurrentBlock(int): std::pair&amp;lt;std::vector&amp;lt;std::pair&amp;lt;int, int&amp;gt;&amp;gt;, VisualAttributes *&amp;gt;&lt;/div&gt;&lt;div&gt;+ getNextBlock(int): std::pair&amp;lt;std::vector&amp;lt;std::pair&amp;lt;int, int&amp;gt;&amp;gt;, VisualAttributes *&amp;gt;&lt;/div&gt;&lt;div&gt;+ getHeldBlock(int): std::pair&amp;lt;std::vector&amp;lt;std::pair&amp;lt;int, int&amp;gt;&amp;gt;, VisualAttributes *&amp;gt;&lt;/div&gt;&lt;div&gt;+ getBlockBacklog(int): std::vector&amp;lt;&lt;span style=&quot;background-color: initial;&quot;&gt;std::pair&amp;lt;std::vector&amp;lt;std::pair&amp;lt;int, int&amp;gt;&amp;gt;, VisualAttributes *&amp;gt;&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;div&gt;+ getCurrentScore(int): int&lt;/div&gt;&lt;div&gt;+ getHighScore(int): int&lt;/div&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="wFKSXW86APxbTFOxJpED-0" vertex="1">
           <mxGeometry y="26" width="600" height="124" as="geometry" />
         </mxCell>
         <mxCell id="wFKSXW86APxbTFOxJpED-6" value="" style="endArrow=open;endFill=1;endSize=12;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="xHiWEumnkp8T0ZaLCuRG-95" target="wFKSXW86APxbTFOxJpED-0" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
-            <mxPoint x="2070" y="1733.0600000000004" as="sourcePoint" />
-            <mxPoint x="2170.48" y="1580" as="targetPoint" />
+            <mxPoint x="2105" y="1722.0600000000004" as="sourcePoint" />
+            <mxPoint x="2205.48" y="1569" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="2210" y="1726" />
+              <mxPoint x="2245" y="1715" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="wFKSXW86APxbTFOxJpED-7" value="" style="endArrow=open;endFill=1;endSize=12;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="xHiWEumnkp8T0ZaLCuRG-96" target="wFKSXW86APxbTFOxJpED-0" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
-            <mxPoint x="2700" y="1764.44" as="sourcePoint" />
-            <mxPoint x="2760" y="1520" as="targetPoint" />
+            <mxPoint x="2735" y="1753.44" as="sourcePoint" />
+            <mxPoint x="2795" y="1509" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="2715" y="1510" />
+              <mxPoint x="2750" y="1499" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -1033,11 +1033,11 @@
         </mxCell>
         <mxCell id="RzOuaV8a0XBnqdEBW30R-268" value="" style="endArrow=diamondThin;endFill=0;endSize=24;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="RzOuaV8a0XBnqdEBW30R-45" target="RzOuaV8a0XBnqdEBW30R-41" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
-            <mxPoint x="1930" y="1588" as="sourcePoint" />
-            <mxPoint x="1955" y="1738" as="targetPoint" />
+            <mxPoint x="1965" y="1577" as="sourcePoint" />
+            <mxPoint x="1990" y="1727" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="2320" y="1862" />
-              <mxPoint x="2320" y="1862" />
+              <mxPoint x="2355" y="1851" />
+              <mxPoint x="2355" y="1851" />
             </Array>
           </mxGeometry>
         </mxCell>
