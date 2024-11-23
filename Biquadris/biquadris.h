@@ -13,12 +13,14 @@ class BiQuadris : Subject {
   //Board board1
   //Board board2
   int currentBoardTurn = 1;
-  bool devMode = false;
-  bool bonusFeatures = true;
+  bool devMode;
+  bool bonusFeatures;
   bool gameOver = false;
   bool canUseSpecialAction = false;
 
   public:
+    BiQuadris(bool devMode = false, bool bonusFeatures = true, int randomSeed = 0);
+
     void moveBlockHorizontal(int);
     void moveBlockDown(int);
     void rotateBlockClockwise(int);
@@ -38,16 +40,16 @@ class BiQuadris : Subject {
     void forceEffect(char blockType);
 
     // getters
-    Grid getGrid(int whichBoard);
-    BlockAttributes getCurrentBlockAttributes(int whichBoard);
-    BlockAttributes getNextBlockAttributes(int whichBoard);
-    BlockAttributes getHeldBlockAttributes(int whichBoard);
-    vector<BlockAttributes> getBlockBacklog(int whichBoard);
-    int getCurrentScore(int whichBoard);
-    int getHighScore(int whichBoard);
-    bool getIsGameOver();
-    int getCurrentBoardTurn();
-    bool getCanUseSpecialAction();
+    Grid getGrid(int whichBoard) const;
+    BlockAttributes getCurrentBlockAttributes(int whichBoard) const;
+    BlockAttributes getNextBlockAttributes(int whichBoard) const;
+    BlockAttributes getHeldBlockAttributes(int whichBoard) const;
+    vector<BlockAttributes> getBlockBacklog(int whichBoard) const;
+    int getCurrentScore(int whichBoard) const;
+    int getHighScore(int whichBoard) const;
+    bool getIsGameOver() const;
+    int getCurrentBoardTurn() const;
+    bool getCanUseSpecialAction() const;
 
     // setters
     void setBonusFeatures(bool isOn);
@@ -55,4 +57,10 @@ class BiQuadris : Subject {
     void gameOver();
 
     ~BiQuadris();
+};
+
+class BiQuadrisProxy {
+  BiQuadris & gameEngine;
+  BiQuadrisProxy(BiQuadris gameEngine) : gameEngine{gameEngine} {}
+  ~BiQuadrisProxy() = default;
 };
