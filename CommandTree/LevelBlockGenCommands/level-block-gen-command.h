@@ -4,9 +4,12 @@
 #include "command.h"
 #include "../Biquadris/biquadris-proxies.h"
 
-class LevelBlockGenCommand : Command<LevelBlockGenProxy> {
-  LevelBlockGenCommand(LevelBlockGenProxy & biquadrisProxy) : Command<LevelBlockGenProxy>{biquadrisProxy} {}
-  virtual ~LevelBlockGenCommand() = default;
+class LevelBlockGenCommand : public Command<LevelBlockGenProxy> {
+  protected:
+    LevelBlockGenCommand(LevelBlockGenProxy & biquadrisProxy, std::string commandName, bool hasArgs) : 
+      Command<LevelBlockGenProxy>{biquadrisProxy, commandName, hasArgs} {}
+
+    virtual ~LevelBlockGenCommand() = default;
 };
 
 #endif
