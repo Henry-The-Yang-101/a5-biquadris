@@ -21,9 +21,11 @@ class BlockCell {
 
 class Block {
 
+    protected:
+        enum class Rotation {UP, RIGHT, DOWN, LEFT};
+
     private:
 
-        enum class Rotation {UP, RIGHT, DOWN, LEFT};
         Rotation rotation;
 
         BoardProxy & board;
@@ -39,7 +41,7 @@ class Block {
         Block(BoardProxy& board, char type, int level);
         ~Block();
 
-        std::vector<CellCoords> getBaseShape(Rotation rotation);
+        virtual std::vector<CellCoords> getBaseShape(Rotation rotation);
 
         bool moveLeft();
         bool moveRight();
