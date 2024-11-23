@@ -4,23 +4,27 @@
 #include "manage-game-state-command.h"
 
 class BonusOnCommand : public ManageGameStateCommand {
-  BonusOnCommand(ManageGameStateProxy & biquadrisProxy, std::string commandName);
-  void execute(int multiplier) override;
+  public:
+    BonusOnCommand(ManageGameStateProxy & biquadrisProxy, std::string commandName);
+    void execute(int multiplier) override;
 };
 
 class BonusOffCommand : public ManageGameStateCommand {
-  BonusOffCommand(ManageGameStateProxy & biquadrisProxy, std::string commandName);
-  void execute(int multiplier) override;
+  public:
+    BonusOffCommand(ManageGameStateProxy & biquadrisProxy, std::string commandName);
+    void execute(int multiplier) override;
 };
 
 class DevOnCommand : public ManageGameStateCommand {
-  DevOnCommand(ManageGameStateProxy & biquadrisProxy, std::string commandName);
-  void execute(int multiplier) override;
+  public:
+    DevOnCommand(ManageGameStateProxy & biquadrisProxy, std::string commandName);
+    void execute(int multiplier) override;
 };
 
 class DevOffCommand : public ManageGameStateCommand {
-  DevOffCommand(ManageGameStateProxy & biquadrisProxy, std::string commandName);
-  void execute(int multiplier) override;
+  public:
+    DevOffCommand(ManageGameStateProxy & biquadrisProxy, std::string commandName);
+    void execute(int multiplier) override;
 };
 
 #endif

@@ -1,6 +1,6 @@
 #include "all-output-commands.h"
 
-// HintCommand
+// HintCommand definitions
 HintCommand::HintCommand(ostream & out, std::string commandName) : OutputCommand{out, commandName, false} {}
 
 void HintCommand::execute(int multiplier) {

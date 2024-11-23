@@ -6,12 +6,15 @@
 
 template <typename Dependency>
 class Command {
-  Dependency & dependency;
-  string commandName;
   bool hasArgs;
 
+  protected:
+    Dependency & dependency;
+    std::string commandName;
+
   public:
-    Command(Dependency & dependency) : dependency{dependency} {}
+    Command(Dependency & dependency, std::string commandName, bool hasArgs) : 
+      dependency{dependency}, commandName{commandName}, hasArgs{hasArgs} {}
 
     virtual void execute(int multiplier) = 0;
     virtual void execute(int multiplier, std::vector<std::string> args) {}

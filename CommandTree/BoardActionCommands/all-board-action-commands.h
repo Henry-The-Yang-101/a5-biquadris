@@ -4,23 +4,27 @@
 #include "board-action-command.h"
 
 class LeftCommand : public BoardActionCommand {
-  LeftCommand(BoardActionProxy & biquadrisProxy, std::string commandName);
-  void execute(int multiplier) override;
+  public:
+    LeftCommand(BoardActionProxy & biquadrisProxy, std::string commandName);
+    void execute(int multiplier) override;
 };
 
 class RightCommand : public BoardActionCommand {
-  RightCommand(BoardActionProxy & biquadrisProxy, std::string commandName);
-  void execute(int multiplier) override;
+  public:
+    RightCommand(BoardActionProxy & biquadrisProxy, std::string commandName);
+    void execute(int multiplier) override;
 };
 
 class DownCommand : public BoardActionCommand {
-  DownCommand(BoardActionProxy & biquadrisProxy, std::string commandName);
-  void execute(int multiplier) override;
+  public:
+    DownCommand(BoardActionProxy & biquadrisProxy, std::string commandName);
+    void execute(int multiplier) override;
 };
 
 class DropCommand : public BoardActionCommand {
-  DropCommand(BoardActionProxy & biquadrisProxy, std::string commandName);
-  void execute(int multiplier) override;
+  public:
+    DropCommand(BoardActionProxy & biquadrisProxy, std::string commandName);
+    void execute(int multiplier) override;
 };
 
 class ClockwiseCommand : public BoardActionCommand {
@@ -34,18 +38,21 @@ class CounterClockwiseCommand : public BoardActionCommand {
 };
 
 class HoldCommand : public BoardActionCommand {
-  HoldCommand(BoardActionProxy & biquadrisProxy, std::string commandName);
-  void execute(int multiplier) override;
+  public:
+    HoldCommand(BoardActionProxy & biquadrisProxy, std::string commandName);
+    void execute(int multiplier) override;
 };
 
 class HeavyEffectCommand : public BoardActionCommand {
-  HeavyEffectCommand(BoardActionProxy & biquadrisProxy, std::string commandName);
-  void execute(int multiplier) override;
+  public:
+    HeavyEffectCommand(BoardActionProxy & biquadrisProxy, std::string commandName);
+    void execute(int multiplier) override;
 };
 
 class RestartCommand : public BoardActionCommand {
-  RestartCommand(BoardActionProxy & biquadrisProxy, std::string commandName);
-  void execute(int multiplier) override;
+  public:
+    RestartCommand(BoardActionProxy & biquadrisProxy, std::string commandName);
+    void execute(int multiplier) override;
 };
 
 #endif

@@ -6,9 +6,12 @@
 
 class CommandTree; //forward declare
 
-class MetaCommand : Command<CommandTree *> {
-  MetaCommand(CommandTree *& commandTree) : Command<CommandTree *>{commandTree} {}
-  virtual ~MetaCommand() = default;
+class MetaCommand : public Command<CommandTree *> {
+  protected:
+    MetaCommand(CommandTree *& commandTree, std::string commandName, bool hasArgs) : 
+      Command<CommandTree *>{commandTree, commandName, hasArgs} {}
+
+    virtual ~MetaCommand() = default;
 };
 
 #endif
