@@ -1,8 +1,11 @@
+#ifndef BIQUADRIS_H
+#define BIQUADRIS_H
+
 #include <iostream>
 #include <vector>
 #include <string>
 #include "../Miscellaneous/subject.h"
-// include board
+// include board.h when its ready
 
 using namespace std;
 using CellCoords = pair<int, int>;
@@ -15,21 +18,21 @@ class BiQuadris : Subject {
   int currentBoardTurn = 1;
   bool devMode;
   bool bonusFeatures;
-  bool gameOver = false;
+  bool isGameOver = false;
   bool canUseSpecialAction = false;
 
   public:
     BiQuadris(string sequenceFile1 = "sequence1.txt", string sequenceFile2 = "sequence2.txt", bool devMode = false, bool bonusFeatures = true, int randomSeed = 0);
 
-    void moveBlockHorizontal(int multipler);
-    void moveBlockDown(int multipler);
-    void rotateBlockClockwise(int multipler);
-    void rotateBlockCounterClockwise(int multipler);
-    void dropBlock(int multipler);
+    void moveBlockHorizontal(int multiplier);
+    void moveBlockDown(int multiplier);
+    void rotateBlockClockwise(int multiplier);
+    void rotateBlockCounterClockwise(int multiplier);
+    void dropBlock(int multiplier);
     void holdBlock();
     void restartBoard();
-    void levelUp(int multipler);
-    void levelDown(int multipler);
+    void levelUp(int multiplier);
+    void levelDown(int multiplier);
     void enableRandom();
     void disableRandom(string blockSequenceFile);
     void replaceCurrentBlock(char blockType);
@@ -65,3 +68,5 @@ class BiQuadrisProxy {
     BiQuadrisProxy(BiQuadris & gameEngine) : gameEngine{gameEngine} {}
     virtual ~BiQuadrisProxy() = default;
 };
+
+#endif

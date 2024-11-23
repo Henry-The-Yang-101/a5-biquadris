@@ -1,4 +1,12 @@
+#ifndef BIQUADRIS_PROXIES_H
+#define BIQUADRIS_PROXIES_H
+
+#include <string>
 #include "biquadris.h"
+
+using CellCoords = pair<int, int>;
+using BlockAttributes = pair<vector<CellCoords>, char>;
+using Grid = vector<vector<char>>;
 
 class ManageGameStateProxy : BiQuadrisProxy {
   ManageGameStateProxy(BiQuadris & gameEngine);
@@ -14,11 +22,11 @@ class VisualEffectProxy : BiQuadrisProxy {
 
 class BoardActionProxy : BiQuadrisProxy {
   BoardActionProxy(BiQuadris & gameEngine);
-  void moveBlockHorizontal(int multipler);
-  void moveBlockDown(int multipler);
-  void rotateBlockClockwise(int multipler);
-  void rotateBlockCounterClockwise(int multipler);
-  void dropBlock(int multipler);
+  void moveBlockHorizontal(int multiplier);
+  void moveBlockDown(int multiplier);
+  void rotateBlockClockwise(int multiplier);
+  void rotateBlockCounterClockwise(int multiplier);
+  void dropBlock(int multiplier);
   void holdBlock();
   void restartBoard();
   void heavyEffect();
@@ -27,10 +35,28 @@ class BoardActionProxy : BiQuadrisProxy {
 class LevelBlockGenProxy : BiQuadrisProxy {
   LevelBlockGenProxy(BiQuadris & gameEngine);
 
-  void levelUp(int multipler);
-  void levelDown(int multipler);
+  void levelUp(int multiplier);
+  void levelDown(int multiplier);
   void enableRandom();
-  void disableRandom(string blockSequenceFile);
+  void disableRandom(std::string blockSequenceFile);
   void replaceCurrentBlock(char blockType);
   void forceEffect(char blockType);
 };
+
+
+class DisplayProxy : BiQuadrisProxy {
+  DisplayProxy(BiQuadris & gameEngine);
+
+  Grid getGrid(int whichBoard) const;
+  BlockAttributes getCurrentBlockAttributes(int whichBoard) const;
+  BlockAttributes getNextBlockAttributes(int whichBoard) const;
+  BlockAttributes getHeldBlockAttributes(int whichBoard) const;
+  vector<BlockAttributes> getBlockBacklog(int whichBoard) const;
+  int getCurrentScore(int whichBoard) const;
+  int getHighScore(int whichBoard) const;
+  bool getIsGameOver() const;
+  int getCurrentBoardTurn() const;
+  bool getCanUseSpecialAction() const;
+};
+
+#endif
