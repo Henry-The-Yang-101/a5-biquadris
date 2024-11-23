@@ -1,15 +1,13 @@
 #ifndef META_COMMAND_H
 #define META_COMMAND_H
 
-#include "command.h"
-#include "commandTree.h"
+#include "../aggregate-command.h"
+#include "../command-tree.h"
 
-class CommandTree;
-
-class MetaCommand : public AggregateCommand<CommandTree *> {
+class MetaCommand : public AggregateCommand<CommandTree> {
   protected:
-    MetaCommand(CommandTree *& commandTree, std::string commandName, bool hasArgs) : 
-      AggregateCommand<CommandTree *>{commandTree, commandName, hasArgs} {}
+    MetaCommand(CommandTree & commandTree, std::string commandName, bool hasArgs) : 
+      AggregateCommand<CommandTree>{commandTree, commandName, hasArgs} {}
 
     virtual ~MetaCommand() = default;
 };
