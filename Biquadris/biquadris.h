@@ -19,20 +19,20 @@ class BiQuadris : Subject {
   bool canUseSpecialAction = false;
 
   public:
-    BiQuadris(bool devMode = false, bool bonusFeatures = true, int randomSeed = 0);
+    BiQuadris(string sequenceFile1 = "sequence1.txt", string sequenceFile2 = "sequence2.txt", bool devMode = false, bool bonusFeatures = true, int randomSeed = 0);
 
-    void moveBlockHorizontal(int);
-    void moveBlockDown(int);
-    void rotateBlockClockwise(int);
-    void rotateBlockCounterClockwise(int);
-    void dropBlock(int);
+    void moveBlockHorizontal(int multipler);
+    void moveBlockDown(int multipler);
+    void rotateBlockClockwise(int multipler);
+    void rotateBlockCounterClockwise(int multipler);
+    void dropBlock(int multipler);
     void holdBlock();
     void restartBoard();
-    void levelUp(int);
-    void levelDown(int);
+    void levelUp(int multipler);
+    void levelDown(int multipler);
     void enableRandom();
     void disableRandom(string blockSequenceFile);
-    void replaceCurrentBlock(char);
+    void replaceCurrentBlock(char blockType);
 
     // effects
     void blindEffect();
@@ -53,14 +53,15 @@ class BiQuadris : Subject {
 
     // setters
     void setBonusFeatures(bool isOn);
-    void setDevFeatures(bool isOn);
+    void setDevMode(bool isOn);
     void gameOver();
 
     ~BiQuadris();
 };
 
 class BiQuadrisProxy {
-  BiQuadris & gameEngine;
-  BiQuadrisProxy(BiQuadris gameEngine) : gameEngine{gameEngine} {}
-  ~BiQuadrisProxy() = default;
+  protected:
+    BiQuadris & gameEngine;
+    BiQuadrisProxy(BiQuadris & gameEngine) : gameEngine{gameEngine} {}
+    virtual ~BiQuadrisProxy() = default;
 };
