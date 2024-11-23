@@ -4,22 +4,20 @@
 #include <vector>
 #include <string>
 
-template <typename Dependency>
 class Command {
   bool hasArgs;
 
   protected:
-    Dependency & dependency;
     std::string commandName;
 
-  public:
-    Command(Dependency & dependency, std::string commandName, bool hasArgs) : 
-      dependency{dependency}, commandName{commandName}, hasArgs{hasArgs} {}
+    Command(std::string commandName, bool hasArgs) : 
+      commandName{commandName}, hasArgs{hasArgs} {}
+    
+    virtual ~Command() = default;
 
+  public:
     virtual void execute(int multiplier) = 0;
     virtual void execute(int multiplier, std::vector<std::string> args) {}
-
-    virtual ~Command() = default;
 };
 
 #endif

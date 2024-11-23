@@ -1,13 +1,13 @@
 #ifndef OUTPUT_COMMAND_H
 #define OUTPUT_COMMAND_H
 
-#include "command.h"
-#include "../Biquadris/biquadris-proxies.h"
+#include <iostream>
+#include "aggregate-command.h"
 
-class OutputCommand : public Command<ostream> {
+class OutputCommand : public AggregateCommand<std::ostream> {
   protected:
-    OutputCommand(ostream & out, std::string commandName, bool hasArgs) : 
-      Command<ostream>{out, commandName, hasArgs} {}
+    OutputCommand(std::ostream & out, std::string commandName, bool hasArgs) : 
+      AggregateCommand<std::ostream>{out, commandName, hasArgs} {}
 
     virtual ~OutputCommand() = default;
 };

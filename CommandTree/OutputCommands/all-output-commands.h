@@ -5,7 +5,7 @@
 
 class HintCommand : public OutputCommand {
   public:
-    HintCommand(ostream & out, std::string commandName);
+    HintCommand(std::ostream & out, std::string commandName);
     void execute(int multiplier) override;
 };
 

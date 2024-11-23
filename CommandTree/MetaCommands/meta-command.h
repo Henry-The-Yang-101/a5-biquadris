@@ -2,14 +2,14 @@
 #define META_COMMAND_H
 
 #include "command.h"
-#include "../Biquadris/biquadris-proxies.h"
+#include "commandTree.h"
 
-class CommandTree; //forward declare
+class CommandTree;
 
-class MetaCommand : public Command<CommandTree *> {
+class MetaCommand : public AggregateCommand<CommandTree *> {
   protected:
     MetaCommand(CommandTree *& commandTree, std::string commandName, bool hasArgs) : 
-      Command<CommandTree *>{commandTree, commandName, hasArgs} {}
+      AggregateCommand<CommandTree *>{commandTree, commandName, hasArgs} {}
 
     virtual ~MetaCommand() = default;
 };
