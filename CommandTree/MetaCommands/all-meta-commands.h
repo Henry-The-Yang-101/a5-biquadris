@@ -25,6 +25,7 @@ class MacroInstanceCommand : public MetaCommand {
 };
 
 class SequenceCommand : public MetaCommand {
+  static const std::string filePathPrefix;
   public:
     SequenceCommand(CommandTree & commandTree, std::string commandName);
     void execute(int multiplier) {}

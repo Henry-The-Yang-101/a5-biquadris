@@ -16,6 +16,7 @@ class CommandTree {
   private:
     class CommandNode {
       public:
+        CommandNode();
         std::unordered_map<char, std::unique_ptr<Command>> children;
         std::unique_ptr<Command> command;
     };
