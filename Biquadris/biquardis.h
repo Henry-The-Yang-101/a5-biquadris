@@ -12,9 +12,9 @@ using Grid = vector<vector<char>>;
 class BiQuadris : Subject {
   //Board board1
   //Board board2
+  int currentBoardTurn = 1;
   bool devMode = false;
   bool bonusFeatures = true;
-  int currentBoardTurn = 1;
   bool gameOver = false;
   bool canUseSpecialAction = false;
 
