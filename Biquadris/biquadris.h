@@ -12,7 +12,7 @@ using CellCoords = pair<int, int>;
 using BlockAttributes = pair<vector<CellCoords>, char>;
 using Grid = vector<vector<char>>;
 
-class BiQuadris : Subject {
+class BiQuadris : public Subject {
   //Board board1
   //Board board2
   int currentBoardTurn = 1;

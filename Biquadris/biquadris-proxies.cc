@@ -1,4 +1,3 @@
-#include <string>
 #include "biquadris-proxies.h"
 
 using CellCoords = pair<int, int>;
