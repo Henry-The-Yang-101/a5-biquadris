@@ -4,9 +4,12 @@
 #include "command.h"
 #include "../Biquadris/biquadris-proxies.h"
 
-class VisualEffectCommand : Command<VisualEffectProxy> {
-  VisualEffectCommand(VisualEffectProxy & biquadrisProxy) : Command<VisualEffectProxy>{biquadrisProxy} {}
-  virtual ~VisualEffectCommand() = default;
+class VisualEffectCommand : public Command<VisualEffectProxy> {
+  protected:
+    VisualEffectCommand(VisualEffectProxy & biquadrisProxy, std::string commandName, bool hasArgs) : 
+      Command<VisualEffectProxy>{biquadrisProxy, commandName, hasArgs} {}
+
+    virtual ~VisualEffectCommand() = default;
 };
 
 #endif
