@@ -7,6 +7,9 @@
 #include "command.h"
 
 class CommandTree {
+  class CommandNode;
+  std::unique_ptr<CommandNode> root;
+
   public:
     CommandTree();
     void addCommand(std::unique_ptr<Command> command);
@@ -16,12 +19,12 @@ class CommandTree {
   private:
     class CommandNode {
       public:
-        CommandNode();
-        std::unordered_map<char, std::unique_ptr<Command>> children;
+        CommandNode() = default;
+        std::unordered_map<char, std::unique_ptr<CommandNode>> children;
         std::unique_ptr<Command> command;
     };
-
-    std::unique_ptr<CommandNode> root;
+    Command* find(std::string commandName) const;
+    std::unique_ptr<Command> recursiveRemoveCommand(CommandNode* node, const std::string& commandName, size_t index);
 };
 
 #endif

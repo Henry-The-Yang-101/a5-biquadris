@@ -15,6 +15,7 @@ class Command {
     virtual ~Command() = default;
 
   public:
+    bool getHasArgs() { return this->hasArgs; }
     std::string getCommandName() { return this->commandName; }
     void setCommandName(std::string newName) { this->commandName = newName; }
     virtual void execute(int multiplier) = 0;
