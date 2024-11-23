@@ -52,6 +52,7 @@ class BiQuadris : Subject {
     // setters
     void setBonusFeatures(bool isOn);
     void setDevFeatures(bool isOn);
+    void gameOver();
 
     ~BiQuadris();
 };
