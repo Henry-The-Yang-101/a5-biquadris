@@ -1,7 +1,7 @@
 #ifndef MANAGE_GAME_STATE_COMMAND_H
 #define MANAGE_GAME_STATE_COMMAND_H
 
-#include "aggregate-command.h"
+#include "../aggregate-command.h"
 #include "../Biquadris/biquadris-proxies.h"
 
 class ManageGameStateCommand : public AggregateCommand<ManageGameStateProxy> {

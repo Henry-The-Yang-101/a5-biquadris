@@ -2,7 +2,7 @@
 #define OUTPUT_COMMAND_H
 
 #include <iostream>
-#include "aggregate-command.h"
+#include "../aggregate-command.h"
 
 class OutputCommand : public AggregateCommand<std::ostream> {
   protected:

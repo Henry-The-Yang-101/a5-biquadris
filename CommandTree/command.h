@@ -6,18 +6,19 @@
 
 class Command {
   bool hasArgs;
+  std::string commandName;
 
   protected:
-    std::string commandName;
-
     Command(std::string commandName, bool hasArgs) : 
       commandName{commandName}, hasArgs{hasArgs} {}
     
     virtual ~Command() = default;
 
   public:
+    std::string getCommandName() { return this->commandName; }
+    void setCommandName(std::string newName) { this->commandName = newName; }
     virtual void execute(int multiplier) = 0;
-    virtual void execute(int multiplier, std::vector<std::string> args) {}
+    virtual void execute(int multiplier, std::vector<std::string> && args) {}
 };
 
 #endif

@@ -24,14 +24,14 @@ void RandomCommand::execute(int multiplier) {
 // NoRandomCommand definitions
 NoRandomCommand::NoRandomCommand(LevelBlockGenProxy & biquadrisProxy, std::string commandName) : LevelBlockGenCommand{biquadrisProxy, commandName, true} {}
 
-void NoRandomCommand::execute(int multiplier, std::vector<std::string> args) {
+void NoRandomCommand::execute(int multiplier, std::vector<std::string> && args) {
   if (args.size() == 1) this->dependency.disableRandom(args[0]);
 }
 
 // ForceCommand definitions
 ForceCommand::ForceCommand(LevelBlockGenProxy & biquadrisProxy, std::string commandName) : LevelBlockGenCommand{biquadrisProxy, commandName, true} {}
 
-void ForceCommand::execute(int multiplier, std::vector<std::string> args) {
+void ForceCommand::execute(int multiplier, std::vector<std::string> && args) {
   if (args.size() == 1 && args[0].size() > 0) this->dependency.forceEffect(args[0][0]);
 }
 
@@ -39,5 +39,5 @@ void ForceCommand::execute(int multiplier, std::vector<std::string> args) {
 ReplaceBlockCommand::ReplaceBlockCommand(LevelBlockGenProxy & biquadrisProxy, std::string commandName) : LevelBlockGenCommand{biquadrisProxy, commandName, false} {}
 
 void ReplaceBlockCommand::execute(int multiplier) {
-  this->dependency.replaceCurrentBlock(this->commandName[0]);
+  this->dependency.replaceCurrentBlock(this->getCommandName()[0]);
 }

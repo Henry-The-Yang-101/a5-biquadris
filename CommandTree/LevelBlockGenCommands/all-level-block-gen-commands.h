@@ -25,14 +25,14 @@ class NoRandomCommand : public LevelBlockGenCommand {
   public:
     NoRandomCommand(LevelBlockGenProxy & biquadrisProxy, std::string commandName);
     void execute(int multiplier) {}
-    void execute(int multiplier, std::vector<std::string> args) override;
+    void execute(int multiplier, std::vector<std::string> && args) override;
 };
 
 class ForceCommand : public LevelBlockGenCommand {
   public:
     ForceCommand(LevelBlockGenProxy & biquadrisProxy, std::string commandName);
     void execute(int multiplier) {}
-    void execute(int multiplier, std::vector<std::string> args) override;
+    void execute(int multiplier, std::vector<std::string> && args) override;
 };
 
 class ReplaceBlockCommand : public LevelBlockGenCommand {

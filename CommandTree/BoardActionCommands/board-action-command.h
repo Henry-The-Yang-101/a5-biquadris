@@ -1,7 +1,7 @@
 #ifndef BOARD_ACTION_COMMAND_H
 #define BOARD_ACTION_COMMAND_H
 
-#include "aggregate-command.h"
+#include "../aggregate-command.h"
 #include "../Biquadris/biquadris-proxies.h"
 
 class BoardActionCommand : public AggregateCommand<BoardActionProxy> {
