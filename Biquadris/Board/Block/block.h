@@ -1,7 +1,6 @@
 #ifndef BLOCK_H
 #define BLOCK_H
 
-#include "board.h"
 #include "board-proxy.h"
 
 using CellCoords = pair<int, int>;
@@ -9,11 +8,11 @@ using CellCoords = pair<int, int>;
 class BlockCell {
 
     private:
-        BoardProxy & board;
+        BoardProxy & boardProxy;
         int clearScore;
 
     public:
-        BlockCell(BoardProxy & board, char type);
+        BlockCell(BoardProxy & boardProxy, char type);
         ~BlockCell();
 
         char type;
@@ -28,7 +27,7 @@ class Block {
 
         Rotation rotation;
 
-        BoardProxy & board;
+        BoardProxy & boardProxy;
         int leftShift;
         int downShift;
         int level;
@@ -38,7 +37,7 @@ class Block {
         bool checkPositionValidity(Rotation newRotation, int newX, int newY);
 
     public:
-        Block(BoardProxy& board, char type, int level);
+        Block(BoardProxy& boardProxy, char type, int level);
         ~Block();
 
         virtual std::vector<CellCoords> getBaseShape(Rotation rotation);
