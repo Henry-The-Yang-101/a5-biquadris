@@ -41,7 +41,7 @@ class Block {
         virtual int getClearScore() const;
         virtual std::vector<CellCoordinate> getBaseShape(Rotation rotation) const = 0;
         std::vector<CellCoordinate> getCellCoordinates(Rotation newRotation, int newrightShift, int newDownShift) const;
-        bool checkPositionValidity(const std::vector<CellCoordinate> & coords) const;
+        bool checkPositionValidity(const std::vector<CellCoordinate> & cellCoords) const;
 
     public:
         bool moveLeft();

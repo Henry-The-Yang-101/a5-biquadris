@@ -46,11 +46,11 @@ std::vector<CellCoordinate> Block::getCellCoordinates(Rotation newRotation, int 
   return baseShape;
 }
 
-bool Block::checkPositionValidity(const std::vector<CellCoordinate> & coords) const {
-  for (CellCoordinate c : coords) {
-    if () {
-      
-    }
+bool Block::checkPositionValidity(const std::vector<CellCoordinate> & cellCoords) const {
+  for (const CellCoordinate & cell : cellCoords) {
+    if (cell.first < 0 || cell.first >= this->boardProxy.getBoardWidth()) return false;
+    if (cell.second >= this->boardProxy.getBoardHeight()) return false;
+    if (!this->boardProxy.cellAvailable(cell.first, cell.second)) return false;
   }
   return true;
 }
@@ -108,7 +108,7 @@ void Block::drop() {
   std::vector<CellCoordinate> dropCoords = std::move(this->getDropPreviewCellCoordinate());
   std::shared_ptr<BlockCell> blockCell = std::make_shared<BlockCell>(this->boardProxy, this->getClearScore(), this->type);
 
-  for (CellCoordinate & cell : dropCoords) {
+  for (const CellCoordinate & cell : dropCoords) {
     this->boardProxy.insertBlockCell(cell.first, cell.second, blockCell);
   }
 }
@@ -142,4 +142,3 @@ std::vector<CellCoordinate> Block::getDropPreviewCellCoordinate() const {
 bool Block::checkPositionValidity() const {
   return this->checkPositionValidity(this->getCellCoordinates());
 }
-
