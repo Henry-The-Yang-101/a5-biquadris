@@ -92,45 +92,45 @@ void LevelBlockGenProxy::forceEffect(char blockType) {
 DisplayProxy::DisplayProxy(BiQuadris & gameEngine) : BiQuadrisProxy{gameEngine} {}
 
 Grid DisplayProxy::getGrid(int whichBoard) const {
-  this->gameEngine.getGrid(whichBoard);
+  return this->gameEngine.getGrid(whichBoard);
 }
 
 BlockAttributes DisplayProxy::getCurrentBlockAttributes(int whichBoard) const {
-  this->gameEngine.getCurrentBlockAttributes(whichBoard);
+  return this->gameEngine.getCurrentBlockAttributes(whichBoard);
 }
 
 BlockAttributes DisplayProxy::getNextBlockAttributes(int whichBoard) const {
-  this->gameEngine.getNextBlockAttributes(whichBoard);
+  return this->gameEngine.getNextBlockAttributes(whichBoard);
 }
 
 BlockAttributes DisplayProxy::getHeldBlockAttributes(int whichBoard) const {
-  this->gameEngine.getHeldBlockAttributes(whichBoard);
+  return this->gameEngine.getHeldBlockAttributes(whichBoard);
 }
 
 vector<BlockAttributes> DisplayProxy::getBlockBacklog(int whichBoard) const {
-  this->gameEngine.getBlockBacklog(whichBoard);
+  return this->gameEngine.getBlockBacklog(whichBoard);
 }
 
 int DisplayProxy::getCurrentScore(int whichBoard) const {
-  this->gameEngine.getCurrentScore(whichBoard);
+  return this->gameEngine.getCurrentScore(whichBoard);
 }
 
 int DisplayProxy::getHighScore(int whichBoard) const {
-  this->gameEngine.getHighScore(whichBoard);
+  return this->gameEngine.getHighScore(whichBoard);
 }
 
 int DisplayProxy::getLevel(int whichBoard) const {
-  this->gameEngine.getLevel(whichBoard);
+  return this->gameEngine.getLevel(whichBoard);
 }
 
 bool DisplayProxy::getIsGameOver() const {
-  this->gameEngine.getIsGameOver();
+  return this->gameEngine.getIsGameOver();
 }
 
 int DisplayProxy::getCurrentBoardTurn() const {
-  this->gameEngine.getCurrentBoardTurn();
+  return this->gameEngine.getCurrentBoardTurn();
 }
 
 bool DisplayProxy::getCanUseSpecialAction() const {
-  this->gameEngine.getCanUseSpecialAction();
+  return this->gameEngine.getCanUseSpecialAction();
 }
