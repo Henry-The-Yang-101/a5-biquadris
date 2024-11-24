@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <memory>
+#include "board-proxy.h"
 #include "biquadris-proxies.h"
 #include "block.h"
 #include "level.h"
@@ -11,6 +12,7 @@ using Grid = std::vector<std::vector<std::shared_ptr<BlockCell>>>;
 
 class Board {
     private:
+        const BoardProxy boardProxy;
         ManageGameStateProxy game;
         std::unique_ptr<Level> currentLevel;
 
@@ -28,8 +30,10 @@ class Board {
         bool currentBlockHeavyEffect;
 
         Grid grid;
+
+        const std::string blockSequenceFileName;
     public:
-        Board(ManageGameStateProxy game, std::unique_ptr<Level> level, int width, int height);
+        Board(ManageGameStateProxy game, std::unique_ptr<Level> level, int width, int height, std::string blockSequenceFileName);
         ~Board();
 
         bool cellAvailable(int x, int y);
