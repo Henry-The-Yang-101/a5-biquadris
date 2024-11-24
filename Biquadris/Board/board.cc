@@ -10,21 +10,21 @@ Board::~Board() {}
 bool Board::cellAvailable(int x, int y) {
 
     // check within board boundaries and coordinate is nullptr (no block in cell)
-    return (x >= 0 && x < width && y >= 0 && y < height) && (grid[y][x] == nullptr);
+    return (x >= 0 && x < this->width && y >= 0 && y < this->height) && (this->grid[y][x] == nullptr);
 }
 
 void Board::insertBlockCell(int x, int y, std::shared_ptr<BlockCell> cell) {
-
-    if (x >= 0 && x < width && y >= 0 && y < height) {
-        grid[y][x] = cell;
-    }
+    this->grid[y][x] = cell;
 }
 
 void Board::moveBlockHorizontal(int multiplier) {
 
+    // move right if mulitiplier is positive
     while (multiplier > 0 && this->currentBlock->moveRight()) {
         multiplier--;
     }
+
+    // move left if multiplier is negative
     while (multiplier < 0 && this->currentBlock->moveLeft()) {
         multiplier++;
     }
@@ -52,6 +52,8 @@ void Board::rotateBlockCounterClockwise(int multiplier) {
 void Board::dropBlock(int multiplier) {
     while (multiplier > 0) {
         this->currentBlock->drop();
+
+        // replace current and next block
         this->currentBlock = std::move(this->nextBlock);
         this->nextBlock = std::move(this->currentLevel->cycleBlock());
     }
@@ -63,6 +65,7 @@ void Board::holdBlock() {
 
         std::swap(this->currentBlock, this->blockOnHold);
 
+        // replace current block with nextblock if initially no block on hold
         if (this->currentBlock == nullptr) {
             this->currentBlock = std::move(this->nextBlock);
             this->nextBlock = std::move(this->currentLevel->cycleBlock());
@@ -88,11 +91,11 @@ void Board::restart() {
 
 }
 void Board::levelUp(int multiplier) {
-    int newLevel = currentLevel->getLevelNum() + multiplier;
+    int newLevel = this->currentLevel->getLevelNum() + multiplier;
     this->currentLevel = std::make_unique<Level>(newLevel, this->currentBlockHeavyEffect, this->boardProxy, this->blockSequenceFileName);
 }
 void Board::levelDown(int multiplier) {
-    int newLevel = currentLevel->getLevelNum() - multiplier;
+    int newLevel = this->currentLevel->getLevelNum() - multiplier;
     this->currentLevel = std::make_unique<Level>(newLevel, this->currentBlockHeavyEffect, this->boardProxy, this->blockSequenceFileName);
 }
 void Board::increaseScore(int points) {
