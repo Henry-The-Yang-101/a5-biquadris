@@ -5,8 +5,8 @@
 #include <string>
 
 class Command {
-  bool hasArgs;
   std::string commandName;
+  bool hasArgs;
 
   protected:
     Command(std::string commandName, bool hasArgs) : 
