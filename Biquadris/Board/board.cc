@@ -1,5 +1,5 @@
 #include "board.h"
-#include "level.h"
+#include "./Level/level.h"
 
 Board::Board(ManageGameStateProxy game, std::unique_ptr<Level> level, int width, int height, const std::string blockSequenceFileName) : 
     boardProxy{*this}, game{game}, currentLevel{std::move(level)}, width{width}, height{height}, currentScore{0}, highScore{0}, 
@@ -47,4 +47,3 @@ void Board::increaseScore(int points) {
 void Board::setHeavyEffect() {
     this->currentBlockHeavyEffect = true;
 }
-
