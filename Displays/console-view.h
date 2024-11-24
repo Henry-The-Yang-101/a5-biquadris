@@ -5,8 +5,8 @@
 
 using namespace std;
 
-using CellCoords = pair<int, int>;
-using BlockAttributes = pair<vector<CellCoords>, char>;
+using CellCoordinate = pair<int, int>;
+using BlockAttributes = pair<vector<CellCoordinate>, char>;
 using Grid = vector<vector<char>>;
 
 class ConsoleView: public Observer{

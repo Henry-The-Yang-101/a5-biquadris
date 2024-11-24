@@ -9,6 +9,7 @@ BlockCell::~BlockCell() {
   this->boardProxy.increaseScore(this->clearScore);
 }
 
+
 // Block definitions
 
 Block::Block(BoardProxy& boardProxy, char type, int numLevel) : boardProxy{boardProxy}, type{type}, numLevel{numLevel}, rotation{Rotation::UP} {}
@@ -35,22 +36,27 @@ int Block::getClearScore() const {
   return (this->numLevel + 1) * (this->numLevel + 1);
 }
 
-std::vector<CellCoords> Block::getPositionCellCoords(Rotation newRotation, int newRightShift, int newDownShift) const {
-  std::vector<CellCoords> baseShape = std::move(this->getBaseShape(newRotation));
+std::vector<CellCoordinate> Block::getCellCoordinates(Rotation newRotation, int newRightShift, int newDownShift) const {
+  std::vector<CellCoordinate> baseShape = std::move(this->getBaseShape(newRotation));
 
-  for (CellCoords & cell : baseShape) {
+  for (CellCoordinate & cell : baseShape) {
     cell.first += newRightShift;
     cell.second += newDownShift;
   }
   return baseShape;
 }
 
-bool Block::checkPositionValidity(const std::vector<CellCoords> & coords) const {
-  //
+bool Block::checkPositionValidity(const std::vector<CellCoordinate> & coords) const {
+  for (CellCoordinate c : coords) {
+    if () {
+      
+    }
+  }
+  return true;
 }
 
 bool Block::moveLeft() {
-  bool valid = this->checkPositionValidity(this->getPositionCellCoords(this->rotation, this->rightShift - 1, this->downShift));
+  bool valid = this->checkPositionValidity(this->getCellCoordinates(this->rotation, this->rightShift - 1, this->downShift));
   
   if (valid) {
     this->rightShift--;
@@ -59,7 +65,7 @@ bool Block::moveLeft() {
 }
 
 bool Block::moveRight() {
-  bool valid = this->checkPositionValidity(this->getPositionCellCoords(this->rotation, this->rightShift + 1, this->downShift));
+  bool valid = this->checkPositionValidity(this->getCellCoordinates(this->rotation, this->rightShift + 1, this->downShift));
   
   if (valid) {
     this->rightShift++;
@@ -68,7 +74,7 @@ bool Block::moveRight() {
 }
 
 bool Block::rotateClockwise() {
-  bool valid = this->checkPositionValidity(this->getPositionCellCoords(rotationAfterRotatedClockwise(this->rotation),
+  bool valid = this->checkPositionValidity(this->getCellCoordinates(rotationAfterRotatedClockwise(this->rotation),
                                                                        this->rightShift,
                                                                        this->downShift));
 
@@ -79,7 +85,7 @@ bool Block::rotateClockwise() {
 }
 
 bool Block::rotateCounterClockwise() {
-  bool valid = this->checkPositionValidity(this->getPositionCellCoords(rotationAfterRotatedCounterClockwise(this->rotation),
+  bool valid = this->checkPositionValidity(this->getCellCoordinates(rotationAfterRotatedCounterClockwise(this->rotation),
                                                                        this->rightShift,
                                                                        this->downShift));
   
@@ -90,7 +96,7 @@ bool Block::rotateCounterClockwise() {
 }
 
 bool Block::down() {
-  bool valid = this->checkPositionValidity(this->getPositionCellCoords(this->rotation, this->rightShift, this->downShift + 1));
+  bool valid = this->checkPositionValidity(this->getCellCoordinates(this->rotation, this->rightShift, this->downShift + 1));
   
   if (valid) {
     this->downShift++;
@@ -99,42 +105,41 @@ bool Block::down() {
 }
 
 void Block::drop() {
-  std::vector<CellCoords> dropCoords = std::move(this->getDropPreviewCellCoords());
+  std::vector<CellCoordinate> dropCoords = std::move(this->getDropPreviewCellCoordinate());
   std::shared_ptr<BlockCell> blockCell = std::make_shared<BlockCell>(this->boardProxy, this->getClearScore(), this->type);
 
-  for (CellCoords & cell : dropCoords) {
+  for (CellCoordinate & cell : dropCoords) {
     this->boardProxy.insertBlockCell(cell.first, cell.second, blockCell);
   }
 }
 
-
-std::vector<CellCoords> Block::getPositionCellCoords() const {
-  return this->getPositionCellCoords(this->rotation, this->rightShift, this->downShift);
+std::vector<CellCoordinate> Block::getCellCoordinates() const {
+  return this->getCellCoordinates(this->rotation, this->rightShift, this->downShift);
 }
 
-std::vector<CellCoords> Block::getDropPreviewCellCoords() const {
+std::vector<CellCoordinate> Block::getDropPreviewCellCoordinate() const {
   // checking from downShift + 1 because after constructing Block and running checkPositionValidity
   // to check game over, the currentposition should always be valid
-  std::vector<CellCoords> currentCellCoords = std::move(this->getPositionCellCoords(this->rotation, this->rightShift, this->downShift + 1));
+  std::vector<CellCoordinate> currentCellCoordinate = std::move(this->getCellCoordinates(this->rotation, this->rightShift, this->downShift + 1));
   int maxDownShift = 0;
 
   while (true) {
-    for (CellCoords & cell : currentCellCoords) {
+    for (CellCoordinate & cell : currentCellCoordinate) {
       cell.second++;
     }
-    if (!this->checkPositionValidity(currentCellCoords)) {
+    if (!this->checkPositionValidity(currentCellCoordinate)) {
       break;
     }
     maxDownShift++;
   }
-  for (CellCoords & cell : currentCellCoords) {
+  for (CellCoordinate & cell : currentCellCoordinate) {
     cell.second--;
   }
 
-  return currentCellCoords;
+  return currentCellCoordinate;
 }
 
 bool Block::checkPositionValidity() const {
-  return this->checkPositionValidity(this->getPositionCellCoords());
+  return this->checkPositionValidity(this->getCellCoordinates());
 }
 
