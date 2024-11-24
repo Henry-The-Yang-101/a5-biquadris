@@ -9,7 +9,7 @@
 
 class Level {
   private:
-    const int numLevel;
+    const int levelNum;
     const bool heavy;
     std::string blockSequenceFileName;
     std::ifstream blockSequenceFileStream;
@@ -19,7 +19,7 @@ class Level {
   protected:
     BoardProxy & boardProxy;
 
-    Level(int numLevel, bool heavy, BoardProxy & boardProxy, std::string & blockSequenceFileName);
+    Level(int levelNum, bool heavy, BoardProxy & boardProxy, const std::string & blockSequenceFileName);
     void setBlockSequenceFile(std::string & blockSequenceFile);
     virtual char chooseBlockType() const;
     virtual ~Level() = default;
@@ -27,21 +27,23 @@ class Level {
   public:
     static const int BACKLOG_SIZE = 4;
 
+    int getLevelNum() const;
     std::unique_ptr<Block> cycleBlock();
-    virtual bool checkRuleCondition() const;
-    virtual void executeRuleAction();
+    virtual bool checkCustomRuleCondition() const;
+    virtual void executeCustomRuleAction();
 };
 
 class RandomizedLevel : public Level {
   private:
-    const int denom;
     const std::map<int, char> blockCumulativeDistributionMap;
+    const int distributionTotal;
     bool randomEnabled;
 
-    static std::map<int, char> convertNumeratorsToCumulativeDistributionMap(std::vector<int> & distributionNumerators);
+    static std::map<int, char> convertDistributionToCumulativeMap(const std::vector<int> & distribution);
+    static int calculateTotal(const std::vector<int> & distribution);
 
   protected:
-    RandomizedLevel(int numLevel, bool heavy, BoardProxy & boardProxy, std::string & blockSequenceFileName, int denomLCM, std::vector<int> & distributionNumerators);
+    RandomizedLevel(int levelNum, bool heavy, BoardProxy & boardProxy, const std::string & blockSequenceFileName, const std::vector<int> & distribution);
     char chooseBlockType() const override;
     virtual ~RandomizedLevel() = default;
 
