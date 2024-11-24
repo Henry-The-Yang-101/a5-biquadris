@@ -59,7 +59,7 @@ Command* CommandTree::find(std::string commandName) const {
     if (currentNode->children.find(c) != currentNode->children.end()) {
       currentNode = currentNode->children[c].get();
     } else {
-      throw std::runtime_error(std::string{"Command with name \""} + commandName + "\" not found");
+      throw std::runtime_error("Command with name \"" + commandName + "\" not found");
     }
   }
   if (currentNode->command != nullptr) {
@@ -74,9 +74,9 @@ Command* CommandTree::find(std::string commandName) const {
   }
 
   if (currentNode->children.empty()) {
-    throw std::runtime_error(std::string{"Command with name \""} + commandName + "\" not found");
+    throw std::runtime_error("Command with name \"" + commandName + "\" not found");
   } else {
-    throw std::runtime_error(std::string{"Ambiguous command name \""} + commandName + "\"");
+    throw std::runtime_error("Ambiguous command name \"" + commandName + "\"");
   }
 }
 
@@ -92,10 +92,10 @@ std::unique_ptr<Command> CommandTree::recursiveRemoveCommand(CommandNode* node, 
       return recursiveRemoveCommand(node->children.begin()->second.get(), commandName, index);
     } else if (node->children.size() == 0) {
       // No command found
-      throw std::runtime_error(std::string{"Command with name \""} + commandName + "\" not found");
+      throw std::runtime_error("Command with name \"" + commandName + "\" not found");
     } else {
       // More than one possible command given the provided commandName
-      throw std::runtime_error(std::string{"Ambiguous command name \""} + commandName + "\"");
+      throw std::runtime_error("Ambiguous command name \"" + commandName + "\"");
     }
   }
 
@@ -103,7 +103,7 @@ std::unique_ptr<Command> CommandTree::recursiveRemoveCommand(CommandNode* node, 
   char currentChar = commandName[index];
   auto it = node->children.find(currentChar);
   if (it == node->children.end()) {
-    throw std::runtime_error(std::string{"Command with name \""} + commandName + "\" not found");
+    throw std::runtime_error("Command with name \"" + commandName + "\" not found");
   }
 
   // Recursively request to remove the command in the child node

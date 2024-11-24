@@ -2,27 +2,55 @@
 #define LEVEL_H
 
 #include <string>
+#include <fstream>
 #include <vector>
+#include <map>
 #include "../board-proxy.h"
 
 class Level {
-  const int numLevel;
-  const bool heavy;
-  BoardProxy & boardProxy;
-  bool random;
-  std::string sequenceFileName;
-  std::vector<std::unique_ptr<Block>> blockBacklog;
-
+  private:
+    const int levelNum;
+    const bool heavy;
+    std::string blockSequenceFileName;
+    std::ifstream blockSequenceFileStream;
+    std::vector<std::unique_ptr<Block>> blockBacklog;
+  
+    std::unique_ptr<Block> generateBlock(char blockType) const;
   protected:
-    Level(int numLevel, bool heavy, BoardProxy & boardProxy, bool random, std::string sequenceFileName);
-    virtual std::unique_ptr<Block> generateBlock() = 0;
+    BoardProxy & boardProxy;
+
+    Level(int levelNum, bool heavy, BoardProxy & boardProxy, const std::string & blockSequenceFileName);
+    void setBlockSequenceFile(std::string & blockSequenceFile);
+    virtual char chooseBlockType() const;
+    virtual ~Level() = default;
 
   public:
     static const int BACKLOG_SIZE = 4;
 
+    int getLevelNum() const;
     std::unique_ptr<Block> cycleBlock();
-    virtual bool checkRuleCondition() const { return false; }
-    virtual void executeRuleAction() {}
+    virtual bool checkCustomRuleCondition() const;
+    virtual void executeCustomRuleAction();
+};
+
+class RandomizedLevel : public Level {
+  private:
+    const std::map<int, char> blockCumulativeDistributionMap;
+    const int distributionTotal;
+    bool randomEnabled;
+
+    static std::map<int, char> convertDistributionToCumulativeMap(const std::vector<int> & distribution);
+    static int calculateTotal(const std::vector<int> & distribution);
+
+  protected:
+    RandomizedLevel(int levelNum, bool heavy, BoardProxy & boardProxy, const std::string & blockSequenceFileName, const std::vector<int> & distribution);
+    char chooseBlockType() const override;
+    virtual ~RandomizedLevel() = default;
+
+  public: 
+    void enableRandom();
+    void disableRandom();
+    void disableRandom(std::string & blockSequenceFile);
 };
 
 #endif
