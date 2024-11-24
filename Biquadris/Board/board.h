@@ -54,6 +54,10 @@ class Board {
         void increaseScore(int points);
 
         void setHeavyEffect();
+
+        int getWidth();
+        int getHeight();
+        int getNumBlocksPlacedWithoutClearing();
 };
 
 #endif

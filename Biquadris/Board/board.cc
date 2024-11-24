@@ -99,3 +99,15 @@ void Board::increaseScore(int points) {
 void Board::setHeavyEffect() {
     this->currentBlockHeavyEffect = true;
 }
+
+int Board::getHeight() {
+    return this->height;
+}
+
+int Board::getWidth() {
+    return this->width;
+}
+
+int Board::getNumBlocksPlacedWithoutClearing() {
+    return this->numBlocksPlacedWithoutClearing;
+}
