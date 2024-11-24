@@ -1,16 +1,17 @@
 #include "board.h"
 #include "./Level/level.h"
 
-Board::Board(ManageGameStateProxy game, std::unique_ptr<Level> level, int width, int height, const std::string blockSequenceFileName) : 
-    boardProxy{*this}, game{game}, currentLevel{std::move(level)}, width{width}, height{height}, currentScore{0}, highScore{0}, 
+Board::Board(ManageGameStateProxy game, std::unique_ptr<Level> level, const std::string blockSequenceFileName) : 
+    boardProxy{*this}, game{game}, currentLevel{std::move(level)}, currentScore{0}, highScore{0}, 
     numBlocksPlacedWithoutClearing{0}, allowedToHold{false}, currentBlockHeavyEffect{false}, grid{}, blockSequenceFileName{blockSequenceFileName} {}
 
 Board::~Board() {}
 
 bool Board::cellAvailable(int x, int y) {
 
+    y += this->NUM_RESERVE_ROWS;
     // check within board boundaries and coordinate is nullptr (no block in cell)
-    return (x >= 0 && x < this->width && y >= 0 && y < this->height) && (this->grid[y][x] == nullptr);
+    return (x >= 0 && x < this->WIDTH && y >= 0 && y < this->HEIGHT) && (this->grid[y][x] == nullptr);
 }
 
 void Board::insertBlockCell(int x, int y, std::shared_ptr<BlockCell> cell) {
@@ -87,7 +88,7 @@ void Board::restart() {
     // this->allowedToHold = false;
 
     this->grid.clear();
-    this->grid.resize(this->height, std::vector<std::shared_ptr<BlockCell>>{this->width, nullptr});
+    this->grid.resize(this->HEIGHT, std::vector<std::shared_ptr<BlockCell>>{this->WIDTH, nullptr});
 
 }
 void Board::levelUp(int multiplier) {
@@ -107,11 +108,11 @@ void Board::setHeavyEffect() {
 }
 
 int Board::getHeight() {
-    return this->height;
+    return this->HEIGHT + this->NUM_RESERVE_ROWS;
 }
 
 int Board::getWidth() {
-    return this->width;
+    return this->WIDTH;
 }
 
 int Board::getNumBlocksPlacedWithoutClearing() {

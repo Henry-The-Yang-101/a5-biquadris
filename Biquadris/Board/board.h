@@ -13,12 +13,15 @@ using CellCoordinate = std::pair<int, int>;
 
 class Board {
     private:
+
+        static const int NUM_RESERVE_ROWS = 3;
+        static const int WIDTH = 11;
+        static const int HEIGHT = 15;
+
         const BoardProxy boardProxy;
         ManageGameStateProxy game;
         std::unique_ptr<Level> currentLevel;
 
-        int width;
-        int height;
         int currentScore;
         int highScore;
         int numBlocksPlacedWithoutClearing;
@@ -34,7 +37,7 @@ class Board {
 
         const std::string blockSequenceFileName;
     public:
-        Board(ManageGameStateProxy game, std::unique_ptr<Level> level, int width, int height, std::string blockSequenceFileName);
+        Board(ManageGameStateProxy game, std::unique_ptr<Level> level, std::string blockSequenceFileName);
         ~Board();
 
         bool cellAvailable(int x, int y);
