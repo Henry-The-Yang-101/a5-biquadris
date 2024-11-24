@@ -39,10 +39,11 @@ class Block {
         int downShift = 0;
 
         virtual int getClearScore() const;
-        bool checkPositionValidity(Rotation newRotation, int newrightShift, int newDownShift) const;
-    public:
         virtual std::vector<CellCoords> getBaseShape(Rotation rotation) const = 0;
+        std::vector<CellCoords> getPositionCellCoords(Rotation newRotation, int newrightShift, int newDownShift) const;
+        bool checkPositionValidity(const std::vector<CellCoords> & coords) const;
 
+    public:
         bool moveLeft();
         bool moveRight();
         bool rotateClockwise();
@@ -51,9 +52,11 @@ class Block {
 
         void drop();
 
-        bool checkPositionValidity() const; // This is how board is gonna check if its game over
+        std::vector<CellCoords> getPositionCellCoords() const;
+        std::vector<CellCoords> getDropPreviewCellCoords() const;
 
-        std::vector<CellCoords> getDropPreview() const; 
+        bool checkPositionValidity() const; // This is how board is gonna check if its game over
+        // board should run this right after constructing Block
 
 };
 

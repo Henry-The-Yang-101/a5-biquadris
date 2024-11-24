@@ -128,5 +128,3 @@ bool Block::checkPositionValidity() const {
   return this->checkPositionValidity(this->getPositionCellCoords());
 }
 
-
-
