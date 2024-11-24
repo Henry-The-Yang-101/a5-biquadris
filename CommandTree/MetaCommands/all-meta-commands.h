@@ -8,6 +8,7 @@ class RenameCommand : public MetaCommand {
     RenameCommand(CommandTree & commandTree, std::string commandName);
     void execute(int multiplier) {}
     void execute(int multiplier, std::vector<std::string> && args) override;
+    ~RenameCommand() = default;
 };
 
 class MacroCommand : public MetaCommand {
@@ -15,6 +16,7 @@ class MacroCommand : public MetaCommand {
     MacroCommand(CommandTree & commandTree, std::string commandName);
     void execute(int multiplier) {}
     void execute(int multiplier, std::vector<std::string> && args) override;
+    ~MacroCommand() = default;
 };
 
 class MacroInstanceCommand : public MetaCommand {
@@ -22,6 +24,7 @@ class MacroInstanceCommand : public MetaCommand {
   public:
     MacroInstanceCommand(CommandTree & commandTree, std::string commandName, std::vector<std::string> && commandSequence);
     void execute(int multiplier);
+    ~MacroInstanceCommand() = default;
 };
 
 class SequenceCommand : public MetaCommand {
@@ -30,6 +33,7 @@ class SequenceCommand : public MetaCommand {
     SequenceCommand(CommandTree & commandTree, std::string commandName);
     void execute(int multiplier) {}
     void execute(int multiplier, std::vector<std::string> && args) override;
+    ~SequenceCommand() = default;
 };
 
 #endif

@@ -7,6 +7,7 @@ class HintCommand : public OutputCommand {
   public:
     HintCommand(std::ostream & out, std::string commandName);
     void execute(int multiplier) override;
+    ~HintCommand() = default;
 };
 
 #endif

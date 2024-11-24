@@ -17,13 +17,13 @@ void BonusOffCommand::execute(int multiplier) {
 // DevOnCommand definitions
 DevOnCommand::DevOnCommand(ManageGameStateProxy & biquadrisProxy, std::string commandName) : ManageGameStateCommand{biquadrisProxy, commandName, false} {}
 
-void BonusOnCommand::execute(int multiplier) {
+void DevOnCommand::execute(int multiplier) {
   this->dependency.setDevMode(true);
 }
 
 // DevOffCommand definitions
 DevOffCommand::DevOffCommand(ManageGameStateProxy & biquadrisProxy, std::string commandName) : ManageGameStateCommand{biquadrisProxy, commandName, false} {}
 
-void BonusOnCommand::execute(int multiplier) {
+void DevOffCommand::execute(int multiplier) {
   this->dependency.setDevMode(false);
 }
