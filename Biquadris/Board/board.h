@@ -10,6 +10,7 @@
 
 using Grid = std::vector<std::vector<std::shared_ptr<BlockCell>>>;
 using CellCoordinate = std::pair<int, int>;
+using BlockCellCoordinates = std::vector<CellCoordinate>;
 
 class Board {
     private:
@@ -49,7 +50,7 @@ class Board {
         void rotateBlockCounterClockwise(int multiplier);
         void dropBlock(int multiplier);
         void holdBlock();
-        std::vector<CellCoordinate> getBlockDropPreview();
+        BlockCellCoordinates getBlockDropPreview();
 
         void restart();
         void levelUp(int multiplier);
