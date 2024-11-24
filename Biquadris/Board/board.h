@@ -5,6 +5,7 @@
 #include <memory>
 #include "biquadris-proxies.h"
 #include "block.h"
+#include "level.h"
 
 using Grid = std::vector<std::vector<std::shared_ptr<BlockCell>>>;
 
@@ -12,7 +13,7 @@ class Board {
     private:
         ManageGameStateProxy game;
         std::unique_ptr<Level> currentLevel;
-        
+
         int width;
         int height;
         int currentScore;
