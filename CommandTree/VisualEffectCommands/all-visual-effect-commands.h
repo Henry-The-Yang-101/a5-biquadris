@@ -7,7 +7,6 @@ class BlindCommand : public VisualEffectCommand {
   public:
     BlindCommand(VisualEffectProxy & biquadrisProxy, std::string commandName);
     void execute(int multiplier) override;
-    ~BlindCommand() = default;
 };
 
 #endif
