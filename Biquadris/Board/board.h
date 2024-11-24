@@ -9,6 +9,7 @@
 #include "level.h"
 
 using Grid = std::vector<std::vector<std::shared_ptr<BlockCell>>>;
+using CellCoordinate = std::pair<int, int>;
 
 class Board {
     private:
@@ -45,7 +46,7 @@ class Board {
         void rotateBlockCounterClockwise(int multiplier);
         void dropBlock(int multiplier);
         void holdBlock();
-        std::vector<std::pair<int, int>> getBlockDropPreview();
+        std::vector<CellCoordinate> getBlockDropPreview();
 
         void restart();
         void levelUp(int multiplier);

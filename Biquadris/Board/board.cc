@@ -68,7 +68,7 @@ void Board::holdBlock() {
     }
 
 }
-std::vector<std::pair<int, int>> Board::getBlockDropPreview() {
+std::vector<CellCoordinate> Board::getBlockDropPreview() {
     return this->currentBlock->getCellCoordinates();
 }
 
