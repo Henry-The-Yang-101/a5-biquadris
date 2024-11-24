@@ -47,9 +47,9 @@ class Block {
         bool moveRight();
         bool rotateClockwise();
         bool rotateCounterClockwise();
+        bool down();
 
         void drop();
-        bool down();
 
         bool checkPositionValidity() const; // This is how board is gonna check if its game over
 
