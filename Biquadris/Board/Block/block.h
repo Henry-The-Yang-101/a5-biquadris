@@ -1,46 +1,47 @@
 #ifndef BLOCK_H
 #define BLOCK_H
 
+#include <utility>
 #include "board-proxy.h"
 
-using CellCoords = pair<int, int>;
+using CellCoords = std::pair<int, int>;
 
 class BlockCell {
 
     private:
         BoardProxy & boardProxy;
-        int clearScore;
+        const int clearScore;
 
     public:
-        BlockCell(BoardProxy & boardProxy, char type);
-        ~BlockCell();
+        const char type;
 
-        char type;
+        BlockCell(BoardProxy & boardProxy, int clearScore, char type);
+        ~BlockCell();
 };
 
 class Block {
 
     protected:
         enum class Rotation {UP, RIGHT, DOWN, LEFT};
+        Block(BoardProxy& boardProxy, char type, int numLevel);
+
+        static Rotation rotationAfterRotatedClockwise(Rotation rotation);
+        static Rotation rotationAfterRotatedCounterClockwise(Rotation rotation);
+
+        virtual ~Block() = default;
 
     private:
-
-        Rotation rotation;
-
         BoardProxy & boardProxy;
-        int leftShift;
-        int downShift;
-        int level;
-        char type;
+        const char type;
+        const int numLevel;
+        Rotation rotation;
+        int rightShift = 0;
+        int downShift = 0;
 
-        int getClearScore();
-        bool checkPositionValidity(Rotation newRotation, int newX, int newY);
-
+        virtual int getClearScore() const;
+        bool checkPositionValidity(Rotation newRotation, int newrightShift, int newDownShift) const;
     public:
-        Block(BoardProxy& boardProxy, char type, int level);
-        ~Block();
-
-        virtual std::vector<CellCoords> getBaseShape(Rotation rotation);
+        virtual std::vector<CellCoords> getBaseShape(Rotation rotation) const = 0;
 
         bool moveLeft();
         bool moveRight();
@@ -50,7 +51,9 @@ class Block {
         void drop();
         bool down();
 
-        std::vector<CellCoords> dropPreview(); 
+        bool checkPositionValidity() const; // This is how board is gonna check if its game over
+
+        std::vector<CellCoords> getDropPreview() const; 
 
 };
 
