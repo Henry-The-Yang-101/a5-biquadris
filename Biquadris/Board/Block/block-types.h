@@ -6,6 +6,7 @@
 // Rotation is protected, could make public to use this alias
 // using ShapeMap = std::unordered_map<Block::Rotation, std::vector<std::pair<int, int>>>;
 using Shape = std::vector<std::pair<int, int>>;
+using CellCoordinate = std::pair<int, int>;
 
 class IBlock : public Block {
     private:

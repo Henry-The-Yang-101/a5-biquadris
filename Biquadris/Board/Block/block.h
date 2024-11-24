@@ -5,6 +5,7 @@
 #include "board-proxy.h"
 
 using CellCoordinate = std::pair<int, int>;
+using BlockCellCoordinates = std::vector<CellCoordinate>;
 
 class BlockCell {
 
@@ -39,9 +40,9 @@ class Block {
         int downShift = 0;
 
         virtual int getClearScore() const;
-        virtual std::vector<CellCoordinate> getBaseShape(Rotation rotation) const = 0;
-        std::vector<CellCoordinate> getCellCoordinates(Rotation newRotation, int newrightShift, int newDownShift) const;
-        bool checkPositionValidity(const std::vector<CellCoordinate> & cellCoords) const;
+        virtual BlockCellCoordinates getBaseShape(Rotation rotation) const = 0;
+        BlockCellCoordinates getCellCoordinates(Rotation newRotation, int newrightShift, int newDownShift) const;
+        bool checkPositionValidity(const BlockCellCoordinates & cellCoords) const;
 
     public:
         bool moveLeft();
@@ -52,8 +53,8 @@ class Block {
 
         void drop();
 
-        std::vector<CellCoordinate> getCellCoordinates() const;
-        std::vector<CellCoordinate> getDropPreviewCellCoordinate() const;
+        BlockCellCoordinates getCellCoordinates() const;
+        BlockCellCoordinates getDropPreviewCellCoordinate() const;
 
         bool checkPositionValidity() const; // This is how board is gonna check if its game over
         // board should run this right after constructing Block
