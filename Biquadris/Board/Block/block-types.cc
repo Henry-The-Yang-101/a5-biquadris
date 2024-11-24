@@ -1,92 +1,108 @@
 #include "block-types.h"
 
-IBlock::IBlock(BoardProxy & board, int level) : Block(board, 'I', level) {
-    baseShapeRotations = {
-        {Rotation::UP, {{0, 0}, {1, 0}, {2, 0}, {3, 0}}},
-        {Rotation::RIGHT, {{0, 0}, {0, 1}, {0, 2}, {0, 3}}},
-        {Rotation::DOWN,  {{0, 0}, {1, 0}, {2, 0}, {3, 0}}},
-        {Rotation::LEFT, {{0, 0}, {0, 1}, {0, 2}, {0, 3}}}
-    };
-}
+using CellCoordinate = std::pair<int, int>;
+using BlockCellCoordinates = std::vector<CellCoordinate>;
 
-Shape IBlock::getBaseShape(Rotation rotation) {
-    return baseShapeRotations[rotation];
-}
 
-JBlock::JBlock(BoardProxy & board, int level) : Block(board, 'J', level) {
-    baseShapeRotations = {
-        {Rotation::UP, {{0, 0}, {1, 0}, {2, 0}, {0, 1}}},
-        {Rotation::RIGHT, {{0, 0}, {1, 0}, {2, 0}, {2, 1}}},
-        {Rotation::DOWN, {{0, 1}, {1, 1}, {2, 1}, {2, 0}}},
-        {Rotation::LEFT, {{0, 0}, {0, 1}, {1, 1}, {2, 1}}}
-    };
-}
+// IBlock definitions
+IBlock::IBlock(BoardProxy & board, int level) : Block{board, level} {}
 
-Shape JBlock::getBaseShape(Rotation rotation) {
-    return baseShapeRotations[rotation];
-}
+const std::unordered_map<Block::Rotation, BlockCellCoordinates> IBlock::BASE_SHAPE_ROTATIONS = {
+    { Rotation::UP, {{0, 0}, {1, 0}, {2, 0}, {3, 0}} },
+    { Rotation::RIGHT, {{0, -3}, {0, -2}, {0, -1}, {0, 0}} },
+    { Rotation::DOWN, {{0, 0}, {1, 0}, {2, 0}, {3, 0}} },
+    { Rotation::LEFT, {{0, -3}, {0, -2}, {0, -1}, {0, 0}} }
+};
 
-LBlock::LBlock(BoardProxy & board, int level) : Block(board, 'L', level) {
-    baseShapeRotations = {
-        {Rotation::UP, {{0, 0}, {1, 0}, {2, 0}, {2, 1}}},
-        {Rotation::RIGHT, {{0, 0}, {0, 1}, {0, 2}, {1, 0}}},
-        {Rotation::DOWN, {{0, 0}, {0, 1}, {1, 1}, {2, 1}}},
-        {Rotation::LEFT, {{0, 2}, {1, 0}, {1, 1}, {1, 2}}}
-    };
-}
+BlockCellCoordinates IBlock::getBaseShape(Rotation rotation) const { return BASE_SHAPE_ROTATIONS.at(rotation); }
 
-Shape LBlock::getBaseShape(Rotation rotation) {
-    return baseShapeRotations[rotation];
-}
+char IBlock::getType() const { return 'I'; }
 
-OBlock::OBlock(BoardProxy & board, int level) : Block(board, 'O', level) {
-    baseShapeRotations = {
-        {Rotation::UP, {{0, 0}, {1, 0}, {0, 1}, {1, 1}}},
-        {Rotation::RIGHT, {{0, 0}, {1, 0}, {0, 1}, {1, 1}}},
-        {Rotation::DOWN, {{0, 0}, {1, 0}, {0, 1}, {1, 1}}},
-        {Rotation::LEFT, {{0, 0}, {1, 0}, {0, 1}, {1, 1}}}
-    };
-}
 
-Shape OBlock::getBaseShape(Rotation rotation) {
-    return baseShapeRotations[rotation];
-}
+// JBlock definitions
+JBlock::JBlock(BoardProxy & board, int level) : Block(board, level) {}
 
-SBlock::SBlock(BoardProxy & board, int level) : Block(board, 'S', level) {
-    baseShapeRotations = {
-        {Rotation::UP, {{0, 0}, {1, 0}, {1, 1}, {2, 1}}},
-        {Rotation::RIGHT, {{0, 1}, {0, 2}, {1, 1}, {1, 0}}},
-        {Rotation::DOWN, {{0, 0}, {1, 0}, {1, 1}, {2, 1}}},
-        {Rotation::LEFT, {{0, 1}, {0, 2}, {1, 1}, {1, 0}}}
-    };
-}
+const std::unordered_map<Block::Rotation, BlockCellCoordinates> JBlock::BASE_SHAPE_ROTATIONS = {
+    { Rotation::UP, {{0, -1}, {0, 0}, {1, 0}, {2, 0}} },
+    { Rotation::RIGHT, {{0, -2}, {1, -2}, {0, -1}, {0, 0}} },
+    { Rotation::DOWN, {{0, -1}, {1, -1}, {2, -1}, {2, 0}} },
+    { Rotation::LEFT, {{1, -2}, {1, -1}, {0, 0}, {1, 0}} }
+};
 
-Shape SBlock::getBaseShape(Rotation rotation) {
-    return baseShapeRotations[rotation];
-}
+BlockCellCoordinates JBlock::getBaseShape(Rotation rotation) const { return BASE_SHAPE_ROTATIONS.at(rotation); }
 
-ZBlock::ZBlock(BoardProxy & board, int level) : Block(board, 'Z', level) {
-    baseShapeRotations = {
-        {Rotation::UP, {{0, 1}, {1, 1}, {1, 0}, {2, 0}}},
-        {Rotation::RIGHT, {{0, 0}, {0, 1}, {1, 1}, {1, 2}}},
-        {Rotation::DOWN, {{0, 1}, {1, 1}, {1, 0}, {2, 0}}},
-        {Rotation::LEFT, {{0, 0}, {0, 1}, {1, 1}, {1, 2}}}
-    };
-}
+char JBlock::getType() const { return 'J'; }
 
-Shape ZBlock::getBaseShape(Rotation rotation) {
-    return baseShapeRotations[rotation];
-}
 
-TBlock::TBlock(BoardProxy & board, int level) : Block(board, 'T', level) {
-    baseShapeRotations = {
-        {Rotation::UP, {{0, 1}, {1, 1}, {2, 1}, {1, 0}}},
-        {Rotation::RIGHT, {{0, 1},{1, 0}, {1, 1}, {1, 2}}},
-        {Rotation::DOWN, {{0, 0}, {1, 0}, {2, 0}, {1, 1}}},
-        {Rotation::LEFT, {{0, 0}, {0, 1}, {0, 2}, {1, 1}}}
-    };
-}
+// LBlock definitions
+LBlock::LBlock(BoardProxy & board, int level) : Block(board, level) {}
 
-Shape TBlock::getBaseShape(Rotation rotation) {
-    return baseShapeRotations[rotation];
-}
+const std::unordered_map<Block::Rotation, BlockCellCoordinates> LBlock::BASE_SHAPE_ROTATIONS = {
+    { Rotation::UP, {{2, -1}, {0, 0}, {1, 0}, {2, 0}} },
+    { Rotation::RIGHT, {{0, -2}, {0, -1}, {0, 0}, {1, 0}} },
+    { Rotation::DOWN, {{0, -1}, {1, -1}, {2, -1}, {0, 0}} },
+    { Rotation::LEFT, {{0, -2}, {0, -1}, {0, 0}, {1, 0}} }
+};
+
+BlockCellCoordinates LBlock::getBaseShape(Rotation rotation) const { return BASE_SHAPE_ROTATIONS.at(rotation); }
+
+char LBlock::getType() const { return 'L'; }
+
+
+// OBlock definitions
+OBlock::OBlock(BoardProxy & board, int level) : Block(board, level) {}
+
+BlockCellCoordinates OBlock::getBaseShape(Rotation rotation) const { return {{0, -1}, {1, -1}, {0, 0}, {1, 0}}; }
+
+char OBlock::getType() const { return 'O'; }
+
+
+// SBlock definitions
+SBlock::SBlock(BoardProxy & board, int level) : Block(board, level) {}
+
+const std::unordered_map<Block::Rotation, BlockCellCoordinates> SBlock::BASE_SHAPE_ROTATIONS = {
+    { Rotation::UP, {{1, -1}, {2, -1}, {0, 0}, {1, 0}} },
+    { Rotation::RIGHT, {{0, -2}, {0, -1}, {1, -1}, {1, 0}} },
+    { Rotation::DOWN, {{1, -1}, {2, -1}, {0, 0}, {1, 0}} },
+    { Rotation::LEFT, {{0, -2}, {0, -1}, {1, -1}, {1, 0}} }
+};
+
+BlockCellCoordinates SBlock::getBaseShape(Rotation rotation) const { return BASE_SHAPE_ROTATIONS.at(rotation); }
+
+char SBlock::getType() const { return 'S'; }
+
+
+// ZBlock definitions
+ZBlock::ZBlock(BoardProxy & board, int level) : Block(board, level) {}
+
+const std::unordered_map<Block::Rotation, BlockCellCoordinates> ZBlock::BASE_SHAPE_ROTATIONS = {
+    { Rotation::UP, {{0, -1}, {1, -1}, {1, 0}, {2, 0}} },
+    { Rotation::RIGHT, {{1, -2}, {0, -1}, {1, -1}, {0, 0}} },
+    { Rotation::DOWN, {{0, -1}, {1, -1}, {1, 0}, {2, 0}} },
+    { Rotation::LEFT, {{1, -2}, {0, -1}, {1, -1}, {0, 0}} }
+};
+
+BlockCellCoordinates ZBlock::getBaseShape(Rotation rotation) const { return BASE_SHAPE_ROTATIONS.at(rotation); }
+
+char ZBlock::getType() const { return 'Z'; }
+
+
+// TBlock definitions
+TBlock::TBlock(BoardProxy & board, int level) : Block(board, level) {}
+
+const std::unordered_map<Block::Rotation, BlockCellCoordinates> TBlock::BASE_SHAPE_ROTATIONS = {
+    { Rotation::UP, {{0, -1}, {1, -1}, {2, -1}, {1, 0}} },
+    { Rotation::RIGHT, {{1, -2}, {0, -1}, {1, -1}, {1, 0}} },
+    { Rotation::DOWN, {{1, -1}, {0, 0}, {1, 0}, {2, 0}} },
+    { Rotation::LEFT, {{0, -2}, {0, -1}, {1, -1}, {0, 0}} }
+};
+
+BlockCellCoordinates TBlock::getBaseShape(Rotation rotation) const { return BASE_SHAPE_ROTATIONS.at(rotation); }
+
+char TBlock::getType() const { return 'T'; }
+
+
+// StarBlock definitions
+StarBlock::StarBlock(BoardProxy& board, int level) : Block(board, level) {}
+
+BlockCellCoordinates StarBlock::getBaseShape(Rotation rotation) const { return {{this->boardProxy.getBoardWidth() - (this->boardProxy.getBoardWidth() / 2), 0}};}

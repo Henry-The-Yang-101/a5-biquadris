@@ -8,7 +8,6 @@ using CellCoordinate = std::pair<int, int>;
 using BlockCellCoordinates = std::vector<CellCoordinate>;
 
 class BlockCell {
-
     private:
         BoardProxy & boardProxy;
         const int clearScore;
@@ -21,10 +20,11 @@ class BlockCell {
 };
 
 class Block {
-
     protected:
         enum class Rotation {UP, RIGHT, DOWN, LEFT};
-        Block(BoardProxy& boardProxy, char type, int numLevel);
+        BoardProxy & boardProxy;
+
+        Block(BoardProxy& boardProxy, int numLevel);
 
         static Rotation rotationAfterRotatedClockwise(Rotation rotation);
         static Rotation rotationAfterRotatedCounterClockwise(Rotation rotation);
@@ -32,14 +32,13 @@ class Block {
         virtual ~Block() = default;
 
     private:
-        BoardProxy & boardProxy;
-        const char type;
         const int numLevel;
         Rotation rotation;
         int rightShift = 0;
         int downShift = 0;
 
         virtual int getClearScore() const;
+        virtual char getType() const = 0;
         virtual BlockCellCoordinates getBaseShape(Rotation rotation) const = 0;
         BlockCellCoordinates getCellCoordinates(Rotation newRotation, int newrightShift, int newDownShift) const;
         bool checkPositionValidity(const BlockCellCoordinates & cellCoords) const;
@@ -58,7 +57,6 @@ class Block {
 
         bool checkPositionValidity() const; // This is how board is gonna check if its game over
         // board should run this right after constructing Block
-
 };
 
 #endif

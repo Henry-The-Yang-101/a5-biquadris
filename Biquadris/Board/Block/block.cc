@@ -14,7 +14,7 @@ BlockCell::~BlockCell() {
 
 
 // Block definitions
-Block::Block(BoardProxy& boardProxy, char type, int numLevel) : boardProxy{boardProxy}, type{type}, numLevel{numLevel}, rotation{Rotation::UP} {}
+Block::Block(BoardProxy& boardProxy, int numLevel) : boardProxy{boardProxy}, numLevel{numLevel}, rotation{Rotation::UP} {}
 
 Block::Rotation Block::rotationAfterRotatedClockwise(Rotation rotation) {
   switch(rotation) {
@@ -108,7 +108,7 @@ bool Block::down() {
 
 void Block::drop() {
   BlockCellCoordinates dropCoords = std::move(this->getDropPreviewCellCoordinate());
-  std::shared_ptr<BlockCell> blockCell = std::make_shared<BlockCell>(this->boardProxy, this->getClearScore(), this->type);
+  std::shared_ptr<BlockCell> blockCell = std::make_shared<BlockCell>(this->boardProxy, this->getClearScore(), this->getType());
 
   for (const CellCoordinate & cell : dropCoords) {
     this->boardProxy.insertBlockCell(cell.first, cell.second, blockCell);
