@@ -14,7 +14,7 @@ EXEC = biquadris                      # executable name
 .PHONY: clean                        # not file names
 
 ${EXEC}: ${OBJECTS}                   # link step
-    ${CXX} ${CXXFLAGS} $^ -o $@ -lX11
+	${CXX} ${CXXFLAGS} $^ -o $@ -lX11
 
 # Implicit rules to compile .cc to .o files
 # Dependencies are generated automatically from the -MMD flag
@@ -24,4 +24,4 @@ ${EXEC}: ${OBJECTS}                   # link step
 
 # Clean up generated files
 clean:
-    rm -f ${DEPENDS} ${OBJECTS} ${EXEC}
+	rm -f ${DEPENDS} ${OBJECTS} ${EXEC}
