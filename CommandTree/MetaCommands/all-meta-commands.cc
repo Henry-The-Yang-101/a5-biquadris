@@ -1,3 +1,4 @@
+#include <stdexcept>
 #include <iostream>
 #include <fstream>
 #include "all-meta-commands.h"
@@ -47,11 +48,7 @@ void SequenceCommand::execute(int multiplier, std::vector<std::string> && args) 
       std::fstream commandSequenceFile{commandSequenceFilePath};
 
       if (!commandSequenceFile.is_open()) {
-        std::cerr << "Failed to open " << args[0] << std::endl;
-        std::cerr << "Ensure the executable is being run from the project root directory" << std::endl;
-        
-        commandSequenceFile.close();
-        return;
+        throw std::runtime_error("Failed to open \"" + args[0] + "\" command sequence file");
       }
 
       std::string currentLine;
