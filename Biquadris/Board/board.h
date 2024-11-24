@@ -25,7 +25,7 @@ class Board {
         std::unique_ptr<Block> currentBlock;
         std::unique_ptr<Block> nextBlock;
         std::unique_ptr<Block> blockOnHold;
-        std::unique_ptr<Block> allowedToHold;
+        bool allowedToHold;
 
         bool currentBlockHeavyEffect;
 
