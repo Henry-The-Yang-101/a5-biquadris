@@ -3,7 +3,7 @@
 
 Board::Board(ManageGameStateProxy game, std::unique_ptr<Level> level, int width, int height, const std::string blockSequenceFileName) : 
     boardProxy{*this}, game{game}, currentLevel{std::move(level)}, width{width}, height{height}, currentScore{0}, highScore{0}, 
-    numBlocksPlacedWithoutClearing{0}, currentBlockHeavyEffect{false}, grid{}, blockSequenceFileName{blockSequenceFileName} {}
+    numBlocksPlacedWithoutClearing{0}, allowedToHold{false}, currentBlockHeavyEffect{false}, grid{}, blockSequenceFileName{blockSequenceFileName} {}
 
 Board::~Board() {}
 
@@ -17,20 +17,72 @@ void Board::insertBlockCell(int x, int y, std::shared_ptr<BlockCell> cell) {
     }
 }
 
-// void moveBlockHorizontal(int multiplier) {}
-// void moveBlockDown(int multiplier) {}
-// void rotateBlockClockwise(int multiplier) {}
-// void rotateBlockCounterClockwise(int multiplier) {}
-// void dropBlock(int multiplier) {}
-// void holdBlock() {}
-// std::vector<std::pair<int, int>> getBlockDropPreview() {}
+void Board::moveBlockHorizontal(int multiplier) {
+
+    while (multiplier > 0 && this->currentBlock->moveRight()) {
+        multiplier--;
+    }
+    while (multiplier < 0 && this->currentBlock->moveLeft()) {
+        multiplier++;
+    }
+
+}
+
+void Board::moveBlockDown(int multiplier) {
+    while (multiplier > 0 && this->currentBlock->down()) {
+        multiplier--;
+    }
+}
+
+void Board::rotateBlockClockwise(int multiplier) {
+    while (multiplier > 0 && this->currentBlock->rotateClockwise()) {
+        multiplier--;
+    }
+}
+
+void Board::rotateBlockCounterClockwise(int multiplier) {
+    while(multiplier > 0 && this->currentBlock->rotateCounterClockwise()) {
+        multiplier--;
+    }
+}
+
+void Board::dropBlock(int multiplier) {
+    while (multiplier > 0) {
+        this->currentBlock->drop();
+        this->currentBlock = std::move(this->nextBlock);
+        this->nextBlock = std::move(this->currentLevel->cycleBlock());
+    }
+}
+
+void Board::holdBlock() {
+
+    if (this->allowedToHold) {
+
+        std::swap(this->currentBlock, this->blockOnHold);
+
+        if (this->currentBlock == nullptr) {
+            this->currentBlock = std::move(this->nextBlock);
+            this->nextBlock = std::move(this->currentLevel->cycleBlock());
+        } 
+
+    }
+
+}
+std::vector<std::pair<int, int>> Board::getBlockDropPreview() {
+    return this->currentBlock->getCellCoordinates();
+}
 
 void Board::restart() {
+
     this->currentScore = 0;
     this->numBlocksPlacedWithoutClearing = 0;
-    this->currentBlockHeavyEffect = false;
+
+    // this->currentBlockHeavyEffect = false;
+    // this->allowedToHold = false;
+
     this->grid.clear();
-    this->grid.resize(this->height, std::vector<std::shared_ptr<BlockCell>>(this->width, nullptr));
+    this->grid.resize(this->height, std::vector<std::shared_ptr<BlockCell>>{this->width, nullptr});
+
 }
 void Board::levelUp(int multiplier) {
     int newLevel = currentLevel->getLevelNum() + multiplier;
