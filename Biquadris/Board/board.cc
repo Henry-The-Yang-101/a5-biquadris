@@ -8,10 +8,13 @@ Board::Board(ManageGameStateProxy game, std::unique_ptr<Level> level, int width,
 Board::~Board() {}
 
 bool Board::cellAvailable(int x, int y) {
-    return (x < 0 || x >= width || y < 0 || y >= height) && (grid[y][x] == nullptr);
+
+    // check within board boundaries and coordinate is nullptr (no block in cell)
+    return (x >= 0 && x < width && y >= 0 && y < height) && (grid[y][x] == nullptr);
 }
 
 void Board::insertBlockCell(int x, int y, std::shared_ptr<BlockCell> cell) {
+
     if (x >= 0 && x < width && y >= 0 && y < height) {
         grid[y][x] = cell;
     }
