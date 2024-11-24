@@ -22,6 +22,10 @@ JBlock::JBlock(BoardProxy & board, int level) : Block(board, 'J', level) {
     };
 }
 
+Shape JBlock::getBaseShape(Rotation rotation) {
+    return baseShapeRotations[rotation];
+}
+
 LBlock::LBlock(BoardProxy & board, int level) : Block(board, 'L', level) {
     baseShapeRotations = {
         {Rotation::UP, {{0, 0}, {1, 0}, {2, 0}, {2, 1}}},
@@ -31,6 +35,9 @@ LBlock::LBlock(BoardProxy & board, int level) : Block(board, 'L', level) {
     };
 }
 
+Shape LBlock::getBaseShape(Rotation rotation) {
+    return baseShapeRotations[rotation];
+}
 
 OBlock::OBlock(BoardProxy & board, int level) : Block(board, 'O', level) {
     baseShapeRotations = {
@@ -39,6 +46,10 @@ OBlock::OBlock(BoardProxy & board, int level) : Block(board, 'O', level) {
         {Rotation::DOWN, {{0, 0}, {1, 0}, {0, 1}, {1, 1}}},
         {Rotation::LEFT, {{0, 0}, {1, 0}, {0, 1}, {1, 1}}}
     };
+}
+
+Shape OBlock::getBaseShape(Rotation rotation) {
+    return baseShapeRotations[rotation];
 }
 
 SBlock::SBlock(BoardProxy & board, int level) : Block(board, 'S', level) {
@@ -50,6 +61,10 @@ SBlock::SBlock(BoardProxy & board, int level) : Block(board, 'S', level) {
     };
 }
 
+Shape SBlock::getBaseShape(Rotation rotation) {
+    return baseShapeRotations[rotation];
+}
+
 ZBlock::ZBlock(BoardProxy & board, int level) : Block(board, 'Z', level) {
     baseShapeRotations = {
         {Rotation::UP, {{0, 1}, {1, 1}, {1, 0}, {2, 0}}},
@@ -57,6 +72,10 @@ ZBlock::ZBlock(BoardProxy & board, int level) : Block(board, 'Z', level) {
         {Rotation::DOWN, {{0, 1}, {1, 1}, {1, 0}, {2, 0}}},
         {Rotation::LEFT, {{0, 0}, {0, 1}, {1, 1}, {1, 2}}}
     };
+}
+
+Shape ZBlock::getBaseShape(Rotation rotation) {
+    return baseShapeRotations[rotation];
 }
 
 TBlock::TBlock(BoardProxy & board, int level) : Block(board, 'T', level) {
@@ -68,7 +87,6 @@ TBlock::TBlock(BoardProxy & board, int level) : Block(board, 'T', level) {
     };
 }
 
-
-
-
-
+Shape TBlock::getBaseShape(Rotation rotation) {
+    return baseShapeRotations[rotation];
+}
