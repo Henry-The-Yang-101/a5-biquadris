@@ -1,3 +1,4 @@
+#include <memory>
 #include "block.h"
 
 // BlockCell definitions
@@ -95,6 +96,15 @@ bool Block::down() {
     this->downShift++;
   }
   return valid;
+}
+
+void Block::drop() {
+  std::vector<CellCoords> dropCoords = std::move(this->getDropPreviewCellCoords());
+  std::shared_ptr<BlockCell> blockCell = std::make_shared<BlockCell>(this->boardProxy, this->getClearScore(), this->type);
+
+  for (CellCoords & cell : dropCoords) {
+    this->boardProxy.insertBlockCell(cell.first, cell.second, blockCell);
+  }
 }
 
 
