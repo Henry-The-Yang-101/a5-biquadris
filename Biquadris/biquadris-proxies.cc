@@ -119,6 +119,10 @@ int DisplayProxy::getHighScore(int whichBoard) const {
   this->gameEngine.getHighScore(whichBoard);
 }
 
+int DisplayProxy::getLevel(int whichBoard) const {
+  this->gameEngine.getLevel(whichBoard);
+}
+
 bool DisplayProxy::getIsGameOver() const {
   this->gameEngine.getIsGameOver();
 }

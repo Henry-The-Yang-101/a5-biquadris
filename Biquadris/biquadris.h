@@ -50,6 +50,7 @@ class BiQuadris : public Subject {
     vector<BlockAttributes> getBlockBacklog(int whichBoard) const;
     int getCurrentScore(int whichBoard) const;
     int getHighScore(int whichBoard) const;
+    int getLevel(int whichBoard) const;
     bool getIsGameOver() const;
     int getCurrentBoardTurn() const;
     bool getCanUseSpecialAction() const;
