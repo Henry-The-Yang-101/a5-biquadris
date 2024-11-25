@@ -39,4 +39,4 @@ bool LevelFour::executeCustomRuleAction() {
   }
   starBlock->drop();
   return false;
-} // might not be enough logic for edge cases
+}
