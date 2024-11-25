@@ -17,9 +17,9 @@ class Board {
         static const int HEIGHT = 15;
         static const int NUM_RESERVE_ROWS = 3;
 
-        const std::string blockSequenceFileName;
-        const BoardProxy boardProxy;
-        ManageGameStateProxy gameProxy;
+        std::string blockSequenceFileName;
+        BoardProxy boardProxy;
+        ManageGameStateProxy & gameProxy;
         std::unique_ptr<Level> currentLevel;
 
         int currentScore = 0;
@@ -35,10 +35,13 @@ class Board {
 
         std::vector<std::vector<std::shared_ptr<BlockCell>>> grid;
 
-        void refillRows();
+        void setLevel(int levelNum);
+        void applyLevelHeaviness();
+        void applyHeavyEffect();
+        int countAndClearFilledRows();
 
     public:
-        Board(ManageGameStateProxy game, std::unique_ptr<Level> level, std::string blockSequenceFileName, bool allowedToHold);
+        Board(ManageGameStateProxy & game, int startLevelNum, std::string blockSequenceFileName, bool allowedToHold);
         ~Board() = default;
 
         bool cellAvailable(int column, int row);

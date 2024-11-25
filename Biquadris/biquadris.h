@@ -60,7 +60,8 @@ class BiQuadris : public Subject {
     // setters
     void setBonusFeatures(bool isOn);
     void setDevMode(bool isOn);
-    void gameOver();
+    void informCurrentBoardPlacedBlock(int rowsCleared);
+    void informGameOver();
 
     ~BiQuadris();
 };

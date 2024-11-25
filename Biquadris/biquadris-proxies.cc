@@ -15,8 +15,12 @@ void ManageGameStateProxy::setDevMode(bool isOn) {
   this->gameEngine.setDevMode(isOn);
 }
 
-void ManageGameStateProxy::gameOver() {
-  this->gameEngine.gameOver();
+void ManageGameStateProxy::informCurrentBoardPlacedBlock(int rowsCleared) {
+  this->gameEngine.informCurrentBoardPlacedBlock(rowsCleared);
+}
+
+void ManageGameStateProxy::informGameOver() {
+  this->gameEngine.informGameOver();
 }
 
 // VisualEffectProxy definitions
