@@ -238,7 +238,14 @@ BlockAttributes Board::getCurrentBlockAttributes() {
     return std::pair{this->currentBlock->getCellCoordinates(), this->currentBlock};
 }
 
-BlockAttributes getNextBlockAttributes();
-BlockAttributes getNextBlockAttributes();
+BlockAttributes Board::getNextBlockAttributes() {}
+BlockAttributes Board::getNextBlockAttributes() {}
 
+void Board::setCurrentBlock(char blockType) {
+    this->currentBlock = std::make_unique<Block>(blockType);
+}
+
+void Board::setLevelRandomEnabled(bool enabled) {
+    this->currentLevel->setRandomEnabled(enabled);
+}
 

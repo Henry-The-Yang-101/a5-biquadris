@@ -71,6 +71,10 @@ class Board {
         int getHeight();
         int getNumBlocksPlacedWithoutClearing();
 
+        void setCurrentBlock(char blockType);
+
+        void setLevelRandomEnabled(bool enabled);
+
         BlockCellCoordinates getCurrentBlockDropPreviewCellCoordinates();
         BlockAttributes getCurrentBlockAttributes();
         BlockAttributes getNextBlockAttributes();
