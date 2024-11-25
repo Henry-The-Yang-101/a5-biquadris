@@ -27,4 +27,10 @@ class DevOffCommand : public ManageGameStateCommand {
     void execute(int multiplier) override;
 };
 
+class SpareCommand : public ManageGameStateCommand {
+  public:
+    SpareCommand(ManageGameStateProxy & biquadrisProxy, std::string commandName);
+    void execute(int multiplier) override;
+};
+
 #endif

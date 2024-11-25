@@ -14,6 +14,10 @@ void ManageGameStateProxy::setDevMode(bool isOn) {
   this->gameEngine.setDevMode(isOn);
 }
 
+void ManageGameStateProxy::endSpecialActionMove() {
+  this->gameEngine.endSpecialActionMove();
+}
+
 void ManageGameStateProxy::informCurrentBoardPlacedBlock(int rowsCleared) {
   this->gameEngine.informCurrentBoardPlacedBlock(rowsCleared);
 }

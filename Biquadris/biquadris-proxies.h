@@ -13,6 +13,7 @@ class ManageGameStateProxy : public BiQuadrisProxy {
 
     void setBonusFeatures(bool isOn);
     void setDevMode(bool isOn);
+    void endSpecialActionMove();
     void informCurrentBoardPlacedBlock(int rowsCleared);
     void informGameOver();
 };

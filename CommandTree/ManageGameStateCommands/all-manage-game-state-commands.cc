@@ -27,3 +27,10 @@ DevOffCommand::DevOffCommand(ManageGameStateProxy & biquadrisProxy, std::string 
 void DevOffCommand::execute(int multiplier) {
   this->dependency.setDevMode(false);
 }
+
+// SpareCommand definitions
+SpareCommand::SpareCommand(ManageGameStateProxy & biquadrisProxy, std::string commandName) : ManageGameStateCommand{biquadrisProxy, commandName, false} {}
+
+void SpareCommand::execute(int multiplier) {
+  this->dependency.endSpecialActionMove();
+}

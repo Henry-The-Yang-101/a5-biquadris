@@ -268,6 +268,8 @@ void BiQuadris::informGameOver() {
 }
 
 void BiQuadris::endSpecialActionMove() {
+    this->assertSpecialActionMove();
+
     this->canUseSpecialAction = false;
     this->currentPlayerTurn = getOpponentTurn(this->currentPlayerTurn);
 }
