@@ -203,8 +203,28 @@ void ConsoleView::render() {
 
         //printing game area
         for (int r = 0; r < gameGridRows; r++) {
+            for (int c = 0; c < gameGridCols; c++) {
+                cout << p1GameGrid[r][c];
+                if (c != gameGridCols - 1) {
+                    // change to space later, using | for readability
+                    cout << "|";
+                }
+            }
+            for (int i = 0; i < nextContainerWidth + leftInteriorPadding; i++) cout << " ";
+            cout << "|";
+            for (int i = 0; i < rightInteriorPadding + holdContainerWidth; i++) cout << " ";
+            for (int c = 0; c < gameGridCols; c++) {
+                cout << p2GameGrid[r][c];
+                if (c != gameGridCols - 1) {
+                    // change to space later, using | for readability
+                    cout << "|";
+                }
+            }
+            cout << endl;
 
         }
+
+        
 
     } else {
 

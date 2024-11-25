@@ -7,16 +7,16 @@ DEPENDS = ${OBJECTS:.o=.d}
 ${EXEC}: ${OBJECTS}
 	${CXX} ${CXXFLAGS} ${OBJECTS} -o ${EXEC}
 
-biquadris-proxies.o: biquadris-proxies.cc biquadris-proxies.h biquadris.h
+biquadris-proxies.o: ./biquadris-proxies.cc ./biquadris-proxies.h ./biquadris.h
 	${CXX} -c biquadris-proxies.cc
 
-biquadris.o: biquadris.cc biquadris.h
+biquadris.o: ./biquadris.cc ./biquadris.h
 	${CXX} -c biquadris.cc
 
-console-view.o: ../console-view.cc ../console-view.h ../../Miscellaneous/observer.h biquadris-proxies.h 
+console-view.o: ../console-view.cc ../console-view.h ../../Miscellaneous/observer.h ./biquadris-proxies.h 
 	${CXX} -c ../console-view.cc
 
-main.o: ../console-view.h biquadris-proxies.h biquadris.h
+main.o: ../console-view.h ./biquadris-proxies.h ./biquadris.h
 	${CXX} -c main.cc
 
 -include ${DEPENDS}

@@ -1,6 +1,6 @@
-#include "../console-view.h";
-#include "biquadris-proxies.h";
-#include "biquadris.h";
+#include "../console-view.h"
+#include "biquadris-proxies.h"
+#include "biquadris.h"
 
 using namespace std;
 

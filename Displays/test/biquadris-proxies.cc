@@ -8,7 +8,15 @@ using Grid = vector<vector<char>>;
 DisplayProxy::DisplayProxy(BiQuadris & gameEngine) : BiQuadrisProxy{gameEngine} {}
 
 Grid DisplayProxy::getGrid(int whichBoard) const {
-  Grid temp;
+  Grid temp(18, vector<char>(11, ' ')); // 18 rows and 11 columns, filled with spaces
+
+  // Optionally, you can fill the grid with some test values
+  for (int i = 0; i < 18; ++i) {
+    for (int j = 0; j < 11; ++j) {
+      temp[i][j] = (i + j) % 2 == 0 ? 'X' : 'O'; // Example pattern
+    }
+  }
+
   return temp;
 }
 
