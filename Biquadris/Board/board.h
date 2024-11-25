@@ -32,7 +32,7 @@ class Board {
 
         std::unique_ptr<Block> currentBlock;
         std::unique_ptr<Block> nextBlock;
-        std::unique_ptr<Block> blockOnHold;
+        std::unique_ptr<Block> heldBlock;
         bool allowedToHold = true;
 
         bool currentBlockHeavyEffect = false;
@@ -50,7 +50,7 @@ class Board {
         Board(ManageGameStateProxy & game, int initLevelNum, std::string blockSequenceFileName);
         ~Board() = default;
 
-        bool cellAvailable(int column, int row);
+        bool cellAvailable(int column, int row) const;
         void insertBlockCell(int column, int row, std::shared_ptr<BlockCell> cell);
 
         void moveBlockLeft(int multiplier);
@@ -71,9 +71,9 @@ class Board {
 
         void setLevelRandomEnabled(bool enabled);
 
-        int getWidth();
-        int getHeight();
-        int getNumBlocksPlacedWithoutClearing();
+        int getWidth() const;
+        int getHeight() const;
+        int getNumBlocksPlacedWithoutClearing() const;
 
         int getCurrentScore() const;
         int getHighScore() const;

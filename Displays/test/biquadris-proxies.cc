@@ -83,7 +83,7 @@ BlockAttributes DisplayProxy::getHeldBlockAttributes(int whichBoard) const {
     return {currentBlockCoordinates, currentBlockType};
 }
 
-vector<BlockAttributes> DisplayProxy::getBlockBacklog(int whichBoard) const {
+vector<BlockAttributes> DisplayProxy::getBlockAttributesBacklog(int whichBoard) const {
     // Mock backlog data with 5 blocks of different types and rotations
     if (whichBoard == 1) {
     vector<BlockAttributes> backlog;

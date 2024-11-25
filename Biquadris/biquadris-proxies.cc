@@ -115,8 +115,8 @@ BlockAttributes DisplayProxy::getHeldBlockAttributes(int whichBoard) const {
   return this->gameEngine.getHeldBlockAttributes(whichBoard);
 }
 
-vector<BlockAttributes> DisplayProxy::getBlockBacklog(int whichBoard) const {
-  return this->gameEngine.getBlockBacklog(whichBoard);
+vector<BlockAttributes> DisplayProxy::getBlockAttributesBacklog(int whichBoard) const {
+  return this->gameEngine.getBlockAttributesBacklog(whichBoard);
 }
 
 int DisplayProxy::getCurrentScore(int whichBoard) const {

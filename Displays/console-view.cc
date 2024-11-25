@@ -51,8 +51,8 @@ ConsoleView::ConsoleView(DisplayProxy &displayProxy, bool enhanced): displayProx
         }
 
         //retrieve block queue from game engine
-        vector<BlockAttributes> p1NextQueue= displayProxy.getBlockBacklog(1);
-        vector<BlockAttributes> p2NextQueue = displayProxy.getBlockBacklog(2);
+        vector<BlockAttributes> p1NextQueue= displayProxy.getBlockAttributesBacklog(1);
+        vector<BlockAttributes> p2NextQueue = displayProxy.getBlockAttributesBacklog(2);
 
         //add blocks in queue to the next grid
         int rowShift = 0;

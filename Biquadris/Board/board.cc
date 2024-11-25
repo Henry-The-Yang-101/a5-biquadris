@@ -75,7 +75,7 @@ int Board::calculateScoreIncrease(int linesCleared) {
     return (this->currentLevel->getLevelNum() + linesCleared) * (this->currentLevel->getLevelNum() + linesCleared);
 }
 
-bool Board::cellAvailable(int column, int row) {
+bool Board::cellAvailable(int column, int row) const {
     row += this->NUM_RESERVE_ROWS;
     return this->grid[row][column] == nullptr;
 }
@@ -173,7 +173,7 @@ void Board::dropBlock(int multiplier) {
 void Board::holdBlock() {
     if (this->allowedToHold) {
 
-        std::swap(this->currentBlock, this->blockOnHold);
+        std::swap(this->currentBlock, this->heldBlock);
 
         // replace current block with nextblock if initially no block on hold
         if (this->currentBlock == nullptr) {
@@ -197,7 +197,7 @@ void Board::restart() {
     this->setCurrentLevel(this->initLevelNum);
     this->currentBlock = this->currentLevel->cycleBlock();
     this->nextBlock = this->currentLevel->cycleBlock();
-    this->blockOnHold = nullptr;
+    this->heldBlock = nullptr;
     this->currentScore = 0;
 }
 
@@ -217,29 +217,33 @@ void Board::setHeavyEffect() {
     this->currentBlockHeavyEffect = true;
 }
 
-int Board::getHeight() {
+int Board::getHeight() const {
     return this->HEIGHT + this->NUM_RESERVE_ROWS;
 }
 
-int Board::getWidth() {
+int Board::getWidth() const {
     return this->WIDTH;
 }
 
-int Board::getNumBlocksPlacedWithoutClearing() {
+int Board::getNumBlocksPlacedWithoutClearing() const {
     return this->numBlocksPlacedWithoutClearing;
 }
 
-BlockCellCoordinates Board::getCurrentBlockDropPreviewCellCoordinates() {
+BlockCellCoordinates Board::getCurrentBlockDropPreviewCellCoordinates() const {
     return this->currentBlock->getDropPreviewCellCoordinates();
 }
 
-BlockAttributes Board::getCurrentBlockAttributes() {
-
-    return std::pair{this->currentBlock->getCellCoordinates(), this->currentBlock};
+BlockAttributes Board::getCurrentBlockAttributes() const {
+    return std::pair{this->currentBlock->getCellCoordinates(), this->currentBlock->getType()};
 }
 
-BlockAttributes Board::getNextBlockAttributes() {}
-BlockAttributes Board::getNextBlockAttributes() {}
+BlockAttributes Board::getNextBlockAttributes() const {
+    return std::pair{this->nextBlock->getCellCoordinates(), this->nextBlock->getType()};
+}
+
+BlockAttributes Board::getHeldBlockAttributes() const {
+    return std::pair{this->heldBlock->getCellCoordinates(), this->heldBlock->getType()};
+}
 
 void Board::setCurrentBlock(char blockType) {
     this->currentBlock = std::make_unique<Block>(blockType);

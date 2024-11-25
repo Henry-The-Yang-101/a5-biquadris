@@ -16,7 +16,7 @@ class DisplayProxy : public BiQuadrisProxy {
     BlockAttributes getCurrentBlockAttributes(int whichBoard) const;
     BlockAttributes getNextBlockAttributes(int whichBoard) const;
     BlockAttributes getHeldBlockAttributes(int whichBoard) const;
-    vector<BlockAttributes> getBlockBacklog(int whichBoard) const;
+    vector<BlockAttributes> getBlockAttributesBacklog(int whichBoard) const;
     int getCurrentScore(int whichBoard) const;
     int getHighScore(int whichBoard) const;
     int getLevel(int whichBoard) const;
