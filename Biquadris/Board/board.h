@@ -33,6 +33,7 @@ class Board {
         std::unique_ptr<Block> currentBlock;
         std::unique_ptr<Block> nextBlock;
         std::unique_ptr<Block> heldBlock;
+        std::unique_ptr<Block> heldBlock;
         bool allowedToHold = true;
 
         bool currentBlockHeavyEffect = false;
