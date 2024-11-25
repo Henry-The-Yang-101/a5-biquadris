@@ -119,7 +119,7 @@ BlockCellCoordinates Block::getCellCoordinates() const {
   return this->getCellCoordinates(this->rotation, this->rightShift, this->downShift);
 }
 
-BlockCellCoordinates Block::getDropPreviewCellCoordinate() const {
+BlockCellCoordinates Block::getDropPreviewCellCoordinates() const {
   // checking from downShift + 1 because after constructing Block and running checkPositionValidity
   // to check game over, the currentposition should always be valid
   BlockCellCoordinates currentCellCoordinates = std::move(this->getCellCoordinates(this->rotation, this->rightShift, this->downShift + 1));

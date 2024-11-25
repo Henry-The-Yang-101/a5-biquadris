@@ -26,9 +26,6 @@ class Block {
 
         Block(BoardProxy& boardProxy, int numLevel);
 
-        static Rotation rotationAfterRotatedClockwise(Rotation rotation);
-        static Rotation rotationAfterRotatedCounterClockwise(Rotation rotation);
-
         virtual ~Block() = default;
 
     private:
@@ -37,9 +34,13 @@ class Block {
         int rightShift = 0;
         int downShift = 0;
 
+        static Rotation rotationAfterRotatedClockwise(Rotation rotation);
+        static Rotation rotationAfterRotatedCounterClockwise(Rotation rotation);
+
         virtual int getClearScore() const;
         virtual char getType() const = 0;
         virtual BlockCellCoordinates getBaseShape(Rotation rotation) const = 0;
+        
         BlockCellCoordinates getCellCoordinates(Rotation newRotation, int newrightShift, int newDownShift) const;
         bool checkPositionValidity(const BlockCellCoordinates & cellCoords) const;
 
@@ -53,7 +54,7 @@ class Block {
         void drop();
 
         BlockCellCoordinates getCellCoordinates() const;
-        BlockCellCoordinates getDropPreviewCellCoordinate() const;
+        BlockCellCoordinates getDropPreviewCellCoordinates() const;
 
         bool checkPositionValidity() const; // This is how board is gonna check if its game over
         // board should run this right after constructing Block
