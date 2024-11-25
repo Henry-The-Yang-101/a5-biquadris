@@ -39,7 +39,7 @@ class LevelFour : public RandomizedLevel {
   public:
     LevelFour(BoardProxy & boardProxy, const std::string & blockSequenceFileName);
     bool checkCustomRuleCondition() const override;
-    void executeCustomRuleAction() override;
+    bool executeCustomRuleAction() override;
 };
 
 #endif
