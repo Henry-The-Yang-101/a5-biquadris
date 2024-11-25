@@ -9,16 +9,39 @@ using Grid = vector<vector<char>>;
 DisplayProxy::DisplayProxy(BiQuadris & gameEngine) : BiQuadrisProxy{gameEngine} {}
 
 Grid DisplayProxy::getGrid(int whichBoard) const {
-  Grid temp(18, vector<char>(11, ' ')); // 18 rows and 11 columns, filled with spaces
+  Grid grid(18, vector<char>(11, ' ')); // 18 rows and 11 columns, filled with spaces
 
-  // Optionally, you can fill the grid with some test values
-  for (int i = 0; i < 18; ++i) {
-    for (int j = 0; j < 11; ++j) {
-      temp[i][j] = (i + j) % 2 == 0 ? 'X' : 'O'; // Example pattern
+  vector<string> gameState = {
+        "           ", // Row 0
+        "           ", // Row 1
+        "           ", // Row 2
+        "           ", // Row 3
+        "           ", // Row 4
+        "           ", // Row 5
+        "           ", // Row 6
+        "           ", // Row 7
+        "           ", // Row 8
+        "           ", // Row 9
+        "           ", // Row 10
+        "           ", // Row 11
+        "           ", // Row 12
+        "           ", // Row 13
+        "     I  I  ", // Row 14
+        "LLL  I  I  ", // Row 15
+        "LTSS IOOIOO", // Row 16
+        "TTTSSIOOIOO", // Row 17
+    };
+
+    for (int i = 0; i < grid.size(); ++i) {
+        for (int j = 0; j < grid[i].size(); ++j) {
+            if (j < gameState[i].size()) {
+                grid[i][j] = gameState[i][j];
+            } else {
+                grid[i][j] = ' ';
+            }
+        }
     }
-  }
-
-  return temp;
+  return grid;
 }
 
 BlockAttributes DisplayProxy::getCurrentBlockAttributes(int whichBoard) const {
