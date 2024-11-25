@@ -6,6 +6,7 @@
 #include <string>
 #include "../Miscellaneous/subject.h"
 // include board.h when its ready
+#include "./Board/board.h"
 
 using namespace std;
 using CellCoordinate = pair<int, int>;
@@ -13,8 +14,8 @@ using BlockAttributes = pair<vector<CellCoordinate>, char>;
 using Grid = vector<vector<char>>;
 
 class BiQuadris : public Subject {
-  //Board board1
-  //Board board2
+  Board board1;
+  Board board2;
   int currentBoardTurn = 1;
   bool devMode;
   bool bonusFeatures;
@@ -22,7 +23,7 @@ class BiQuadris : public Subject {
   bool canUseSpecialAction = false;
 
   public:
-    BiQuadris(string sequenceFile1 = "sequence1.txt", string sequenceFile2 = "sequence2.txt", bool devMode = false, bool bonusFeatures = true, int randomSeed = 0);
+    BiQuadris(string sequenceFile1 = "sequence1.txt", string sequenceFile2 = "sequence2.txt", bool devMode = false, bool bonusFeatures = true, int randomSeed = 0, int board1Lvl, int board2Lvl);
 
     void moveBlockLeft(int multiplier);
     void moveBlockRight(int multiplier);
