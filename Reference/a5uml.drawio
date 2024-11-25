@@ -1,11 +1,11 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36" version="24.8.9">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="1466" dy="929" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3140" pageHeight="2000" math="0" shadow="0">
+    <mxGraphModel dx="789" dy="500" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3140" pageHeight="2000" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="zkfFHV4jXpPFQw0GAbJ--0" value="Block" style="swimlane;fontStyle=2;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="610" y="355" width="390" height="365" as="geometry">
+          <mxGeometry x="610" y="355" width="390" height="380" as="geometry">
             <mxRectangle x="230" y="140" width="160" height="26" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
@@ -15,14 +15,14 @@
         <mxCell id="xHiWEumnkp8T0ZaLCuRG-27" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="zkfFHV4jXpPFQw0GAbJ--0" vertex="1">
           <mxGeometry y="100" width="390" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="xHiWEumnkp8T0ZaLCuRG-48" value="&lt;div&gt;+ moveLeft(): bool&lt;br&gt;+ moveRight(): bool&lt;br&gt;+ rotateClockwise(): bool&lt;br&gt;+ rotateCounterClockwise(): bool&lt;br&gt;+ drop(): void&lt;br&gt;+ down(): bool&lt;/div&gt;&lt;div&gt;+&amp;nbsp;getCellCoordinates() : std::vector&amp;lt;std::pair&amp;lt;int, int&amp;gt;&amp;gt;&lt;br&gt;&lt;div&gt;+ getDropPreviewCellCoordinates(): std::vector&amp;lt;std::pair&amp;lt;int, int&amp;gt;&amp;gt;&lt;/div&gt;&lt;/div&gt;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=0;html=1;" parent="zkfFHV4jXpPFQw0GAbJ--0" vertex="1">
-          <mxGeometry y="108" width="390" height="122" as="geometry" />
+        <mxCell id="xHiWEumnkp8T0ZaLCuRG-48" value="&lt;div&gt;+ moveLeft(): bool&lt;br&gt;+ moveRight(): bool&lt;br&gt;+ rotateClockwise(): bool&lt;br&gt;+ rotateCounterClockwise(): bool&lt;br&gt;+ drop(): void&lt;br&gt;+ down(): bool&lt;/div&gt;&lt;div&gt;+&amp;nbsp;getCellCoordinates() : std::vector&amp;lt;std::pair&amp;lt;int, int&amp;gt;&amp;gt;&lt;/div&gt;&lt;div&gt;+ isValidPosition(): bool&lt;br&gt;&lt;div&gt;+ getDropPreviewCellCoordinates(): std::vector&amp;lt;std::pair&amp;lt;int, int&amp;gt;&amp;gt;&lt;/div&gt;&lt;/div&gt;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=0;html=1;" parent="zkfFHV4jXpPFQw0GAbJ--0" vertex="1">
+          <mxGeometry y="108" width="390" height="142" as="geometry" />
         </mxCell>
         <mxCell id="RzOuaV8a0XBnqdEBW30R-56" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="zkfFHV4jXpPFQw0GAbJ--0" vertex="1">
-          <mxGeometry y="230" width="390" height="8" as="geometry" />
+          <mxGeometry y="250" width="390" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="RzOuaV8a0XBnqdEBW30R-57" value="&lt;div&gt;&lt;u&gt;- rotationAfterRotatedClockwise(Rotation): Rotation&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;- rotationAfterRotatedCounterClockwise(Rotation): Rotation&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;- getClearScore(): int&lt;br&gt;- &lt;i&gt;getType&lt;/i&gt;(): char&lt;br&gt;-&amp;nbsp;&lt;i&gt;getBaseShape&lt;/i&gt;(Rotation): std::vector&amp;lt;std::pair&amp;lt;int, int&amp;gt;&amp;gt;&lt;div&gt;- getCellCoordinates(Rotation, int, int): std::vector&amp;lt;std::pair&amp;lt;int, int&amp;gt;&amp;gt;&lt;br&gt;- checkPositionValidity(std::vector&amp;lt;std::pair&amp;lt;int, int&amp;gt;&amp;gt;): bool&lt;/div&gt;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=0;html=1;" parent="zkfFHV4jXpPFQw0GAbJ--0" vertex="1">
-          <mxGeometry y="238" width="390" height="122" as="geometry" />
+        <mxCell id="RzOuaV8a0XBnqdEBW30R-57" value="&lt;div&gt;&lt;u&gt;- rotationAfterRotatedClockwise(Rotation): Rotation&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;u&gt;- rotationAfterRotatedCounterClockwise(Rotation): Rotation&lt;/u&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;- getClearScore(): int&lt;br&gt;- &lt;i&gt;getType&lt;/i&gt;(): char&lt;br&gt;-&amp;nbsp;&lt;i&gt;getBaseShape&lt;/i&gt;(Rotation): std::vector&amp;lt;std::pair&amp;lt;int, int&amp;gt;&amp;gt;&lt;div&gt;- getCellCoordinates(Rotation, int, int): std::vector&amp;lt;std::pair&amp;lt;int, int&amp;gt;&amp;gt;&lt;br&gt;- isValidPosition(std::vector&amp;lt;std::pair&amp;lt;int, int&amp;gt;&amp;gt;): bool&lt;/div&gt;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=0;html=1;" parent="zkfFHV4jXpPFQw0GAbJ--0" vertex="1">
+          <mxGeometry y="258" width="390" height="122" as="geometry" />
         </mxCell>
         <mxCell id="xHiWEumnkp8T0ZaLCuRG-18" value="&lt;&lt;enumeration&gt;&gt;&#xa;Rotation" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="750" y="160" width="110" height="110" as="geometry">

@@ -42,7 +42,7 @@ class Block {
         virtual BlockCellCoordinates getBaseShape(Rotation rotation) const = 0;
         
         BlockCellCoordinates getCellCoordinates(Rotation newRotation, int newrightShift, int newDownShift) const;
-        bool checkPositionValidity(const BlockCellCoordinates & cellCoords) const;
+        bool isValidPosition(const BlockCellCoordinates & cellCoords) const;
 
     public:
         bool moveLeft();
@@ -56,7 +56,7 @@ class Block {
         BlockCellCoordinates getCellCoordinates() const;
         BlockCellCoordinates getDropPreviewCellCoordinates() const;
 
-        bool checkPositionValidity() const; // This is how board is gonna check if its game over
+        bool isValidPosition() const; // This is how board is gonna check if its game over
         // board should run this right after constructing Block
 };
 
