@@ -4,7 +4,7 @@
 #include <vector>
 #include <memory>
 #include "board-proxy.h"
-#include "biquadris-proxies.h"
+#include "../biquadris-proxies.h"
 #include "block.h"
 #include "level.h"
 

@@ -1,8 +1,12 @@
 #include "biquadris.h"
+#include "./biquadris-proxies.h"
 
-BiQuadris::BiQuadris(string sequenceFile1, string sequenceFile2, bool devMode, bool bonusFeatures, int randomSeed, int board1Lvl, int board2Lvl) :
-    board1{ManageGameStateProxy{*this}, board1Lvl, sequenceFile1}, board2{ManageGameStateProxy{*this}, board2Lvl, sequenceFile2}, 
-    devMode{devMode}, bonusFeatures{bonusFeatures} {}
+BiQuadris::BiQuadris(std::string sequenceFile1, std::string sequenceFile2, bool devMode, bool bonusFeatures, int randomSeed, int board1Lvl, int board2Lvl) :
+    devMode{devMode}, bonusFeatures{bonusFeatures}, game{*this}, visualEffectProxy{*this}, boardActionProxy{*this}, levelBlockGenProxy{*this}, displayProxy{*this}, 
+    board1{this->game, board1Lvl, sequenceFile1}, board2{this->game, board2Lvl, sequenceFile2} {
+
+        
+}
 
 // void moveBlockHorizontal(int multiplier);
 // void moveBlockDown(int multiplier);
