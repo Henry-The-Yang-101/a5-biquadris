@@ -1,36 +1,40 @@
 #include "board.h"
 #include "./Level/level.h"
 
-Board::Board(ManageGameStateProxy game, std::unique_ptr<Level> level, const std::string blockSequenceFileName) : 
-    boardProxy{*this}, game{game}, currentLevel{std::move(level)}, currentScore{0}, highScore{0}, 
-    numBlocksPlacedWithoutClearing{0}, allowedToHold{false}, currentBlockHeavyEffect{false}, grid{}, blockSequenceFileName{blockSequenceFileName} {}
+Board::Board(ManageGameStateProxy gameProxy, std::unique_ptr<Level> level, std::string blockSequenceFileName, bool allowedToHold) : 
+    boardProxy{*this}, gameProxy{gameProxy}, currentLevel{std::move(level)}, allowedToHold{allowedToHold}, blockSequenceFileName{blockSequenceFileName}, 
+    grid{HEIGHT + NUM_RESERVE_ROWS, std::vector<std::shared_ptr<BlockCell>>{WIDTH, nullptr}} {
+}
 
-Board::~Board() {}
+void Board::refillRows() {
+    while (this->grid.size() < HEIGHT + NUM_RESERVE_ROWS) {
+        this->grid.emplace_back(WIDTH, nullptr);
+    }
+}
 
-bool Board::cellAvailable(int x, int y) {
-
-    y += this->NUM_RESERVE_ROWS;
+bool Board::cellAvailable(int column, int row) {
+    row += this->NUM_RESERVE_ROWS;
     // check within board boundaries and coordinate is nullptr (no block in cell)
-    return (x >= 0 && x < this->WIDTH && y >= 0 && y < this->HEIGHT) && (this->grid[y][x] == nullptr);
+    if (!(column >= 0 && column < this->WIDTH && row >= 0 && row < this->HEIGHT)) return false; // redundant?
+    return this->grid[row][column] == nullptr;
 }
 
-void Board::insertBlockCell(int x, int y, std::shared_ptr<BlockCell> cell) {
-    this->grid[y][x] = cell;
+void Board::insertBlockCell(int column, int row, std::shared_ptr<BlockCell> cell) {
+    this->grid[row][column] = cell;
 }
 
-void Board::moveBlockHorizontal(int multiplier) {
+void Board::moveBlockLeft(int multiplier) {
+    while (multiplier > 0 && this->currentBlock->moveLeft()) {
+        multiplier--;
+    }
+}
 
-    // move right if mulitiplier is positive
+void Board::moveBlockRight(int multiplier) {
     while (multiplier > 0 && this->currentBlock->moveRight()) {
         multiplier--;
     }
-
-    // move left if multiplier is negative
-    while (multiplier < 0 && this->currentBlock->moveLeft()) {
-        multiplier++;
-    }
-
 }
+
 
 void Board::moveBlockDown(int multiplier) {
     while (multiplier > 0 && this->currentBlock->down()) {

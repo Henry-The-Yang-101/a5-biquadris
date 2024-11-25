@@ -29,8 +29,12 @@ void VisualEffectProxy::blindEffect() {
 // BoardActionProxy definitions
 BoardActionProxy::BoardActionProxy(BiQuadris & gameEngine) : BiQuadrisProxy{gameEngine} {}
 
-void BoardActionProxy::moveBlockHorizontal(int multiplier) {
-  this->gameEngine.moveBlockHorizontal(multiplier);
+void BoardActionProxy::moveBlockLeft(int multiplier) {
+  this->gameEngine.moveBlockLeft(multiplier);
+}
+
+void BoardActionProxy::moveBlockRight(int multiplier) {
+  this->gameEngine.moveBlockRight(multiplier);
 }
 
 void BoardActionProxy::moveBlockDown(int multiplier) {
