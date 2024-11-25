@@ -191,5 +191,24 @@ void BiQuadris::setDevMode(bool isOn) {
     this->devMode = isOn;
 }
 
+// void BiQuadris::blindEffect() {
+//     if (this->currentBoardTurn == 1) {
+//         this->board1.setBlindEffect();
+//     } else {
+//         this->board2.setBlindEffect();
+//     }
+// }
+
+void BiQuadris::heavyEffect() {
+    if (this->currentBoardTurn == 1) {
+        this->board1.setHeavyEffect();
+    } else {
+        this->board2.setHeavyEffect();
+    }
+}
+
+// void BiQuadris::forceEffect(char blockType) {
+
+// }
 
 
