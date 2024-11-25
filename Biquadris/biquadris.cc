@@ -109,4 +109,76 @@ void BiQuadris::disableRandom(std::string blockSequenceFile) {
     }
 }
 
+// getters
+Grid BiQuadris::getGrid(int whichBoard) const {
+    if (whichBoard == 1) {
+        return this->board1.getGrid();
+    } else {
+        return this->board2.getGrid();
+    }
+}
+BlockAttributes BiQuadris::getCurrentBlockAttributes(int whichBoard) const {
+    if (whichBoard == 1) {
+        return this->board1.getCurrentBlockAttributes();
+    } else {
+        return this->board2.getCurrentBlockAttributes();
+    }
+}
+
+BlockAttributes BiQuadris::getNextBlockAttributes(int whichBoard) const {
+    if (whichBoard == 1) {
+        return this->board1.getNextBlockAttributes();
+    } else {
+        return this->board2.getNextBlockAttributes();
+    }
+}
+
+BlockAttributes BiQuadris::getHeldBlockAttributes(int whichBoard) const {
+    if (whichBoard == 1) {
+        return this->board1.getHeldBlockAttributes();
+    } else {
+        return this->board2.getHeldBlockAttributes();
+    }
+}
+
+// vector<BlockAttributes> BiQuadris::getBlockBacklog(int whichBoard) const {
+    
+// }
+
+int BiQuadris::getCurrentScore(int whichBoard) const {
+    if (whichBoard == 1) {
+        return this->board1.getCurrentScore();
+    } else {
+        return this->board2.getCurrentScore();
+    }
+}
+
+int BiQuadris::getHighScore(int whichBoard) const {
+    if (whichBoard == 1) {
+        return this->board1.getHighScore();
+    } else {
+        return this->board2.getHighScore();
+    }
+}
+
+int BiQuadris::getLevel(int whichBoard) const {
+    if (whichBoard == 1) {
+        return this->board1.getLevelNum();
+    } else {
+        return this->board2.getLevelNum();
+    }
+}
+
+bool BiQuadris::getIsGameOver() const {
+    return this->isGameOver;
+}
+
+int BiQuadris::getCurrentBoardTurn() const {
+    return this->currentBoardTurn;
+}
+
+bool BiQuadris::getCanUseSpecialAction() const {
+    return this->canUseSpecialAction;
+}
+
 
