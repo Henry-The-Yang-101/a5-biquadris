@@ -8,7 +8,9 @@ int main() {
     BiQuadris dummyGameEngine;
     DisplayProxy dummyProxy = DisplayProxy{dummyGameEngine};
 
-    ConsoleView test = ConsoleView{dummyProxy, true};
+    ConsoleView testEnhanced = ConsoleView{dummyProxy, true};
+    ConsoleView testNormal = ConsoleView{dummyProxy, false};
 
-    test.render();
+    testEnhanced.render();
+    testNormal.render();
 }

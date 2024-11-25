@@ -17,8 +17,8 @@ class ConsoleView: public Observer{
     //constants defining spacing for various elements of the board
     const int 
               displayHeight = 26,
-              rightInteriorPadding = 5, 
-              leftInteriorPadding = 5, 
+              rightInteriorPadding = 10, 
+              leftInteriorPadding = 10, 
 
               holdContainerWidth = 8, 
               gameContainerWidth = 23, 
@@ -34,7 +34,9 @@ class ConsoleView: public Observer{
               nextGridRows = 2,
               nextGridCols = 4,
               gameGridRows = 18, 
-              gameGridCols = 11;
+              gameGridCols = 11,
+
+              blockCoordAdjustment = 1;
     
     CharGrid p1GameGrid;
     CharGrid p1HoldGrid;

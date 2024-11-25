@@ -16,7 +16,7 @@ biquadris.o: ./biquadris.cc ./biquadris.h
 console-view.o: ../console-view.cc ../console-view.h ../../Miscellaneous/observer.h ./biquadris-proxies.h 
 	${CXX} -c ../console-view.cc
 
-main.o: ../console-view.h ./biquadris-proxies.h ./biquadris.h
+main.o: ../console-view.h ./biquadris-proxies.h ./biquadris.h main.cc
 	${CXX} -c main.cc
 
 -include ${DEPENDS}
