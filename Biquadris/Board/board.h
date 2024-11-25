@@ -11,7 +11,6 @@
 using CellCoordinate = std::pair<int, int>;
 using BlockCellCoordinates = std::vector<CellCoordinate>;
 using BlockAttributes = std::pair<BlockCellCoordinates, char>;
-using Grid = std::vector<std::vector<std::shared_ptr<BlockCell>>>;
 
 class Board {
     private:
@@ -38,7 +37,7 @@ class Board {
 
         bool currentBlockHeavyEffect = false;
 
-        Grid grid;
+        std::vector<std::vector<std::shared_ptr<BlockCell>>> grid;
 
         void setUpEmptyGrid();
         void setCurrentLevel(int levelNum);
@@ -68,7 +67,7 @@ class Board {
         void increaseScore(int points);
 
         void setHeavyEffect();
-        void setCurrentBlock(char blockType);
+        void replaceCurrentBlock(char blockType);
 
         void setLevelRandomEnabled(bool enabled);
 
@@ -78,7 +77,6 @@ class Board {
 
         int getCurrentScore() const;
         int getHighScore() const;
-
         int getLevelNum() const;
 
         BlockCellCoordinates getCurrentBlockDropPreviewCellCoordinates() const;
@@ -87,8 +85,6 @@ class Board {
         BlockAttributes getNextBlockAttributes() const;
         BlockAttributes getHeldBlockAttributes() const;
         std::vector<BlockAttributes> getBlockAttributesBacklog() const;
-        
-        Grid getGrid() const;
 
 };
 

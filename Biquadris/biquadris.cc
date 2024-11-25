@@ -1,180 +1,116 @@
 #include "biquadris.h"
 #include "./biquadris-proxies.h"
 
-BiQuadris::BiQuadris(std::string sequenceFile1, std::string sequenceFile2, bool devMode, bool bonusFeatures, int randomSeed, int board1Lvl, int board2Lvl) :
-    devMode{devMode}, bonusFeatures{bonusFeatures}, game{*this}, visualEffectProxy{*this}, boardActionProxy{*this}, levelBlockGenProxy{*this}, displayProxy{*this}, 
-    board1{this->game, board1Lvl, sequenceFile1}, board2{this->game, board2Lvl, sequenceFile2} {
+using CellCoordinate = std::pair<int, int>;
+using BlockAttributes = std::pair<std::vector<CellCoordinate>, char>;
+using CharGrid = std::vector<std::vector<char>>;
 
-        
+BiQuadris::BiQuadris(std::string sequenceFile1, std::string sequenceFile2, bool devMode, bool bonusFeatures, int initLevelNum) :
+    devMode{devMode}, bonusFeatures{bonusFeatures}, gameStateProxy{*this}, visualEffectProxy{*this}, boardActionProxy{*this}, levelBlockGenProxy{*this}, displayProxy{*this}, 
+    player1Board{this->gameStateProxy, initLevelNum, sequenceFile1}, player2Board{this->gameStateProxy, initLevelNum, sequenceFile2} {}
+
+
+
+Board & BiQuadris::getPlayerBoard(PlayerTurn whichPlayerTurn) {
+    return (whichPlayerTurn == PlayerTurn::PLAYER1) ? this->player1Board : this->player2Board;
 }
 
+Board & BiQuadris::getCurrentPlayerBoard() {
+    return this->getPlayerBoard(this->currentPlayerTurn);
+}
+
+Board & BiQuadris::getCurrentPlayerOpponentBoard() {
+    return this->getPlayerBoard((this->currentPlayerTurn == PlayerTurn::PLAYER1) ? PlayerTurn::PLAYER2 : PlayerTurn::PLAYER1);
+}
+
+// LOGIC NOT DONE YET
 void BiQuadris::moveBlockLeft(int multiplier) {
-    if (this->currentBoardTurn == 1) {
-        this->board1.moveBlockLeft(multiplier);
-    } else {
-        this->board2.moveBlockLeft(multiplier);
-    }
+    this->getCurrentPlayerBoard().moveBlockLeft(multiplier);
 }
 
 void BiQuadris::moveBlockRight(int multiplier) {
-    if (this->currentBoardTurn == 1) {
-        this->board1.moveBlockRight(multiplier);
-    } else {
-        this->board2.moveBlockRight(multiplier);
-    }
+    this->getCurrentPlayerBoard().moveBlockRight(multiplier);
 }
+
 void BiQuadris::moveBlockDown(int multiplier) {
-    if (this->currentBoardTurn == 1) {
-        this->board1.moveBlockDown(multiplier);
-    } else {
-        this->board2.moveBlockDown(multiplier);
-    }
+    this->getCurrentPlayerBoard().moveBlockDown(multiplier);
 }
 
 void BiQuadris::rotateBlockClockwise(int multiplier) {
-    if (this->currentBoardTurn == 1) {
-        this->board1.rotateBlockClockwise(multiplier);
-    } else {
-        this->board2.rotateBlockClockwise(multiplier);
-    }
+    this->getCurrentPlayerBoard().rotateBlockClockwise(multiplier);
 }
+
 void BiQuadris::rotateBlockCounterClockwise(int multiplier) {
-    if (this->currentBoardTurn == 1) {
-        this->board1.rotateBlockCounterClockwise(multiplier);
-    } else {
-        this->board2.rotateBlockCounterClockwise(multiplier);
-    }
+    this->getCurrentPlayerBoard().rotateBlockCounterClockwise(multiplier);
 }
 void BiQuadris::dropBlock(int multiplier) {
-    if (this->currentBoardTurn == 1) {
-        this->board1.dropBlock(multiplier);
-    } else {
-        this->board2.dropBlock(multiplier);
-    }
+    this->getCurrentPlayerBoard().dropBlock(multiplier);
 }
 
 void BiQuadris::holdBlock() {
-    if (this->currentBoardTurn == 1) {
-        this->board1.holdBlock();
-    } else {
-        this->board2.holdBlock();
-    }
+    this->getCurrentPlayerBoard().holdBlock();
 }
 
-void BiQuadris::restartBoard() {
-    if (this->currentBoardTurn == 1) {
-        this->board1.restart();
-    } else {
-        this->board2.restart();
-    }
+void BiQuadris::restartBoards() {
+    this->player1Board.restart();
+    this->player2Board.restart();
 }
 
 void BiQuadris::levelUp(int multiplier) {
-    if (this->currentBoardTurn == 1) {
-        this->board1.levelUp(multiplier);
-    } else {
-        this->board2.levelUp(multiplier);
-    }
+    this->getCurrentPlayerBoard().levelUp(multiplier);
 }
 
 void BiQuadris::levelDown(int multiplier) {
-    if (this->currentBoardTurn == 1) {
-        this->board1.levelDown(multiplier);
-    } else {
-        this->board2.levelDown(multiplier);
-    }
+    this->getCurrentPlayerBoard().levelDown(multiplier);
 }
 
 void BiQuadris::replaceCurrentBlock(char blockType) {
-    if (this->currentBoardTurn == 1) {
-        this->board1.setCurrentBlock(blockType);
-    } else {
-        this->board2.setCurrentBlock(blockType);
-    }
+    this->getCurrentPlayerBoard().replaceCurrentBlock(blockType);
 }
 
 void BiQuadris::enableRandom() {
-    if (this->currentBoardTurn == 1) {
-        this->board1.setLevelRandomEnabled(true);
-    } else {
-        this->board2.setLevelRandomEnabled(true);
-    }
+    this->getCurrentPlayerBoard().setLevelRandomEnabled(true);
 }
 
 void BiQuadris::disableRandom(std::string blockSequenceFile) {
-    if (this->currentBoardTurn == 1) {
-        this->board1.setLevelRandomEnabled(false);
-    } else {
-        this->board2.setLevelRandomEnabled(false);
-    }
+    this->getCurrentPlayerBoard().setLevelRandomEnabled(false);
+    // come back later
 }
 
-// getters
-Grid BiQuadris::getGrid(int whichBoard) const {
-    if (whichBoard == 1) {
-        return this->board1.getGrid();
-    } else {
-        return this->board2.getGrid();
-    }
-}
-BlockAttributes BiQuadris::getCurrentBlockAttributes(int whichBoard) const {
-    if (whichBoard == 1) {
-        return this->board1.getCurrentBlockAttributes();
-    } else {
-        return this->board2.getCurrentBlockAttributes();
-    }
+BlockAttributes BiQuadris::getCurrentBlockAttributes(PlayerTurn whichPlayerTurn) const {
+    return this->getPlayerBoard(whichPlayerTurn).getCurrentBlockAttributes();
 }
 
-BlockAttributes BiQuadris::getNextBlockAttributes(int whichBoard) const {
-    if (whichBoard == 1) {
-        return this->board1.getNextBlockAttributes();
-    } else {
-        return this->board2.getNextBlockAttributes();
-    }
+BlockAttributes BiQuadris::getNextBlockAttributes(PlayerTurn whichPlayerTurn) const {
+    return this->getPlayerBoard(whichPlayerTurn).getNextBlockAttributes();
 }
 
-BlockAttributes BiQuadris::getHeldBlockAttributes(int whichBoard) const {
-    if (whichBoard == 1) {
-        return this->board1.getHeldBlockAttributes();
-    } else {
-        return this->board2.getHeldBlockAttributes();
-    }
+BlockAttributes BiQuadris::getHeldBlockAttributes(PlayerTurn whichPlayerTurn) const {
+    return this->getPlayerBoard(whichPlayerTurn).getHeldBlockAttributes();
 }
 
 // vector<BlockAttributes> BiQuadris::getBlockBacklog(int whichBoard) const {
     
 // }
 
-int BiQuadris::getCurrentScore(int whichBoard) const {
-    if (whichBoard == 1) {
-        return this->board1.getCurrentScore();
-    } else {
-        return this->board2.getCurrentScore();
-    }
+int BiQuadris::getCurrentScore(PlayerTurn whichPlayerTurn) const {
+    return this->getPlayerBoard(whichPlayerTurn).getCurrentScore();
 }
 
-int BiQuadris::getHighScore(int whichBoard) const {
-    if (whichBoard == 1) {
-        return this->board1.getHighScore();
-    } else {
-        return this->board2.getHighScore();
-    }
+int BiQuadris::getHighScore(PlayerTurn whichPlayerTurn) const {
+    return this->getPlayerBoard(whichPlayerTurn).getHighScore();
 }
 
-int BiQuadris::getLevel(int whichBoard) const {
-    if (whichBoard == 1) {
-        return this->board1.getLevelNum();
-    } else {
-        return this->board2.getLevelNum();
-    }
+int BiQuadris::getLevelNum(PlayerTurn whichPlayerTurn) const {
+    return this->getPlayerBoard(whichPlayerTurn).getLevelNum();
 }
 
 bool BiQuadris::getIsGameOver() const {
     return this->isGameOver;
 }
 
-int BiQuadris::getCurrentBoardTurn() const {
-    return this->currentBoardTurn;
+BiQuadris::PlayerTurn BiQuadris::getCurrentPlayerTurn() const {
+    return this->currentPlayerTurn;
 }
 
 bool BiQuadris::getCanUseSpecialAction() const {
@@ -200,11 +136,7 @@ void BiQuadris::setDevMode(bool isOn) {
 // }
 
 void BiQuadris::heavyEffect() {
-    if (this->currentBoardTurn == 1) {
-        this->board1.setHeavyEffect();
-    } else {
-        this->board2.setHeavyEffect();
-    }
+    this->getCurrentPlayerOpponentBoard().setHeavyEffect();
 }
 
 // void BiQuadris::forceEffect(char blockType) {

@@ -2,6 +2,7 @@
 #include "board.h"
 #include "./Level/level.h"
 #include "./Level/all-levels.h"
+#include "./Block/block-types.h"
 
 using CellCoordinate = std::pair<int, int>;
 using BlockCellCoordinates = std::vector<CellCoordinate>;
@@ -249,8 +250,16 @@ std::vector<BlockAttributes> Board::getBlockAttributesBacklog() const {
     return this->currentLevel->getBlockAttributesBacklog();
 }
 
-void Board::setCurrentBlock(char blockType) {
-    this->currentBlock = std::make_unique<Block>(blockType);
+void Board::replaceCurrentBlock(char blockType) {
+    switch (blockType) {
+        case 'I': this->currentBlock = std::make_unique<IBlock>(gameProxy, blockSequenceFileName); break;
+        case 'J': this->currentBlock = std::make_unique<JBlock>(gameProxy, blockSequenceFileName); break;
+        case 'L': this->currentBlock = std::make_unique<LBlock>(gameProxy, blockSequenceFileName); break;
+        case 'O': this->currentBlock = std::make_unique<OBlock>(gameProxy, blockSequenceFileName); break;
+        case 'S': this->currentBlock = std::make_unique<SBlock>(gameProxy, blockSequenceFileName); break;
+        case 'Z': this->currentBlock = std::make_unique<ZBlock>(gameProxy, blockSequenceFileName); break;
+        case 'T': this->currentBlock = std::make_unique<TBlock>(gameProxy, blockSequenceFileName); break;
+    }
 
     if (!this->currentBlock->isValidPosition()) {
         this->gameProxy.informGameOver();
@@ -263,4 +272,16 @@ void Board::setLevelRandomEnabled(bool enabled) {
     } else {
         throw std::runtime_error("Invalid: not a random level!");
     }
+}
+
+int Board::getCurrentScore() const {
+    return this->currentScore;
+}
+
+int Board::getHighScore() const {
+    return this->highScore;
+}
+
+int Board::getLevelNum() const {
+    return this->currentLevel->getLevelNum();
 }

@@ -6,7 +6,6 @@
 using CellCoordinate = std::pair<int, int>;
 using BlockCellCoordinates = std::vector<CellCoordinate>;
 using BlockAttributes = std::pair<BlockCellCoordinates, char>;
-using CharGrid = std::vector<std::vector<char>>;
 
 class ManageGameStateProxy : public BiQuadrisProxy {
   public:
@@ -36,7 +35,7 @@ class BoardActionProxy : public BiQuadrisProxy {
     void rotateBlockCounterClockwise(int multiplier);
     void dropBlock(int multiplier);
     void holdBlock();
-    void restartBoard();
+    void restartBoards();
     void heavyEffect();
 };
 
@@ -57,18 +56,18 @@ class DisplayProxy : public BiQuadrisProxy {
   public:
     DisplayProxy(BiQuadris & gameEngine);
 
-    CharGrid getGrid(int whichBoard) const;
-    BlockAttributes getCurrentBlockAttributes(int whichBoard) const;
-    BlockAttributes getCurrentBlockDropPreviewAttributes(int whichBoard) const;
-    BlockAttributes getNextBlockAttributes(int whichBoard) const;
-    BlockAttributes getHeldBlockAttributes(int whichBoard) const;
+    BlockAttributes getCurrentBlockAttributes(BiQuadris::PlayerTurn whichPlayerTurn) const;
+    BlockAttributes getCurrentBlockDropPreviewAttributes(BiQuadris::PlayerTurn whichPlayerTurn) const;
+    BlockAttributes getNextBlockAttributes(BiQuadris::PlayerTurn whichPlayerTurn) const;
+    BlockAttributes getHeldBlockAttributes(BiQuadris::PlayerTurn whichPlayerTurn) const;
     
-    std::vector<BlockAttributes> getBlockAttributesBacklog(int whichBoard) const;
-    int getCurrentScore(int whichBoard) const;
-    int getHighScore(int whichBoard) const;
-    int getLevel(int whichBoard) const;
+    std::vector<BlockAttributes> getBlockAttributesBacklog(BiQuadris::PlayerTurn whichPlayerTurn) const;
+
+    int getCurrentScore(BiQuadris::PlayerTurn whichPlayerTurn) const;
+    int getHighScore(BiQuadris::PlayerTurn whichPlayerTurn) const;
+    int getLevelNum(BiQuadris::PlayerTurn whichPlayerTurn) const;
     bool getIsGameOver() const;
-    int getCurrentBoardTurn() const;
+    BiQuadris::PlayerTurn getCurrentPlayerTurn() const;
     bool getCanUseSpecialAction() const;
 };
 

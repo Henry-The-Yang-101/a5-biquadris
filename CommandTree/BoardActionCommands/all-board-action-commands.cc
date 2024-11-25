@@ -60,5 +60,5 @@ void HeavyEffectCommand::execute(int multiplier) {
 RestartCommand::RestartCommand(BoardActionProxy & biquadrisProxy, std::string commandName) : BoardActionCommand{biquadrisProxy, commandName, false} {}
 
 void RestartCommand::execute(int multiplier) {
-  this->dependency.restartBoard();
+  this->dependency.restartBoards();
 }
