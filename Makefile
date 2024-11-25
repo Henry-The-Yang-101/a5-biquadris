@@ -7,7 +7,7 @@ MAKEFILE_NAME = ${firstword ${MAKEFILE_LIST}}       # makefile name
 SOURCES = $(wildcard *.cc) $(wildcard Biquadris/*.cc) $(wildcard CommandTree/*.cc) $(wildcard Displays/*.cc) $(wildcard Miscellaneous/*.cc) # source files (*.cc) including block folder
 OBJECTS = ${SOURCES:.cc=.o}            # object files forming executable
 DEPENDS = ${OBJECTS:.o=.d}            # substitute ".o" with ".d"
-EXEC = biquadris                      # executable name
+EXEC = biquadrisGame                      # executable name
 
 ########## Targets ##########
 
