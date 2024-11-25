@@ -107,7 +107,7 @@ bool Block::down() {
 }
 
 void Block::drop() {
-  BlockCellCoordinates dropCoords = std::move(this->getDropPreviewCellCoordinate());
+  BlockCellCoordinates dropCoords = std::move(this->getDropPreviewCellCoordinates());
   std::shared_ptr<BlockCell> blockCell = std::make_shared<BlockCell>(this->boardProxy, this->getClearScore(), this->getType());
 
   for (const CellCoordinate & cell : dropCoords) {
