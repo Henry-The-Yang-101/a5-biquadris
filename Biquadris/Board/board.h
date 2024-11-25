@@ -85,7 +85,8 @@ class Board {
         BlockAttributes getNextBlockAttributes() const;
         BlockAttributes getNextBlockAttributes() const;
         BlockAttributes getHeldBlockAttributes() const;
-
+        std::vector<BlockAttributes> getBlockAttributesBacklog() const;
+        
         Grid getGrid() const;
 
 };
