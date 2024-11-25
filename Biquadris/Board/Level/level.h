@@ -48,9 +48,7 @@ class RandomizedLevel : public Level {
     virtual ~RandomizedLevel() = default;
 
   public: 
-    void enableRandom();
-    void disableRandom();
-    void disableRandom(std::string & blockSequenceFile);
+    void setRandomEnabled(bool enabled);
 };
 
 #endif

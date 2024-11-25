@@ -124,11 +124,5 @@ char RandomizedLevel::chooseBlockType() const {
   }
 }
 
-void RandomizedLevel::enableRandom() { this->randomEnabled = true; }
+void RandomizedLevel::setRandomEnabled(bool enabled) { this->randomEnabled = enabled; }
 
-void RandomizedLevel::disableRandom() { this->randomEnabled = false; }
-
-void RandomizedLevel::disableRandom(std::string & blockSequenceFile) {
-  this->disableRandom();
-  this->setBlockSequenceFile(blockSequenceFile);
-}
