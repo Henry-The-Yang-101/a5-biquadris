@@ -107,3 +107,6 @@ StarBlock::StarBlock(BoardProxy& board, int level) : Block(board, level) {}
 
 // Base shape is at the middle of the board
 BlockCellCoordinates StarBlock::getBaseShape(Rotation rotation) const { return {{this->boardProxy.getBoardWidth() - (this->boardProxy.getBoardWidth() / 2), 0}};}
+
+char StarBlock::getType() const { return '*'; }
+

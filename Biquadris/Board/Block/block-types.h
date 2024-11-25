@@ -12,9 +12,9 @@ class IBlock : public Block {
         static const std::unordered_map<Rotation, BlockCellCoordinates> BASE_SHAPE_ROTATIONS;
         
         BlockCellCoordinates getBaseShape(Rotation rotation) const override;
-        char getType() const override;
     public:
         IBlock(BoardProxy& board, int level);      
+        char getType() const override;
 };
 
 class JBlock : public Block {
@@ -22,9 +22,9 @@ class JBlock : public Block {
         static const std::unordered_map<Rotation, BlockCellCoordinates> BASE_SHAPE_ROTATIONS;
     
         BlockCellCoordinates getBaseShape(Rotation rotation) const override;
-        char getType() const override;
     public:
         JBlock(BoardProxy& board, int level);
+        char getType() const override;
 };
 
 class LBlock : public Block {
@@ -32,19 +32,19 @@ class LBlock : public Block {
         static const std::unordered_map<Rotation, BlockCellCoordinates> BASE_SHAPE_ROTATIONS;
             
         BlockCellCoordinates getBaseShape(Rotation rotation) const override;
-        char getType() const override;
 
     public:
         LBlock(BoardProxy& board, int level);
+        char getType() const override;
 };
 
 class OBlock : public Block {
     private:
         BlockCellCoordinates getBaseShape(Rotation rotation) const override;
-        char getType() const override;
 
     public:
         OBlock(BoardProxy& board, int level);
+        char getType() const override;
 };
 
 class SBlock : public Block {
@@ -52,10 +52,10 @@ class SBlock : public Block {
         static const std::unordered_map<Rotation, BlockCellCoordinates> BASE_SHAPE_ROTATIONS;
         
         BlockCellCoordinates getBaseShape(Rotation rotation) const override;
-        char getType() const override;
 
     public:
         SBlock(BoardProxy& board, int level);
+        char getType() const override;
 };
 
 class ZBlock : public Block {
@@ -63,10 +63,10 @@ class ZBlock : public Block {
         static const std::unordered_map<Rotation, BlockCellCoordinates> BASE_SHAPE_ROTATIONS;
 
         BlockCellCoordinates getBaseShape(Rotation rotation) const override;
-        char getType() const override;
 
     public:
         ZBlock(BoardProxy& board, int level);
+        char getType() const override;
 };
 
 class TBlock : public Block {
@@ -74,10 +74,10 @@ class TBlock : public Block {
         static const std::unordered_map<Rotation, BlockCellCoordinates> BASE_SHAPE_ROTATIONS;
     
         BlockCellCoordinates getBaseShape(Rotation rotation) const override;
-        char getType() const override;
 
     public:
         TBlock(BoardProxy& board, int level);
+        char getType() const override;
 };
 
 class StarBlock : public Block {
@@ -85,10 +85,10 @@ class StarBlock : public Block {
         
         int getClearScore() const override;
         BlockCellCoordinates getBaseShape(Rotation rotation) const override;
-        char getType() const override;
 
     public:
         StarBlock(BoardProxy& board, int level);
+        char getType() const override;
 };
 
 #endif

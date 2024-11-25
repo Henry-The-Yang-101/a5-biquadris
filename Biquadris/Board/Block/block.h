@@ -38,7 +38,6 @@ class Block {
         static Rotation rotationAfterRotatedCounterClockwise(Rotation rotation);
 
         virtual int getClearScore() const;
-        virtual char getType() const = 0;
         virtual BlockCellCoordinates getBaseShape(Rotation rotation) const = 0;
         
         BlockCellCoordinates getCellCoordinates(Rotation newRotation, int newrightShift, int newDownShift) const;
@@ -55,6 +54,7 @@ class Block {
 
         BlockCellCoordinates getCellCoordinates() const;
         BlockCellCoordinates getDropPreviewCellCoordinates() const;
+        virtual char getType() const = 0;
 
         bool isValidPosition() const; // This is how board is gonna check if its game over
         // board should run this right after constructing Block
