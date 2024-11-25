@@ -38,10 +38,15 @@ ConsoleView::ConsoleView(DisplayProxy &displayProxy, bool enhanced): displayProx
             vector<char> temp1;
             vector<char> temp2;
             p1NextGrid.emplace_back(temp1);
-            p1NextGrid.emplace_back(temp2);
+            p2NextGrid.emplace_back(temp2);
             for (int c = 0; c < enhancedNextGridCols; c++) {
-                p1NextGrid[r].emplace_back(' ');
-                p1NextGrid[r].emplace_back(' ');
+                if (r == 2) {
+                    p1NextGrid[r].emplace_back('_');
+                    p2NextGrid[r].emplace_back('_');
+                } else {
+                    p1NextGrid[r].emplace_back(' ');
+                    p2NextGrid[r].emplace_back(' ');                    
+                }
             }
         }
 
@@ -107,11 +112,19 @@ void ConsoleView::render() {
         
         //printing player and top padding of board
         for (int i = 0; i < holdContainerWidth; i++) cout << " ";
-        cout << "   -->  Player 1  <--  ";
+        if (displayProxy.getCurrentBoardTurn() == 1) {
+            cout << "   -->  Player 1  <--  ";
+        } else {
+            cout << "        Player 1       ";
+        }
         for (int i = 0; i < nextContainerWidth + leftInteriorPadding; i++) cout << " ";
         cout << "|";
         for (int i = 0; i < rightInteriorPadding + holdContainerWidth; i++) cout << " ";
-        cout << "        Player 2       ";
+        if (displayProxy.getCurrentBoardTurn() == 2) {
+            cout << "   -->  Player 2  <--  ";
+        } else {
+            cout << "        Player 2       ";
+        }
         cout << endl;
         for (int i = 0; i < holdContainerWidth + gameContainerWidth + nextContainerWidth + leftInteriorPadding; i++) cout << " ";
         cout << "|";
@@ -132,9 +145,66 @@ void ConsoleView::render() {
         string p2LevelText = "Level: " + to_string(displayProxy.getLevel(2));
         for (int i = 0; i < holdContainerWidth; i++) cout << " ";
         cout << "| " << p1LevelText;
-        //for (int i = 0; i < gameContainerWidth - 2 - p1LevelText.
+        for (int i = 0; i < gameContainerWidth - 3 - p1LevelText.length(); i++)  cout << " ";
+        cout << "|";
+        for (int i = 0; i < nextContainerWidth + leftInteriorPadding; i++) cout << " ";
+        cout << "|";
+        for (int i = 0; i < holdContainerWidth + rightInteriorPadding; i++) cout << " ";
+        cout << "| " << p2LevelText;
+        for (int i = 0; i < gameContainerWidth - 3 - p2LevelText.length(); i++)  cout << " ";
+        cout << "|";
+        cout << endl;
 
+        //printing high score text
+        string p1HighScoreText = "High Score: " + to_string(displayProxy.getHighScore(1));
+        string p2HighScoreText = "High Score: " + to_string(displayProxy.getHighScore(2));
+        for (int i = 0; i < holdContainerWidth; i++) cout << " ";
+        cout << "| " << p1HighScoreText;
+        for (int i = 0; i < gameContainerWidth - 3 - p1HighScoreText.length(); i++)  cout << " ";
+        cout << "|";
+        for (int i = 0; i < nextContainerWidth + leftInteriorPadding; i++) cout << " ";
+        cout << "|";
+        for (int i = 0; i < holdContainerWidth + rightInteriorPadding; i++) cout << " ";
+        cout << "| " << p2HighScoreText;
+        for (int i = 0; i < gameContainerWidth - 3 - p2HighScoreText.length(); i++)  cout << " ";
+        cout << "|";
+        cout << endl; 
 
+        //printing score text
+        string p1ScoreText = "Score: " + to_string(displayProxy.getCurrentScore(1));
+        string p2ScoreText = "Score: " + to_string(displayProxy.getCurrentScore(2));
+        for (int i = 0; i < holdContainerWidth; i++) cout << " ";
+        cout << "| " << p1ScoreText;
+        for (int i = 0; i < gameContainerWidth - 3 - p1ScoreText.length(); i++)  cout << " ";
+        cout << "|";
+        for (int i = 0; i < nextContainerWidth + leftInteriorPadding; i++) cout << " ";
+        cout << "|";
+        for (int i = 0; i < holdContainerWidth + rightInteriorPadding; i++) cout << " ";
+        cout << "| " << p2ScoreText;
+        for (int i = 0; i < gameContainerWidth - 3 - p2ScoreText.length(); i++)  cout << " ";
+        cout << "|";
+        cout << endl;        
+
+        //printing game area lid
+        for (int i = 0; i < holdContainerWidth; i++) cout << "_";
+        cout << "|";
+        for (int i = 0; i < gameContainerWidth-2; i++) cout << "_";
+        cout << "|";
+        for (int i = 0; i < nextContainerWidth; i++) cout << "_";
+        for (int i = 0; i < leftInteriorPadding; i++) cout << " ";
+        cout << "|";
+        for (int i = 0; i < rightInteriorPadding; i++) cout << " ";
+        for (int i = 0; i < holdContainerWidth; i++) cout << "_";
+        cout << "|";
+        for (int i = 0; i < gameContainerWidth-2; i++) cout << "_";
+        cout << "|";
+        for (int i = 0; i < nextContainerWidth; i++) cout << "_";
+        cout << endl;
+
+        //printing game area
+        for (int r = 0; r < gameGridRows; r++) {
+
+        }
 
     } else {
 

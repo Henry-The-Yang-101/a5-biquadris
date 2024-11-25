@@ -41,7 +41,7 @@ int DisplayProxy::getHighScore(int whichBoard) const {
 }
 
 int DisplayProxy::getLevel(int whichBoard) const {
-  return 20;
+  return 2;
 }
 
 bool DisplayProxy::getIsGameOver() const {
