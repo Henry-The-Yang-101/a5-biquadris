@@ -66,7 +66,7 @@ int Board::countAndClearFilledRows() {
         ++currentRowIndex;
     }
     for (int i = 0; i < clearedRows; ++i) {
-        this->grid.emplace_back(WIDTH, nullptr);
+        this->grid.emplace(this->grid.begin(), WIDTH, nullptr);
     }
     return clearedRows;
 }
@@ -234,22 +234,33 @@ BlockCellCoordinates Board::getCurrentBlockDropPreviewCellCoordinates() const {
 }
 
 BlockAttributes Board::getCurrentBlockAttributes() const {
-    return std::pair{this->currentBlock->getCellCoordinates(), this->currentBlock->getType()};
+    return {this->currentBlock->getCellCoordinates(), this->currentBlock->getType()};
 }
 
 BlockAttributes Board::getNextBlockAttributes() const {
-    return std::pair{this->nextBlock->getCellCoordinates(), this->nextBlock->getType()};
+    return {this->nextBlock->getCellCoordinates(), this->nextBlock->getType()};
 }
 
 BlockAttributes Board::getHeldBlockAttributes() const {
-    return std::pair{this->heldBlock->getCellCoordinates(), this->heldBlock->getType()};
+    return {this->heldBlock->getCellCoordinates(), this->heldBlock->getType()};
+}
+
+std::vector<BlockAttributes> Board::getBlockAttributesBacklog() const {
+    return this->currentLevel->getBlockAttributesBacklog();
 }
 
 void Board::setCurrentBlock(char blockType) {
     this->currentBlock = std::make_unique<Block>(blockType);
+
+    if (!this->currentBlock->isValidPosition()) {
+        this->gameProxy.informGameOver();
+    }
 }
 
 void Board::setLevelRandomEnabled(bool enabled) {
-    this->currentLevel->setRandomEnabled(enabled);
+    if (RandomizedLevel::RANDOMIZED_LEVEL_NUMS.contains(this->currentLevel->getLevelNum())) {
+        static_cast<RandomizedLevel*>(this->currentLevel.get())->setRandomEnabled(enabled);
+    } else {
+        throw std::runtime_error("Invalid: not a random level!");
+    }
 }
-

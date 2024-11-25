@@ -5,10 +5,16 @@
 #include <fstream>
 #include <vector>
 #include <map>
+#include <unordered_set>
 #include "../board-proxy.h"
+
+using CellCoordinate = std::pair<int, int>;
+using BlockCellCoordinates = std::vector<CellCoordinate>;
+using BlockAttributes = std::pair<BlockCellCoordinates, char>;
 
 class Level {
   private:
+    static const size_t BACKLOG_SIZE = 4;
     const int levelNum;
     const bool heavy;
     std::string blockSequenceFileName;
@@ -24,10 +30,10 @@ class Level {
     virtual ~Level() = default;
 
   public:
-    static const int BACKLOG_SIZE = 4;
 
     int getLevelNum() const;
     bool getHeavy() const;
+    std::vector<BlockAttributes> getBlockAttributesBacklog() const;
     void setBlockSequenceFile(std::string & blockSequenceFile);
     std::unique_ptr<Block> cycleBlock();
     virtual bool checkCustomRuleCondition() const;
@@ -48,8 +54,11 @@ class RandomizedLevel : public Level {
     char chooseBlockType() const override;
     virtual ~RandomizedLevel() = default;
 
-  public: 
+  public:
+    static const unordered_set<int> RANDOMIZED_LEVEL_NUMS;
     void setRandomEnabled(bool enabled);
 };
+
+const unordered_set<int> RandomizedLevel::RANDOMIZED_LEVEL_NUMS = {1, 2, 3, 4};
 
 #endif

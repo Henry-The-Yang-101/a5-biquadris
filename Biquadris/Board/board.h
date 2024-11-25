@@ -11,7 +11,7 @@
 using CellCoordinate = std::pair<int, int>;
 using BlockCellCoordinates = std::vector<CellCoordinate>;
 using BlockAttributes = std::pair<BlockCellCoordinates, char>;
-using Grid = std::vector<std::vector<std::shared_ptr<BlockCell>>>
+using Grid = std::vector<std::vector<std::shared_ptr<BlockCell>>>;
 
 class Board {
     private:

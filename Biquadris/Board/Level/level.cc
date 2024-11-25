@@ -6,7 +6,9 @@
 #include "level.h"
 #include "../Block/block-types.h"
 
-// intellesense tweakin wtf
+using CellCoordinate = std::pair<int, int>;
+using BlockCellCoordinates = std::vector<CellCoordinate>;
+using BlockAttributes = std::pair<BlockCellCoordinates, char>;
 
 // Level definitions
 Level::Level(int levelNum, bool heavy, BoardProxy & boardProxy, const std::string & blockSequenceFileName) :
@@ -17,7 +19,7 @@ Level::Level(int levelNum, bool heavy, BoardProxy & boardProxy, const std::strin
     throw std::runtime_error("Failed to open \"" + blockSequenceFileName + "\" block sequence file");
   }
 
-  for (int i = 0; i < BACKLOG_SIZE; i++) {
+  for (size_t i = 0; i < BACKLOG_SIZE; i++) {
     this->blockBacklog.push_back(this->generateBlock(this->chooseBlockType()));
   }
 }
@@ -62,6 +64,15 @@ char Level::chooseBlockType() const {
 int Level::getLevelNum() const { return this->levelNum; }
 
 bool Level::getHeavy() const { return this->heavy; }
+
+std::vector<BlockAttributes> Level::getBlockAttributesBacklog() const {
+  std::vector<BlockAttributes> blockAttributesBacklog;
+
+  for (size_t i = 0; i < BACKLOG_SIZE; i++) {
+    blockAttributesBacklog.emplace_back(std::move(this->blockBacklog[i]->getCellCoordinates()), this->blockBacklog[i]->getType());
+  }
+  return blockAttributesBacklog;
+}
 
 void Level::setBlockSequenceFile(std::string & blockSequenceFile) {
   std::ifstream tempFileStream{blockSequenceFile};
