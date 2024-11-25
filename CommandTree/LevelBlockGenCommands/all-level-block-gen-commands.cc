@@ -25,7 +25,11 @@ void RandomCommand::execute(int multiplier) {
 NoRandomCommand::NoRandomCommand(LevelBlockGenProxy & biquadrisProxy, std::string commandName) : LevelBlockGenCommand{biquadrisProxy, commandName, true} {}
 
 void NoRandomCommand::execute(int multiplier, std::vector<std::string> && args) {
-  if (args.size() == 1) this->dependency.disableRandom(args[0]);
+  if (args.size() == 0) {
+    this->dependency.disableRandom();
+  } else {
+    this->dependency.disableRandom(args[0]);
+  }
 }
 
 // ForceCommand definitions

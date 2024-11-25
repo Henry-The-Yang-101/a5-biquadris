@@ -46,6 +46,7 @@ class LevelBlockGenProxy : public BiQuadrisProxy {
     void levelUp(int multiplier);
     void levelDown(int multiplier);
     void enableRandom();
+    void disableRandom();
     void disableRandom(std::string blockSequenceFile);
     void replaceCurrentBlock(char blockType);
     void forceEffect(char blockType);

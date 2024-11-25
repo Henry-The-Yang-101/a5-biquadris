@@ -27,6 +27,7 @@ class BiQuadris : public Subject {
     void levelUp(int multiplier);
     void levelDown(int multiplier);
     void enableRandom();
+    void disableRandom();
     void disableRandom(std::string & blockSequenceFile);
     void replaceCurrentBlock(char blockType);
 

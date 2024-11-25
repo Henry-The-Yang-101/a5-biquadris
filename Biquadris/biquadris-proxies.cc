@@ -83,6 +83,10 @@ void LevelBlockGenProxy::enableRandom() {
   this->gameEngine.enableRandom();
 }
 
+void LevelBlockGenProxy::disableRandom() {
+  this->gameEngine.disableRandom();
+}
+
 void LevelBlockGenProxy::disableRandom(std::string blockSequenceFile) {
   this->gameEngine.disableRandom(blockSequenceFile);
 }

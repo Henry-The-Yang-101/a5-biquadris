@@ -191,14 +191,16 @@ void BiQuadris::enableRandom() {
     this->getCurrentPlayerBoard().setLevelRandomEnabled(true);
 }
 
-void BiQuadris::disableRandom(std::string & blockSequenceFile) {
+void BiQuadris::disableRandom() {
     this->assertBoardActionMove();
     this->assertDevModeOn();
 
     this->getCurrentPlayerBoard().setLevelRandomEnabled(false);
-    if (!blockSequenceFile.empty()) {
-        this->getCurrentPlayerBoard().setBlockSequenceFile(blockSequenceFile);
-    }
+}
+
+void BiQuadris::disableRandom(std::string & blockSequenceFile) {
+    this->disableRandom();
+    this->getCurrentPlayerBoard().setBlockSequenceFile(blockSequenceFile);
 }
 
 BlockAttributes BiQuadris::getCurrentBlockAttributes(PlayerTurn whichPlayerTurn) const {
