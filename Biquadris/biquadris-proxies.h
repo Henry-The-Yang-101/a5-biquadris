@@ -3,9 +3,10 @@
 
 #include "biquadris.h"
 
-using CellCoordinate = pair<int, int>;
-using BlockAttributes = pair<vector<CellCoordinate>, char>;
-using Grid = vector<vector<char>>;
+using CellCoordinate = std::pair<int, int>;
+using BlockCellCoordinates = std::vector<CellCoordinate>;
+using BlockAttributes = std::pair<BlockCellCoordinates, char>;
+using CharGrid = std::vector<std::vector<char>>;
 
 class ManageGameStateProxy : public BiQuadrisProxy {
   public:
@@ -56,11 +57,13 @@ class DisplayProxy : public BiQuadrisProxy {
   public:
     DisplayProxy(BiQuadris & gameEngine);
 
-    Grid getGrid(int whichBoard) const;
+    CharGrid getGrid(int whichBoard) const;
     BlockAttributes getCurrentBlockAttributes(int whichBoard) const;
+    BlockAttributes getCurrentBlockDropPreviewAttributes(int whichBoard) const;
     BlockAttributes getNextBlockAttributes(int whichBoard) const;
     BlockAttributes getHeldBlockAttributes(int whichBoard) const;
-    vector<BlockAttributes> getBlockBacklog(int whichBoard) const;
+    
+    std::vector<BlockAttributes> getBlockBacklog(int whichBoard) const;
     int getCurrentScore(int whichBoard) const;
     int getHighScore(int whichBoard) const;
     int getLevel(int whichBoard) const;

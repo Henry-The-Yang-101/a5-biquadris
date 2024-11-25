@@ -41,17 +41,6 @@ std::unique_ptr<Block> Level::generateBlock(char blockType) const {
   }
 }
 
-void Level::setBlockSequenceFile(std::string & blockSequenceFile) {
-  std::ifstream tempFileStream{blockSequenceFile};
-
-  if (!tempFileStream.is_open()) {
-    throw std::runtime_error("Failed to open \"" + blockSequenceFile + "\" block sequence file; using \"" + this->blockSequenceFileName + "\" instead");
-  }
-
-  this->blockSequenceFileName = blockSequenceFile;
-  this->blockSequenceFileStream = std::move(tempFileStream);
-}
-
 char Level::chooseBlockType() const {
   char blockType;
 
@@ -71,6 +60,19 @@ char Level::chooseBlockType() const {
 }
 
 int Level::getLevelNum() const { return this->levelNum; }
+
+bool Level::getHeavy() const { return this->heavy; }
+
+void Level::setBlockSequenceFile(std::string & blockSequenceFile) {
+  std::ifstream tempFileStream{blockSequenceFile};
+
+  if (!tempFileStream.is_open()) {
+    throw std::runtime_error("Failed to open \"" + blockSequenceFile + "\" block sequence file; using \"" + this->blockSequenceFileName + "\" instead");
+  }
+
+  this->blockSequenceFileName = blockSequenceFile;
+  this->blockSequenceFileStream = std::move(tempFileStream);
+}
 
 std::unique_ptr<Block> Level::cycleBlock() {
   std::unique_ptr<Block> poppedBlock = std::move(this->blockBacklog[0]);

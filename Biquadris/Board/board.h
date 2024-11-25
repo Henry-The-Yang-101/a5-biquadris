@@ -10,12 +10,15 @@
 
 using CellCoordinate = std::pair<int, int>;
 using BlockCellCoordinates = std::vector<CellCoordinate>;
+using BlockAttributes = std::pair<BlockCellCoordinates, char>;
 
 class Board {
     private:
         static const int WIDTH = 11;
         static const int HEIGHT = 15;
         static const int NUM_RESERVE_ROWS = 3;
+
+        const int initLevelNum;
 
         std::string blockSequenceFileName;
         BoardProxy boardProxy;
@@ -29,19 +32,21 @@ class Board {
         std::unique_ptr<Block> currentBlock;
         std::unique_ptr<Block> nextBlock;
         std::unique_ptr<Block> blockOnHold;
-        bool allowedToHold;
+        bool allowedToHold = true;
 
         bool currentBlockHeavyEffect = false;
 
         std::vector<std::vector<std::shared_ptr<BlockCell>>> grid;
 
-        void setLevel(int levelNum);
+        void setUpEmptyGrid();
+        void setCurrentLevel(int levelNum);
         void applyLevelHeaviness();
         void applyHeavyEffect();
         int countAndClearFilledRows();
+        int calculateScoreIncrease(int linesCleared);
 
     public:
-        Board(ManageGameStateProxy & game, int startLevelNum, std::string blockSequenceFileName, bool allowedToHold);
+        Board(ManageGameStateProxy & game, int initLevelNum, std::string blockSequenceFileName);
         ~Board() = default;
 
         bool cellAvailable(int column, int row);
@@ -54,7 +59,6 @@ class Board {
         void rotateBlockCounterClockwise(int multiplier);
         void dropBlock(int multiplier);
         void holdBlock();
-        BlockCellCoordinates getBlockDropPreview();
 
         void restart();
         void levelUp(int multiplier);
@@ -66,6 +70,12 @@ class Board {
         int getWidth();
         int getHeight();
         int getNumBlocksPlacedWithoutClearing();
+
+        BlockCellCoordinates getCurrentBlockDropPreviewCellCoordinates();
+        BlockAttributes getCurrentBlockAttributes();
+        BlockAttributes getNextBlockAttributes();
+        BlockAttributes getNextBlockAttributes();
+
 };
 
 #endif

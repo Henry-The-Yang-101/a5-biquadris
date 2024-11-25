@@ -27,6 +27,7 @@ class Level {
     static const int BACKLOG_SIZE = 4;
 
     int getLevelNum() const;
+    bool getHeavy() const;
     void setBlockSequenceFile(std::string & blockSequenceFile);
     std::unique_ptr<Block> cycleBlock();
     virtual bool checkCustomRuleCondition() const;
