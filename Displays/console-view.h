@@ -1,13 +1,13 @@
 #ifndef CONSOLEVIEW_H
 #define CONSOLVEVIEW_H
 #include "../Miscellaneous/observer.h"
-#include "../Biquadris/biquadris-proxies.h"
+#include "./test/biquadris-proxies.h"
 
 using namespace std;
 
 using CellCoordinate = pair<int, int>;
 using BlockAttributes = pair<vector<CellCoordinate>, char>;
-using Grid = vector<vector<char>>;
+using CharGrid = vector<vector<char>>;
 
 class ConsoleView: public Observer{
     DisplayProxy &displayProxy;
@@ -36,13 +36,13 @@ class ConsoleView: public Observer{
               gameGridRows = 18, 
               gameGridCols = 11;
     
-    Grid p1GameGrid;
-    Grid p1HoldGrid;
-    Grid p1NextGrid;
+    CharGrid p1GameGrid;
+    CharGrid p1HoldGrid;
+    CharGrid p1NextGrid;
 
-    Grid p2GameGrid;
-    Grid p2HoldGrid;
-    Grid p2NextGrid;
+    CharGrid p2GameGrid;
+    CharGrid p2HoldGrid;
+    CharGrid p2NextGrid;
 
     public:
         ConsoleView(DisplayProxy &displayProxy, bool enhanced);
