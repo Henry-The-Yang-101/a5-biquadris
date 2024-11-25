@@ -182,3 +182,14 @@ bool BiQuadris::getCanUseSpecialAction() const {
 }
 
 
+// setters
+void BiQuadris::setBonusFeatures(bool isOn) {
+    this->bonusFeatures = isOn;
+}
+
+void BiQuadris::setDevMode(bool isOn) {
+    this->devMode = isOn;
+}
+
+
+
