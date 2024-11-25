@@ -71,6 +71,7 @@ class BiQuadris : public Subject {
     Board player1Board;
     Board player2Board;
 
+    const Board & getPlayerBoard(PlayerTurn whichPlayerTurn) const;
     Board & getPlayerBoard(PlayerTurn whichPlayerTurn);
     Board & getCurrentPlayerBoard();
     Board & getCurrentPlayerOpponentBoard();

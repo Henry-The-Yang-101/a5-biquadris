@@ -9,9 +9,11 @@ BiQuadris::BiQuadris(std::string sequenceFile1, std::string sequenceFile2, bool 
     devMode{devMode}, bonusFeatures{bonusFeatures}, gameStateProxy{*this}, visualEffectProxy{*this}, boardActionProxy{*this}, levelBlockGenProxy{*this}, displayProxy{*this}, 
     player1Board{this->gameStateProxy, initLevelNum, sequenceFile1}, player2Board{this->gameStateProxy, initLevelNum, sequenceFile2} {}
 
-
-
 Board & BiQuadris::getPlayerBoard(PlayerTurn whichPlayerTurn) {
+    return (whichPlayerTurn == PlayerTurn::PLAYER1) ? this->player1Board : this->player2Board;
+}
+
+const Board & BiQuadris::getPlayerBoard(PlayerTurn whichPlayerTurn) const {
     return (whichPlayerTurn == PlayerTurn::PLAYER1) ? this->player1Board : this->player2Board;
 }
 
@@ -89,9 +91,9 @@ BlockAttributes BiQuadris::getHeldBlockAttributes(PlayerTurn whichPlayerTurn) co
     return this->getPlayerBoard(whichPlayerTurn).getHeldBlockAttributes();
 }
 
-// vector<BlockAttributes> BiQuadris::getBlockBacklog(int whichBoard) const {
-    
-// }
+std::vector<BlockAttributes> BiQuadris::getBlockAttributesBacklog(PlayerTurn whichPlayerTurn) const {
+    return this->getPlayerBoard(whichPlayerTurn).getBlockAttributesBacklog();
+}
 
 int BiQuadris::getCurrentScore(PlayerTurn whichPlayerTurn) const {
     return this->getPlayerBoard(whichPlayerTurn).getCurrentScore();
