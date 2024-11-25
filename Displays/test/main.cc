@@ -1,4 +1,5 @@
 #include "../console-view.h"
+#include "../display-observer.h"
 #include "biquadris-proxies.h"
 #include "biquadris.h"
 
