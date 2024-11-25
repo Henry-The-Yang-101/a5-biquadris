@@ -31,12 +31,10 @@ bool LevelFour::checkCustomRuleCondition() const {
          (this->boardProxy.getNumBlocksPlacedWithoutClearing() % BLOCKS_PLACED_WITHOUT_CLEARING_NEEDED_TO_DROP_STAR_BLOCK == 0);
 }
 
-bool LevelFour::executeCustomRuleAction() {
+void LevelFour::executeCustomRuleAction() {
   std::unique_ptr<Block> starBlock = std::make_unique<StarBlock>(this->boardProxy, this->getLevelNum());
   
-  if (!starBlock->isValidPosition()) {
-    return true;
-  }
-  starBlock->drop();
-  return false;
+  if (starBlock->isValidPosition()) {
+    starBlock->drop();
+  } 
 }

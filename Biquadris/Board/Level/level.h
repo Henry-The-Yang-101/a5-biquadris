@@ -37,7 +37,7 @@ class Level {
     void setBlockSequenceFile(std::string & blockSequenceFile);
     std::unique_ptr<Block> cycleBlock();
     virtual bool checkCustomRuleCondition() const;
-    virtual bool executeCustomRuleAction();
+    virtual void executeCustomRuleAction();
 };
 
 class RandomizedLevel : public Level {

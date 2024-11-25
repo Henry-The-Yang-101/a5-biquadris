@@ -96,7 +96,7 @@ std::unique_ptr<Block> Level::cycleBlock() {
 
 bool Level::checkCustomRuleCondition() const { return false; }
 
-bool Level::executeCustomRuleAction() { return false; }
+void Level::executeCustomRuleAction() {}
 
 
 const char BLOCK_TYPE_ORDER[] = {'I', 'J', 'L', 'O', 'S', 'Z', 'T'};

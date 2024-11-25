@@ -66,6 +66,7 @@ class DisplayProxy : public BiQuadrisProxy {
     int getCurrentScore(BiQuadris::PlayerTurn whichPlayerTurn) const;
     int getHighScore(BiQuadris::PlayerTurn whichPlayerTurn) const;
     int getLevelNum(BiQuadris::PlayerTurn whichPlayerTurn) const;
+    bool getBlindEffectEnabled(BiQuadris::PlayerTurn whichPlayerTurn) const;
     bool getIsGameOver() const;
     BiQuadris::PlayerTurn getCurrentPlayerTurn() const;
     bool getCanUseSpecialAction() const;

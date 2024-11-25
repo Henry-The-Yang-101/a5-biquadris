@@ -160,9 +160,7 @@ void Board::dropBlock(int multiplier) {
         multiplier--;
     }
     if (this->currentLevel->checkCustomRuleCondition()) {
-        if (this->currentLevel->executeCustomRuleAction()) {
-            this->gameProxy.informGameOver();
-        }
+        this->currentLevel->executeCustomRuleAction();
         totalClearedRows += this->countAndClearFilledRows();
     }
     this->allowedToHold = true;
@@ -182,6 +180,10 @@ void Board::holdBlock() {
             this->nextBlock = std::move(this->currentLevel->cycleBlock());
         } 
         this->allowedToHold = false;
+
+        if (!this->currentBlock->isValidPosition()) {
+            this->gameProxy.informGameOver();
+        }
     } else {
         throw std::runtime_error("Can't take back the piece!");
     }
@@ -274,6 +276,11 @@ void Board::setLevelRandomEnabled(bool enabled) {
     }
 }
 
+void Board::setBlockSequenceFile(std::string & blockSequenceFile) {
+    this->currentLevel->setBlockSequenceFile(blockSequenceFile);
+    this->blockSequenceFileName = blockSequenceFile;
+}
+
 int Board::getCurrentScore() const {
     return this->currentScore;
 }
@@ -284,4 +291,8 @@ int Board::getHighScore() const {
 
 int Board::getLevelNum() const {
     return this->currentLevel->getLevelNum();
+}
+
+bool Board::getBlindEffectEnabled () const {
+    return this->blindEffectEnabled;
 }

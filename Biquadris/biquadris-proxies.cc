@@ -126,6 +126,10 @@ int DisplayProxy::getLevelNum(BiQuadris::PlayerTurn whichPlayerTurn) const {
   return this->gameEngine.getLevelNum(whichPlayerTurn);
 }
 
+bool DisplayProxy::getBlindEffectEnabled(BiQuadris::PlayerTurn whichPlayerTurn) const {
+  return this->gameEngine.getBlindEffectEnabled(whichPlayerTurn);
+}
+
 bool DisplayProxy::getIsGameOver() const {
   return this->gameEngine.getIsGameOver();
 }

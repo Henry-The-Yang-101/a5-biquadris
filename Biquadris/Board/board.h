@@ -32,9 +32,9 @@ class Board {
         std::unique_ptr<Block> currentBlock;
         std::unique_ptr<Block> nextBlock;
         std::unique_ptr<Block> heldBlock;
-        std::unique_ptr<Block> heldBlock;
         bool allowedToHold = true;
-
+        
+        bool blindEffectEnabled = false;
         bool currentBlockHeavyEffect = false;
 
         std::vector<std::vector<std::shared_ptr<BlockCell>>> grid;
@@ -66,10 +66,12 @@ class Board {
         void levelDown(int multiplier);
         void increaseScore(int points);
 
+        void setBlindEffect();
         void setHeavyEffect();
         void replaceCurrentBlock(char blockType);
 
         void setLevelRandomEnabled(bool enabled);
+        void setBlockSequenceFile(std::string & blockSequenceFile);
 
         int getWidth() const;
         int getHeight() const;
@@ -78,6 +80,8 @@ class Board {
         int getCurrentScore() const;
         int getHighScore() const;
         int getLevelNum() const;
+
+        bool getBlindEffectEnabled() const;
 
         BlockCellCoordinates getCurrentBlockDropPreviewCellCoordinates() const;
         BlockAttributes getCurrentBlockAttributes() const;

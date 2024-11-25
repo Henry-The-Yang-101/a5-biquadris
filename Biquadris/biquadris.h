@@ -27,7 +27,7 @@ class BiQuadris : public Subject {
     void levelUp(int multiplier);
     void levelDown(int multiplier);
     void enableRandom();
-    void disableRandom(std::string blockSequenceFile);
+    void disableRandom(std::string & blockSequenceFile);
     void replaceCurrentBlock(char blockType);
 
     // effects
@@ -43,24 +43,22 @@ class BiQuadris : public Subject {
     int getCurrentScore(PlayerTurn whichPlayerTurn) const;
     int getHighScore(PlayerTurn whichPlayerTurn) const;
     int getLevelNum(PlayerTurn whichPlayerTurn) const;
+    bool getBlindEffectEnabled(PlayerTurn whichPlayerTurn) const;
     bool getIsGameOver() const;
     PlayerTurn getCurrentPlayerTurn() const;
     bool getCanUseSpecialAction() const;
 
-    // setters
+    // mutators
     void setBonusFeatures(bool isOn);
     void setDevMode(bool isOn);
     void informCurrentBoardPlacedBlock(int rowsCleared);
     void informGameOver();
+    void endSpecialActionMove();
 
     ~BiQuadris();
   
   private:
-    PlayerTurn currentPlayerTurn = PlayerTurn::PLAYER1;
-    bool devMode;
-    bool bonusFeatures;
-    bool isGameOver = false;
-    bool canUseSpecialAction = false;
+    static const int MIN_REQUIRED_ROWS_CLEARED_TO_TRIGGER_SPECIAL_ACTION = 2;
 
     ManageGameStateProxy gameStateProxy;
     VisualEffectProxy visualEffectProxy;
@@ -71,10 +69,30 @@ class BiQuadris : public Subject {
     Board player1Board;
     Board player2Board;
 
+    // Game State variables
+    PlayerTurn currentPlayerTurn = PlayerTurn::PLAYER1;
+    bool devMode = true;
+    bool bonusFeatures = true;
+    bool isGameOver = false;
+    bool canUseSpecialAction = false;
+    bool currentBoardPlacedBlockThisMove = false;
+    int currentBoardNumRowsClearedThisMove;
+
+    // Helper methods:
+    static PlayerTurn getOpponentTurn(PlayerTurn whichPlayerTurn);
     const Board & getPlayerBoard(PlayerTurn whichPlayerTurn) const;
     Board & getPlayerBoard(PlayerTurn whichPlayerTurn);
     Board & getCurrentPlayerBoard();
     Board & getCurrentPlayerOpponentBoard();
+
+    // Game State assertions
+    void assertNotGameOver() const;
+    void assertBonusFeaturesOn() const;
+    void assertDevModeOn() const;
+    void assertBoardActionMove() const;
+    void assertSpecialActionMove() const;
+
+    void updateGameStateAfterBlockAction();
 };
 
 class BiQuadrisProxy {
