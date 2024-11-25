@@ -8,15 +8,105 @@ BiQuadris::BiQuadris(std::string sequenceFile1, std::string sequenceFile2, bool 
         
 }
 
-// void moveBlockHorizontal(int multiplier);
-// void moveBlockDown(int multiplier);
-// void rotateBlockClockwise(int multiplier);
-// void rotateBlockCounterClockwise(int multiplier);
-// void dropBlock(int multiplier);
-// void holdBlock();
-// void restartBoard();
-// void levelUp(int multiplier);
-// void levelDown(int multiplier);
-// void enableRandom();
-// void disableRandom(string blockSequenceFile);
-// void replaceCurrentBlock(char blockType);
+void BiQuadris::moveBlockLeft(int multiplier) {
+    if (this->currentBoardTurn == 1) {
+        this->board1.moveBlockLeft(multiplier);
+    } else {
+        this->board2.moveBlockLeft(multiplier);
+    }
+}
+
+void BiQuadris::moveBlockRight(int multiplier) {
+    if (this->currentBoardTurn == 1) {
+        this->board1.moveBlockRight(multiplier);
+    } else {
+        this->board2.moveBlockRight(multiplier);
+    }
+}
+void BiQuadris::moveBlockDown(int multiplier) {
+    if (this->currentBoardTurn == 1) {
+        this->board1.moveBlockDown(multiplier);
+    } else {
+        this->board2.moveBlockDown(multiplier);
+    }
+}
+
+void BiQuadris::rotateBlockClockwise(int multiplier) {
+    if (this->currentBoardTurn == 1) {
+        this->board1.rotateBlockClockwise(multiplier);
+    } else {
+        this->board2.rotateBlockClockwise(multiplier);
+    }
+}
+void BiQuadris::rotateBlockCounterClockwise(int multiplier) {
+    if (this->currentBoardTurn == 1) {
+        this->board1.rotateBlockCounterClockwise(multiplier);
+    } else {
+        this->board2.rotateBlockCounterClockwise(multiplier);
+    }
+}
+void BiQuadris::dropBlock(int multiplier) {
+    if (this->currentBoardTurn == 1) {
+        this->board1.dropBlock(multiplier);
+    } else {
+        this->board2.dropBlock(multiplier);
+    }
+}
+
+void BiQuadris::holdBlock() {
+    if (this->currentBoardTurn == 1) {
+        this->board1.holdBlock();
+    } else {
+        this->board2.holdBlock();
+    }
+}
+
+void BiQuadris::restartBoard() {
+    if (this->currentBoardTurn == 1) {
+        this->board1.restart();
+    } else {
+        this->board2.restart();
+    }
+}
+
+void BiQuadris::levelUp(int multiplier) {
+    if (this->currentBoardTurn == 1) {
+        this->board1.levelUp(multiplier);
+    } else {
+        this->board2.levelUp(multiplier);
+    }
+}
+
+void BiQuadris::levelDown(int multiplier) {
+    if (this->currentBoardTurn == 1) {
+        this->board1.levelDown(multiplier);
+    } else {
+        this->board2.levelDown(multiplier);
+    }
+}
+
+void BiQuadris::replaceCurrentBlock(char blockType) {
+    if (this->currentBoardTurn == 1) {
+        this->board1.setCurrentBlock(blockType);
+    } else {
+        this->board2.setCurrentBlock(blockType);
+    }
+}
+
+void BiQuadris::enableRandom() {
+    if (this->currentBoardTurn == 1) {
+        this->board1.setLevelRandomEnabled(true);
+    } else {
+        this->board2.setLevelRandomEnabled(true);
+    }
+}
+
+void BiQuadris::disableRandom(std::string blockSequenceFile) {
+    if (this->currentBoardTurn == 1) {
+        this->board1.setLevelRandomEnabled(false);
+    } else {
+        this->board2.setLevelRandomEnabled(false);
+    }
+}
+
+
