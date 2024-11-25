@@ -4,14 +4,14 @@
 LeftCommand::LeftCommand(BoardActionProxy & biquadrisProxy, std::string commandName) : BoardActionCommand{biquadrisProxy, commandName, false} {}
 
 void LeftCommand::execute(int multiplier) {
-  this->dependency.moveBlockHorizontal(-multiplier);
+  this->dependency.moveBlockLeft(multiplier);
 }
 
 // RightCommand definitions
 RightCommand::RightCommand(BoardActionProxy & biquadrisProxy, std::string commandName) : BoardActionCommand{biquadrisProxy, commandName, false} {}
 
 void RightCommand::execute(int multiplier) {
-  this->dependency.moveBlockHorizontal(multiplier);
+  this->dependency.moveBlockRight(multiplier);
 }
 
 // DownCommand definitions

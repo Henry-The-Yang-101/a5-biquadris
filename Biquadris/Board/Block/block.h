@@ -5,9 +5,9 @@
 #include "board-proxy.h"
 
 using CellCoordinate = std::pair<int, int>;
+using BlockCellCoordinates = std::vector<CellCoordinate>;
 
 class BlockCell {
-
     private:
         BoardProxy & boardProxy;
         const int clearScore;
@@ -20,28 +20,29 @@ class BlockCell {
 };
 
 class Block {
-
     protected:
         enum class Rotation {UP, RIGHT, DOWN, LEFT};
-        Block(BoardProxy& boardProxy, char type, int numLevel);
+        BoardProxy & boardProxy;
 
-        static Rotation rotationAfterRotatedClockwise(Rotation rotation);
-        static Rotation rotationAfterRotatedCounterClockwise(Rotation rotation);
+        Block(BoardProxy& boardProxy, int numLevel);
 
         virtual ~Block() = default;
 
     private:
-        BoardProxy & boardProxy;
-        const char type;
         const int numLevel;
         Rotation rotation;
         int rightShift = 0;
         int downShift = 0;
 
+        static Rotation rotationAfterRotatedClockwise(Rotation rotation);
+        static Rotation rotationAfterRotatedCounterClockwise(Rotation rotation);
+
         virtual int getClearScore() const;
-        virtual std::vector<CellCoordinate> getBaseShape(Rotation rotation) const = 0;
-        std::vector<CellCoordinate> getCellCoordinates(Rotation newRotation, int newrightShift, int newDownShift) const;
-        bool checkPositionValidity(const std::vector<CellCoordinate> & cellCoords) const;
+        virtual char getType() const = 0;
+        virtual BlockCellCoordinates getBaseShape(Rotation rotation) const = 0;
+        
+        BlockCellCoordinates getCellCoordinates(Rotation newRotation, int newrightShift, int newDownShift) const;
+        bool isValidPosition(const BlockCellCoordinates & cellCoords) const;
 
     public:
         bool moveLeft();
@@ -52,12 +53,11 @@ class Block {
 
         void drop();
 
-        std::vector<CellCoordinate> getCellCoordinates() const;
-        std::vector<CellCoordinate> getDropPreviewCellCoordinate() const;
+        BlockCellCoordinates getCellCoordinates() const;
+        BlockCellCoordinates getDropPreviewCellCoordinates() const;
 
-        bool checkPositionValidity() const; // This is how board is gonna check if its game over
+        bool isValidPosition() const; // This is how board is gonna check if its game over
         // board should run this right after constructing Block
-
 };
 
 #endif

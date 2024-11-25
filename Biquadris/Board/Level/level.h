@@ -20,7 +20,6 @@ class Level {
     BoardProxy & boardProxy;
 
     Level(int levelNum, bool heavy, BoardProxy & boardProxy, const std::string & blockSequenceFileName);
-    void setBlockSequenceFile(std::string & blockSequenceFile);
     virtual char chooseBlockType() const;
     virtual ~Level() = default;
 
@@ -28,9 +27,10 @@ class Level {
     static const int BACKLOG_SIZE = 4;
 
     int getLevelNum() const;
+    void setBlockSequenceFile(std::string & blockSequenceFile);
     std::unique_ptr<Block> cycleBlock();
     virtual bool checkCustomRuleCondition() const;
-    virtual void executeCustomRuleAction();
+    virtual bool executeCustomRuleAction();
 };
 
 class RandomizedLevel : public Level {
@@ -48,9 +48,7 @@ class RandomizedLevel : public Level {
     virtual ~RandomizedLevel() = default;
 
   public: 
-    void enableRandom();
-    void disableRandom();
-    void disableRandom(std::string & blockSequenceFile);
+    void setRandomEnabled(bool enabled);
 };
 
 #endif

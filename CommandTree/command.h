@@ -5,14 +5,12 @@
 #include <string>
 
 class Command {
-  bool hasArgs;
   std::string commandName;
+  bool hasArgs;
 
   protected:
     Command(std::string commandName, bool hasArgs) : 
       commandName{commandName}, hasArgs{hasArgs} {}
-    
-    virtual ~Command() = default;
 
   public:
     bool getHasArgs() { return this->hasArgs; }
@@ -20,6 +18,7 @@ class Command {
     void setCommandName(std::string newName) { this->commandName = newName; }
     virtual void execute(int multiplier) = 0;
     virtual void execute(int multiplier, std::vector<std::string> && args) {}
+    virtual ~Command() = default;
 };
 
 #endif

@@ -8,45 +8,50 @@
 #include "block.h"
 #include "level.h"
 
-using Grid = std::vector<std::vector<std::shared_ptr<BlockCell>>>;
 using CellCoordinate = std::pair<int, int>;
+using BlockCellCoordinates = std::vector<CellCoordinate>;
 
 class Board {
     private:
+        static const int WIDTH = 11;
+        static const int HEIGHT = 15;
+        static const int NUM_RESERVE_ROWS = 3;
+
+        const std::string blockSequenceFileName;
         const BoardProxy boardProxy;
-        ManageGameStateProxy game;
+        ManageGameStateProxy gameProxy;
         std::unique_ptr<Level> currentLevel;
 
-        int width;
-        int height;
-        int currentScore;
-        int highScore;
-        int numBlocksPlacedWithoutClearing;
+        int currentScore = 0;
+        int highScore = 0;
+        int numBlocksPlacedWithoutClearing = 0;
 
         std::unique_ptr<Block> currentBlock;
         std::unique_ptr<Block> nextBlock;
         std::unique_ptr<Block> blockOnHold;
         bool allowedToHold;
 
-        bool currentBlockHeavyEffect;
+        bool currentBlockHeavyEffect = false;
 
-        Grid grid;
+        std::vector<std::vector<std::shared_ptr<BlockCell>>> grid;
 
-        const std::string blockSequenceFileName;
+        void refillRows();
+
     public:
-        Board(ManageGameStateProxy game, std::unique_ptr<Level> level, int width, int height, std::string blockSequenceFileName);
-        ~Board();
+        Board(ManageGameStateProxy game, std::unique_ptr<Level> level, std::string blockSequenceFileName, bool allowedToHold);
+        ~Board() = default;
 
-        bool cellAvailable(int x, int y);
-        void insertBlockCell(int x, int y, std::shared_ptr<BlockCell> cell);
+        bool cellAvailable(int column, int row);
+        void insertBlockCell(int column, int row, std::shared_ptr<BlockCell> cell);
 
-        void moveBlockHorizontal(int multiplier);
+        void moveBlockLeft(int multiplier);
+        void moveBlockRight(int multiplier);
         void moveBlockDown(int multiplier);
         void rotateBlockClockwise(int multiplier);
         void rotateBlockCounterClockwise(int multiplier);
         void dropBlock(int multiplier);
         void holdBlock();
-        std::vector<CellCoordinate> getBlockDropPreview();
+        BlockCellCoordinates getBlockDropPreview();
 
         void restart();
         void levelUp(int multiplier);
@@ -54,6 +59,10 @@ class Board {
         void increaseScore(int points);
 
         void setHeavyEffect();
+
+        int getWidth();
+        int getHeight();
+        int getNumBlocksPlacedWithoutClearing();
 };
 
 #endif

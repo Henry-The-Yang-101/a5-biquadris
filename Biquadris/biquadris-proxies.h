@@ -27,7 +27,8 @@ class BoardActionProxy : public BiQuadrisProxy {
   public:
     BoardActionProxy(BiQuadris & gameEngine);
 
-    void moveBlockHorizontal(int multiplier);
+    void moveBlockLeft(int multiplier);
+    void moveBlockRight(int multiplier);
     void moveBlockDown(int multiplier);
     void rotateBlockClockwise(int multiplier);
     void rotateBlockCounterClockwise(int multiplier);

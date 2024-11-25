@@ -83,7 +83,7 @@ std::unique_ptr<Block> Level::cycleBlock() {
 
 bool Level::checkCustomRuleCondition() const { return false; }
 
-void Level::executeCustomRuleAction() {}
+bool Level::executeCustomRuleAction() { return false; }
 
 
 const char BLOCK_TYPE_ORDER[] = {'I', 'J', 'L', 'O', 'S', 'Z', 'T'};
@@ -124,11 +124,5 @@ char RandomizedLevel::chooseBlockType() const {
   }
 }
 
-void RandomizedLevel::enableRandom() { this->randomEnabled = true; }
+void RandomizedLevel::setRandomEnabled(bool enabled) { this->randomEnabled = enabled; }
 
-void RandomizedLevel::disableRandom() { this->randomEnabled = false; }
-
-void RandomizedLevel::disableRandom(std::string & blockSequenceFile) {
-  this->disableRandom();
-  this->setBlockSequenceFile(blockSequenceFile);
-}

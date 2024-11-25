@@ -24,7 +24,8 @@ class BiQuadris : public Subject {
   public:
     BiQuadris(string sequenceFile1 = "sequence1.txt", string sequenceFile2 = "sequence2.txt", bool devMode = false, bool bonusFeatures = true, int randomSeed = 0);
 
-    void moveBlockHorizontal(int multiplier);
+    void moveBlockLeft(int multiplier);
+    void moveBlockRight(int multiplier);
     void moveBlockDown(int multiplier);
     void rotateBlockClockwise(int multiplier);
     void rotateBlockCounterClockwise(int multiplier);

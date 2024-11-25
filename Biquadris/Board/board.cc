@@ -1,32 +1,40 @@
 #include "board.h"
 #include "./Level/level.h"
 
-Board::Board(ManageGameStateProxy game, std::unique_ptr<Level> level, int width, int height, const std::string blockSequenceFileName) : 
-    boardProxy{*this}, game{game}, currentLevel{std::move(level)}, width{width}, height{height}, currentScore{0}, highScore{0}, 
-    numBlocksPlacedWithoutClearing{0}, allowedToHold{false}, currentBlockHeavyEffect{false}, grid{}, blockSequenceFileName{blockSequenceFileName} {}
-
-Board::~Board() {}
-
-bool Board::cellAvailable(int x, int y) {
-    return (x < 0 || x >= width || y < 0 || y >= height) && (grid[y][x] == nullptr);
+Board::Board(ManageGameStateProxy gameProxy, std::unique_ptr<Level> level, std::string blockSequenceFileName, bool allowedToHold) : 
+    boardProxy{*this}, gameProxy{gameProxy}, currentLevel{std::move(level)}, allowedToHold{allowedToHold}, blockSequenceFileName{blockSequenceFileName}, 
+    grid{HEIGHT + NUM_RESERVE_ROWS, std::vector<std::shared_ptr<BlockCell>>{WIDTH, nullptr}} {
 }
 
-void Board::insertBlockCell(int x, int y, std::shared_ptr<BlockCell> cell) {
-    if (x >= 0 && x < width && y >= 0 && y < height) {
-        grid[y][x] = cell;
+void Board::refillRows() {
+    while (this->grid.size() < HEIGHT + NUM_RESERVE_ROWS) {
+        this->grid.emplace_back(WIDTH, nullptr);
     }
 }
 
-void Board::moveBlockHorizontal(int multiplier) {
+bool Board::cellAvailable(int column, int row) {
+    row += this->NUM_RESERVE_ROWS;
+    // check within board boundaries and coordinate is nullptr (no block in cell)
+    if (!(column >= 0 && column < this->WIDTH && row >= 0 && row < this->HEIGHT)) return false; // redundant?
+    return this->grid[row][column] == nullptr;
+}
 
+void Board::insertBlockCell(int column, int row, std::shared_ptr<BlockCell> cell) {
+    this->grid[row][column] = cell;
+}
+
+void Board::moveBlockLeft(int multiplier) {
+    while (multiplier > 0 && this->currentBlock->moveLeft()) {
+        multiplier--;
+    }
+}
+
+void Board::moveBlockRight(int multiplier) {
     while (multiplier > 0 && this->currentBlock->moveRight()) {
         multiplier--;
     }
-    while (multiplier < 0 && this->currentBlock->moveLeft()) {
-        multiplier++;
-    }
-
 }
+
 
 void Board::moveBlockDown(int multiplier) {
     while (multiplier > 0 && this->currentBlock->down()) {
@@ -49,6 +57,8 @@ void Board::rotateBlockCounterClockwise(int multiplier) {
 void Board::dropBlock(int multiplier) {
     while (multiplier > 0) {
         this->currentBlock->drop();
+
+        // replace current and next block
         this->currentBlock = std::move(this->nextBlock);
         this->nextBlock = std::move(this->currentLevel->cycleBlock());
     }
@@ -60,6 +70,7 @@ void Board::holdBlock() {
 
         std::swap(this->currentBlock, this->blockOnHold);
 
+        // replace current block with nextblock if initially no block on hold
         if (this->currentBlock == nullptr) {
             this->currentBlock = std::move(this->nextBlock);
             this->nextBlock = std::move(this->currentLevel->cycleBlock());
@@ -81,15 +92,15 @@ void Board::restart() {
     // this->allowedToHold = false;
 
     this->grid.clear();
-    this->grid.resize(this->height, std::vector<std::shared_ptr<BlockCell>>{this->width, nullptr});
+    this->grid.resize(this->HEIGHT, std::vector<std::shared_ptr<BlockCell>>{this->WIDTH, nullptr});
 
 }
 void Board::levelUp(int multiplier) {
-    int newLevel = currentLevel->getLevelNum() + multiplier;
+    int newLevel = this->currentLevel->getLevelNum() + multiplier;
     this->currentLevel = std::make_unique<Level>(newLevel, this->currentBlockHeavyEffect, this->boardProxy, this->blockSequenceFileName);
 }
 void Board::levelDown(int multiplier) {
-    int newLevel = currentLevel->getLevelNum() - multiplier;
+    int newLevel = this->currentLevel->getLevelNum() - multiplier;
     this->currentLevel = std::make_unique<Level>(newLevel, this->currentBlockHeavyEffect, this->boardProxy, this->blockSequenceFileName);
 }
 void Board::increaseScore(int points) {
@@ -98,4 +109,16 @@ void Board::increaseScore(int points) {
 
 void Board::setHeavyEffect() {
     this->currentBlockHeavyEffect = true;
+}
+
+int Board::getHeight() {
+    return this->HEIGHT + this->NUM_RESERVE_ROWS;
+}
+
+int Board::getWidth() {
+    return this->WIDTH;
+}
+
+int Board::getNumBlocksPlacedWithoutClearing() {
+    return this->numBlocksPlacedWithoutClearing;
 }
