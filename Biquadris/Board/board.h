@@ -66,7 +66,7 @@ class Board {
         void levelDown(int multiplier);
         void increaseScore(int points);
 
-        void setBlindEffect();
+        void setBlindEffect(bool enabled);
         void setHeavyEffect();
         void replaceCurrentBlock(char blockType);
 

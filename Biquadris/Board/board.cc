@@ -216,6 +216,10 @@ void Board::increaseScore(int points) {
     this->currentScore += points;
 }
 
+void Board::setBlindEffect(bool enabled) {
+    this->blindEffectEnabled = enabled;
+}
+
 void Board::setHeavyEffect() {
     this->currentBlockHeavyEffect = true;
 }

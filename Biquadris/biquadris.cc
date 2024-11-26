@@ -67,6 +67,8 @@ void BiQuadris::assertSpecialActionMove() const {
 void BiQuadris::updateGameStateAfterBlockAction() {
     if (this->currentBoardPlacedBlockThisMove) {
         this->currentBoardPlacedBlockThisMove = false;
+        this->getCurrentPlayerBoard().setBlindEffect(false);
+
         if (this->currentBoardNumRowsClearedThisMove >= MIN_REQUIRED_ROWS_CLEARED_TO_TRIGGER_SPECIAL_ACTION) {
             canUseSpecialAction = true;
         } else {
@@ -163,7 +165,7 @@ void BiQuadris::replaceCurrentBlock(char blockType) {
 void BiQuadris::blindEffect() {
     this->assertSpecialActionMove();
 
-    this->getCurrentPlayerOpponentBoard().setBlindEffect();
+    this->getCurrentPlayerOpponentBoard().setBlindEffect(true);
 
     this->endSpecialActionMove();
 }
