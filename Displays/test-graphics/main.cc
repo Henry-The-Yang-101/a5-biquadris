@@ -9,8 +9,11 @@ int main() {
     DisplayProxy dummyProxy = DisplayProxy{dummyGameEngine};
 
     // GraphicsView testEnhanced = ConsoleView{dummyProxy, true};
-    GraphicsView testNormal = ConsoleView{dummyProxy, false};
+    GraphicsView testNormal = GraphicsView{dummyProxy, false};
 
     // testEnhanced.render();
-    // testNormal.render();
+    testNormal.render();
+
+    int x;
+    cin >> x;
 }
