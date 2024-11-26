@@ -1,8 +1,8 @@
 #ifndef VISUAL_EFFECT_COMMAND_H
 #define VISUAL_EFFECT_COMMAND_H
 
-#include "aggregate-command.h"
-#include "../Biquadris/biquadris-proxies.h"
+#include "../aggregate-command.h"
+#include "../../Biquadris/biquadris-proxies.h"
 
 class VisualEffectCommand : public AggregateCommand<VisualEffectProxy> {
   protected:

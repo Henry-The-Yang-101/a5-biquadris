@@ -2,7 +2,7 @@
 #define BLOCK_H
 
 #include <utility>
-#include "board-proxy.h"
+#include "../board-proxy.h"
 
 using CellCoordinate = std::pair<int, int>;
 using BlockCellCoordinates = std::vector<CellCoordinate>;

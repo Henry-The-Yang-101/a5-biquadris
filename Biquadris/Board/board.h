@@ -6,7 +6,7 @@
 #include "board-proxy.h"
 #include "../biquadris-proxies.h"
 #include "block.h"
-#include "level.h"
+#include "./Level/level.h"
 
 using CellCoordinate = std::pair<int, int>;
 using BlockCellCoordinates = std::vector<CellCoordinate>;
