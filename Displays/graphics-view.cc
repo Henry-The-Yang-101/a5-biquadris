@@ -2,7 +2,10 @@
 
 GraphicsView::GraphicsView(DisplayProxy &displayProxy, bool enhanced) :
     DisplayObserver{displayProxy, enhanced}, 
-    window{1800, 1000} {
+    window{1352, 720} {
+
+        std::cout << "Creating window with width: " << 2 * (this->boardWidthTemp + this->paddingPixels) << " and height: 1000" << std::endl;
+
         this->charColorMap[' '] = 1;
         this->charColorMap['I'] = 2;
         this->charColorMap['J'] = 3;
@@ -10,28 +13,29 @@ GraphicsView::GraphicsView(DisplayProxy &displayProxy, bool enhanced) :
         this->charColorMap['O'] = 5;
         this->charColorMap['S'] = 6;
         this->charColorMap['Z'] = 7;
-        this->charColorMap['z'] = 7;
         this->charColorMap['T'] = 8;
     }
 
 void GraphicsView::render() {
+
+     // horizontal order l to r: {p1 header, p1 board} {p1 hold, next}
     int Black = 1;
-    int pixelsDown = 0;
+    int pixelsDown = paddingPixels;
     int boardWidth = this->gameGridCols * (PIXELS_PER_SQUARE + this->blockGapPixels) + this->blockGapPixels;
 
     for (int r = 0; r < this->gameGridRows; r++) {
 
         // temporarily calling multiple times, first few calls sometimes dont render
-        this->window.fillRectangle(0, pixelsDown, boardWidth, this->blockGapPixels, Black);
-        this->window.fillRectangle(0, pixelsDown, boardWidth, this->blockGapPixels, Black);
-        this->window.fillRectangle(0, pixelsDown, boardWidth, this->blockGapPixels, Black);
-        this->window.fillRectangle(0, pixelsDown, boardWidth, this->blockGapPixels, Black);
-        this->window.fillRectangle(0, pixelsDown, boardWidth, this->blockGapPixels, Black);
-        this->window.fillRectangle(0, pixelsDown, boardWidth, this->blockGapPixels, Black);
+        this->window.fillRectangle(paddingPixels, pixelsDown, boardWidth, this->blockGapPixels, Black);
+        this->window.fillRectangle(paddingPixels, pixelsDown, boardWidth, this->blockGapPixels, Black);
+        this->window.fillRectangle(paddingPixels, pixelsDown, boardWidth, this->blockGapPixels, Black);
+        this->window.fillRectangle(paddingPixels, pixelsDown, boardWidth, this->blockGapPixels, Black);
+        this->window.fillRectangle(paddingPixels, pixelsDown, boardWidth, this->blockGapPixels, Black);
+        this->window.fillRectangle(paddingPixels, pixelsDown, boardWidth, this->blockGapPixels, Black);
 
         pixelsDown += this->blockGapPixels;
 
-        int pixelsLeft = 0;
+        int pixelsLeft = paddingPixels;
         for (int c = 0; c < this->gameGridCols; c++) {
 
             char currentBlockChar = this->p1GameGrid[r][c];
@@ -42,6 +46,10 @@ void GraphicsView::render() {
             } catch (const std::out_of_range&) {
                 colour = 1;
             }
+
+            // logging for debugging
+            // std::cout << c << ", " << r << endl;
+            // std::cout << "colour: " << colour << std::endl;
 
             this->window.fillRectangle(pixelsLeft, pixelsDown, this->blockGapPixels, PIXELS_PER_SQUARE, Black);
             pixelsLeft += this->blockGapPixels;
@@ -54,12 +62,18 @@ void GraphicsView::render() {
         pixelsDown += PIXELS_PER_SQUARE;
 
     }
-    this->window.fillRectangle(0, pixelsDown, boardWidth, this->blockGapPixels, Black);
+    this->window.fillRectangle(paddingPixels, pixelsDown, boardWidth, this->blockGapPixels, Black);
 
-    pixelsDown = 0;
+    int sidebarStart = boardWidth + paddingPixels + this->blockGapPixels;
+    this->window.fillRectangle(sidebarStart, paddingPixels, sidebarWidth, boardHeightTemp, Black);
+    
+
+
+
+
+    pixelsDown = paddingPixels;
     // temporary to simulate spacing in between
-    const int gapBetweenGridsPixels = 200;
-    int shiftLeft = boardWidth + gapBetweenGridsPixels;
+    int shiftLeft = boardWidth + gapBetweenGridsPixels + paddingPixels + sidebarWidth;
     
     for (int r = 0; r < this->gameGridRows; r++) {
         this->window.fillRectangle(shiftLeft, pixelsDown, boardWidth, this->blockGapPixels, Black);
