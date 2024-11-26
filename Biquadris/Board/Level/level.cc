@@ -89,7 +89,7 @@ std::unique_ptr<Block> Level::cycleBlock() {
   std::unique_ptr<Block> poppedBlock = std::move(this->blockBacklog[0]);
 
   this->blockBacklog.erase(this->blockBacklog.begin());
-  this->blockBacklog.push_back(this->generateBlock());
+  this->blockBacklog.push_back(this->generateBlock(this->chooseBlockType()));
 
   return std::move(poppedBlock);
 }
@@ -104,6 +104,8 @@ const char BLOCK_TYPE_ORDER[] = {'I', 'J', 'L', 'O', 'S', 'Z', 'T'};
 // RandomizedLevel definitions
 RandomizedLevel::RandomizedLevel(int levelNum, bool heavy, BoardProxy & boardProxy, const std::string & blockSequenceFileName, const std::vector<int> & distribution) :
   Level{levelNum, heavy, boardProxy, blockSequenceFileName}, blockCumulativeDistributionMap{std::move(convertDistributionToCumulativeMap(distribution))}, distributionTotal{calculateTotal(distribution)} {}
+
+const std::unordered_set<int> RandomizedLevel::RANDOMIZED_LEVEL_NUMS = {1, 2, 3, 4};
 
 std::map<int, char> RandomizedLevel::convertDistributionToCumulativeMap(const std::vector<int> & distribution) {
   std::map<int, char> outputBlockCumulativeDistributionMap;
@@ -138,4 +140,3 @@ char RandomizedLevel::chooseBlockType() const {
 }
 
 void RandomizedLevel::setRandomEnabled(bool enabled) { this->randomEnabled = enabled; }
-

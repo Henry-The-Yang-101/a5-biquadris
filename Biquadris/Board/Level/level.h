@@ -58,6 +58,4 @@ class RandomizedLevel : public Level {
     virtual ~RandomizedLevel() = default;
 };
 
-const std::unordered_set<int> RandomizedLevel::RANDOMIZED_LEVEL_NUMS = {1, 2, 3, 4};
-
 #endif
