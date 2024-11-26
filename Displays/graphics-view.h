@@ -16,11 +16,11 @@ class GraphicsView : public DisplayObserver {
         const int blockGapPixels = 4;
         const int paddingPixels = 40;
         const int gapBetweenGridsPixels = 24;
-        const int sidebarWidth = 4 * PIXELS_PER_SQUARE + 40;
-        const int sidebarPadding = 20;
-        const int nextBlocksHeight = sidebarPadding * 2 + 16 * PIXELS_PER_SQUARE + 8 * blockGapPixels;
-        const int holdBlocksHeight = sidebarPadding * 2 + 2 * PIXELS_PER_SQUARE + 1 * blockGapPixels;
         const int fontHeight = 20;
+        const int sidebarPadding = 20;
+        const int sidebarWidth = 4 * PIXELS_PER_SQUARE + 3 * blockGapPixels + sidebarPadding * 2;
+        const int nextBlocksHeight = sidebarPadding * 2 + 16 * PIXELS_PER_SQUARE + 8 * blockGapPixels + fontHeight;
+        const int holdBlocksHeight = sidebarPadding * 2 + 2 * PIXELS_PER_SQUARE + 1 * blockGapPixels + fontHeight;
 
     public:
 
