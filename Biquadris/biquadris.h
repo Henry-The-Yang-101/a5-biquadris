@@ -61,11 +61,7 @@ class BiQuadris : public Subject {
   private:
     static const int MIN_REQUIRED_ROWS_CLEARED_TO_TRIGGER_SPECIAL_ACTION = 2;
 
-    ManageGameStateProxy gameStateProxy;
-    VisualEffectProxy visualEffectProxy;
-    BoardActionProxy boardActionProxy;
-    LevelBlockGenProxy levelBlockGenProxy;
-    DisplayProxy displayProxy;
+    InformGameStateProxy informGameStateProxy;
 
     Board player1Board;
     Board player2Board;

@@ -3,6 +3,18 @@
 using CellCoordinate = std::pair<int, int>;
 using BlockAttributes = std::pair<std::vector<CellCoordinate>, char>;
 
+// InformGameStateProxy definitions
+
+InformGameStateProxy::InformGameStateProxy(BiQuadris & gameEngine) : BiQuadrisProxy{gameEngine} {}
+
+void InformGameStateProxy::informCurrentBoardPlacedBlock(int rowsCleared) {
+  this->gameEngine.informCurrentBoardPlacedBlock(rowsCleared);
+}
+
+void InformGameStateProxy::informGameOver() {
+  this->gameEngine.informGameOver();
+}
+
 // ManageGameStateProxy definitions
 ManageGameStateProxy::ManageGameStateProxy(BiQuadris & gameEngine) : BiQuadrisProxy{gameEngine} {}
 
@@ -16,14 +28,6 @@ void ManageGameStateProxy::setDevMode(bool isOn) {
 
 void ManageGameStateProxy::endSpecialActionMove() {
   this->gameEngine.endSpecialActionMove();
-}
-
-void ManageGameStateProxy::informCurrentBoardPlacedBlock(int rowsCleared) {
-  this->gameEngine.informCurrentBoardPlacedBlock(rowsCleared);
-}
-
-void ManageGameStateProxy::informGameOver() {
-  this->gameEngine.informGameOver();
 }
 
 // VisualEffectProxy definitions

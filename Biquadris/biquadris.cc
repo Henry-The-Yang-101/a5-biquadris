@@ -8,8 +8,8 @@ using BlockAttributes = std::pair<std::vector<CellCoordinate>, char>;
 using CharGrid = std::vector<std::vector<char>>;
 
 BiQuadris::BiQuadris(std::string sequenceFile1, std::string sequenceFile2, bool devMode, bool bonusFeatures, int initLevelNum) :
-    devMode{devMode}, bonusFeatures{bonusFeatures}, gameStateProxy{*this}, visualEffectProxy{*this}, boardActionProxy{*this}, levelBlockGenProxy{*this}, displayProxy{*this}, 
-    player1Board{this->gameStateProxy, initLevelNum, sequenceFile1}, player2Board{this->gameStateProxy, initLevelNum, sequenceFile2} {}
+    devMode{devMode}, bonusFeatures{bonusFeatures}, informGameStateProxy{*this}, 
+    player1Board{this->informGameStateProxy, initLevelNum, sequenceFile1}, player2Board{this->informGameStateProxy, initLevelNum, sequenceFile2} {}
 
 
 BiQuadris::PlayerTurn BiQuadris::getOpponentTurn(PlayerTurn whichPlayerTurn) {

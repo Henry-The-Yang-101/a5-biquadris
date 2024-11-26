@@ -8,8 +8,8 @@ using CellCoordinate = std::pair<int, int>;
 using BlockCellCoordinates = std::vector<CellCoordinate>;
 using BlockAttributes = std::pair<BlockCellCoordinates, char>;
 
-Board::Board(ManageGameStateProxy & gameProxy, int initLevelNum, std::string blockSequenceFileName) : 
-    initLevelNum{initLevelNum}, boardProxy{*this}, gameProxy{gameProxy}, blockSequenceFileName{blockSequenceFileName} {
+Board::Board(InformGameStateProxy & informGameStateProxy, int initLevelNum, std::string blockSequenceFileName) : 
+    initLevelNum{initLevelNum}, boardProxy{*this}, informGameStateProxy{informGameStateProxy}, blockSequenceFileName{blockSequenceFileName} {
 
     this->setUpEmptyGrid();
     this->setCurrentLevel(initLevelNum);
@@ -154,7 +154,7 @@ void Board::dropBlock(int multiplier) {
         this->nextBlock = std::move(this->currentLevel->cycleBlock());
         
         if (!this->currentBlock->isValidPosition()) {
-            this->gameProxy.informGameOver();
+            this->informGameStateProxy.informGameOver();
             break;
         }
         multiplier--;
@@ -166,7 +166,7 @@ void Board::dropBlock(int multiplier) {
     this->allowedToHold = true;
     this->currentBlockHeavyEffect = false;
     this->currentScore += this->calculateScoreIncrease(totalClearedRows);
-    this->gameProxy.informCurrentBoardPlacedBlock(totalClearedRows);
+    this->informGameStateProxy.informCurrentBoardPlacedBlock(totalClearedRows);
 }
 
 void Board::holdBlock() {
@@ -182,7 +182,7 @@ void Board::holdBlock() {
         this->allowedToHold = false;
 
         if (!this->currentBlock->isValidPosition()) {
-            this->gameProxy.informGameOver();
+            this->informGameStateProxy.informGameOver();
         }
     } else {
         throw std::runtime_error("Can't take back the piece!");
@@ -254,17 +254,17 @@ std::vector<BlockAttributes> Board::getBlockAttributesBacklog() const {
 
 void Board::replaceCurrentBlock(char blockType) {
     switch (blockType) {
-        case 'I': this->currentBlock = std::make_unique<IBlock>(gameProxy, blockSequenceFileName); break;
-        case 'J': this->currentBlock = std::make_unique<JBlock>(gameProxy, blockSequenceFileName); break;
-        case 'L': this->currentBlock = std::make_unique<LBlock>(gameProxy, blockSequenceFileName); break;
-        case 'O': this->currentBlock = std::make_unique<OBlock>(gameProxy, blockSequenceFileName); break;
-        case 'S': this->currentBlock = std::make_unique<SBlock>(gameProxy, blockSequenceFileName); break;
-        case 'Z': this->currentBlock = std::make_unique<ZBlock>(gameProxy, blockSequenceFileName); break;
-        case 'T': this->currentBlock = std::make_unique<TBlock>(gameProxy, blockSequenceFileName); break;
+        case 'I': this->currentBlock = std::make_unique<IBlock>(this->boardProxy, blockSequenceFileName); break;
+        case 'J': this->currentBlock = std::make_unique<JBlock>(this->boardProxy, blockSequenceFileName); break;
+        case 'L': this->currentBlock = std::make_unique<LBlock>(this->boardProxy, blockSequenceFileName); break;
+        case 'O': this->currentBlock = std::make_unique<OBlock>(this->boardProxy, blockSequenceFileName); break;
+        case 'S': this->currentBlock = std::make_unique<SBlock>(this->boardProxy, blockSequenceFileName); break;
+        case 'Z': this->currentBlock = std::make_unique<ZBlock>(this->boardProxy, blockSequenceFileName); break;
+        case 'T': this->currentBlock = std::make_unique<TBlock>(this->boardProxy, blockSequenceFileName); break;
     }
 
     if (!this->currentBlock->isValidPosition()) {
-        this->gameProxy.informGameOver();
+        this->informGameStateProxy.informGameOver();
     }
 }
 

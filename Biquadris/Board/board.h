@@ -22,7 +22,7 @@ class Board {
 
         std::string blockSequenceFileName;
         BoardProxy boardProxy;
-        ManageGameStateProxy & gameProxy;
+        InformGameStateProxy & informGameStateProxy;
         std::unique_ptr<Level> currentLevel;
 
         int currentScore = 0;
@@ -47,7 +47,7 @@ class Board {
         int calculateScoreIncrease(int linesCleared);
 
     public:
-        Board(ManageGameStateProxy & game, int initLevelNum, std::string blockSequenceFileName);
+        Board(InformGameStateProxy & informGameStateProxy, int initLevelNum, std::string blockSequenceFileName);
         ~Board() = default;
 
         bool cellAvailable(int column, int row) const;

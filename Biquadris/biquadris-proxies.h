@@ -7,6 +7,14 @@ using CellCoordinate = std::pair<int, int>;
 using BlockCellCoordinates = std::vector<CellCoordinate>;
 using BlockAttributes = std::pair<BlockCellCoordinates, char>;
 
+class InformGameStateProxy : public BiQuadrisProxy {
+  public:
+    InformGameStateProxy(BiQuadris & gameEngine);
+
+    void informCurrentBoardPlacedBlock(int rowsCleared);
+    void informGameOver();
+};
+
 class ManageGameStateProxy : public BiQuadrisProxy {
   public:
     ManageGameStateProxy(BiQuadris & gameEngine);
@@ -14,8 +22,6 @@ class ManageGameStateProxy : public BiQuadrisProxy {
     void setBonusFeatures(bool isOn);
     void setDevMode(bool isOn);
     void endSpecialActionMove();
-    void informCurrentBoardPlacedBlock(int rowsCleared);
-    void informGameOver();
 };
 
 class VisualEffectProxy : public BiQuadrisProxy {
@@ -52,7 +58,6 @@ class LevelBlockGenProxy : public BiQuadrisProxy {
     void replaceCurrentBlock(char blockType);
     void forceEffect(char blockType);
 };
-
 
 class DisplayProxy : public BiQuadrisProxy {
   public:
