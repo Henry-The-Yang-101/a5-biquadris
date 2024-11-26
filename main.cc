@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <memory>
 #include <utility>
+#include <stdexcept>
 
 #include "Biquadris/biquadris.h"
 
@@ -19,6 +20,7 @@
 #include "Displays/graphics-view.h"
 
 const int I_LOVE_CS{246};
+const std::vector<char> POSSIBLE_TETROMINOES = {'I', 'J', 'L', 'O', 'S', 'Z', 'T'};
 
 int main (int argc, char* argv[]) {
   std::string blockSequenceFile1 = "sequence1.txt";
@@ -57,18 +59,61 @@ int main (int argc, char* argv[]) {
       }
     }
   }
-
   std::srand(randomSeed);
 
+
   BiQuadris gameEngine{};
+
+  // Setting up commandsTree:
+  CommandTree commandDecisionTree;
+
 
   ManageGameStateProxy manageGameStateProxy{gameEngine};
   VisualEffectProxy visualEffectProxy{gameEngine};
   BoardActionProxy boardActionProxy{gameEngine};
   LevelBlockGenProxy levelBlockGenProxy{gameEngine};
-  DisplayProxy displayProxy{gameEngine};
 
+  // ManageGameState commands:
+  commandDecisionTree.addCommand(std::make_unique<BonusOnCommand>(manageGameStateProxy, "bonuson"));
+  commandDecisionTree.addCommand(std::make_unique<BonusOffCommand>(manageGameStateProxy, "bonusoff"));
+  commandDecisionTree.addCommand(std::make_unique<DevOnCommand>(manageGameStateProxy, "devcommandson"));
+  commandDecisionTree.addCommand(std::make_unique<DevOffCommand>(manageGameStateProxy, "devcommandsoff"));
+  commandDecisionTree.addCommand(std::make_unique<SpareCommand>(manageGameStateProxy, "spare"));
   
+  // VisualEffect commands:
+  commandDecisionTree.addCommand(std::make_unique<BlindCommand>(visualEffectProxy, "blind"));
+
+  // BoardAction commands:
+  commandDecisionTree.addCommand(std::make_unique<LeftCommand>(boardActionProxy, "left"));
+  commandDecisionTree.addCommand(std::make_unique<RightCommand>(boardActionProxy, "right"));
+  commandDecisionTree.addCommand(std::make_unique<DownCommand>(boardActionProxy, "down"));
+  commandDecisionTree.addCommand(std::make_unique<DropCommand>(boardActionProxy, "drop"));
+  commandDecisionTree.addCommand(std::make_unique<ClockwiseCommand>(boardActionProxy, "clockwise"));
+  commandDecisionTree.addCommand(std::make_unique<CounterClockwiseCommand>(boardActionProxy, "counterclockwise"));
+  commandDecisionTree.addCommand(std::make_unique<HoldCommand>(boardActionProxy, "hold"));
+  commandDecisionTree.addCommand(std::make_unique<HeavyEffectCommand>(boardActionProxy, "heavy"));
+  commandDecisionTree.addCommand(std::make_unique<RestartCommand>(boardActionProxy, "restart"));
+
+  // LevelBlockGen commands:
+  commandDecisionTree.addCommand(std::make_unique<LevelUpCommand>(levelBlockGenProxy, "levelup"));
+  commandDecisionTree.addCommand(std::make_unique<LevelDownCommand>(levelBlockGenProxy, "leveldown"));
+  commandDecisionTree.addCommand(std::make_unique<RandomCommand>(levelBlockGenProxy, "random"));
+  commandDecisionTree.addCommand(std::make_unique<NoRandomCommand>(levelBlockGenProxy, "norandom"));
+  commandDecisionTree.addCommand(std::make_unique<ForceCommand>(levelBlockGenProxy, "force"));
+
+  for (char tetromino : POSSIBLE_TETROMINOES) {
+    commandDecisionTree.addCommand(std::make_unique<ReplaceBlockCommand>(levelBlockGenProxy, std::string{1, tetromino}));
+  }
+  
+  // Meta commands:
+  commandDecisionTree.addCommand(std::make_unique<RenameCommand>(commandDecisionTree, "rename"));
+  commandDecisionTree.addCommand(std::make_unique<MacroCommand>(commandDecisionTree, "macro"));
+  commandDecisionTree.addCommand(std::make_unique<SequenceCommand>(commandDecisionTree, "sequence"));
+
+  // Output commands:
+  commandDecisionTree.addCommand(std::make_unique<HintCommand>(std::cout, "hint"));
+
+  DisplayProxy displayProxy{gameEngine};
 
   std::shared_ptr<ConsoleView> consoleView = std::make_shared<ConsoleView>(displayProxy);
   std::shared_ptr<GraphicsView> graphicsView;
@@ -80,7 +125,14 @@ int main (int argc, char* argv[]) {
     gameEngine.attach(graphicsView);
   }
 
-  
+  // Game loop:
+  std::string userInput;
+
+  while (std::getline(std::cin, userInput)) {
+    try {
+      commandDecisionTree.findAndExecute(userInput);
+    } catch (std::runtime_error & error) {
+      std::cerr << error.what() << std::endl;
+    }
+  }
 }
-
-
