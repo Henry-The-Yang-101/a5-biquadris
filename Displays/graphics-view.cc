@@ -29,7 +29,7 @@ void GraphicsView::render() {
     for (int r = 0; r < this->gameGridRows; r++) {
 
         // draw top border
-        this->window.fillRectangle(paddingPixels, pixelsDown, boardWidth, this->blockGapPixels, Black);
+        this->window.fillRectangle(shiftLeft, pixelsDown, boardWidth, this->blockGapPixels, Black);
 
         // move pointer down by width of whatever was just drawn
         pixelsDown += this->blockGapPixels;
@@ -65,23 +65,23 @@ void GraphicsView::render() {
     }
 
     // draw bottom border
-    this->window.fillRectangle(paddingPixels, pixelsDown, boardWidth, this->blockGapPixels, Black);
+    this->window.fillRectangle(shiftLeft, pixelsDown, boardWidth, this->blockGapPixels, Black);
 
 
     // next blocks 
 
     // left position of start of sidebar
-    int alignNextBlocks = boardWidth + paddingPixels + this->blockGapPixels;
+    int alignNextBlocks = shiftLeft + boardWidth + this->blockGapPixels;
 
     // constant for styling
     int sidebarPadding = 24;
 
     // left position of start of next block grid inside of sidebar
-    int nextBlockGridStartLeft = boardWidth + paddingPixels + this->blockGapPixels + sidebarPadding;
+    int nextBlockGridStartLeft = alignNextBlocks + sidebarPadding;
 
     // vertical start position inside of sidebar
     pixelsDown = paddingPixels + sidebarPadding + this->fontHeight;
-    this->window.fillRectangle(alignNextBlocks, paddingPixels, sidebarWidth, boardHeightTemp, 1);
+    this->window.fillRectangle(alignNextBlocks, paddingPixels, sidebarWidth, this->nextBlocksHeight, 1);
     this->window.drawString(nextBlockGridStartLeft, pixelsDown, "Next:");
 
     // gap between text and grid
@@ -170,7 +170,7 @@ void GraphicsView::render() {
 
     pixelsDown = paddingPixels + sidebarPadding + this->fontHeight;
 
-    this->window.fillRectangle(alignNextBlocks, paddingPixels, sidebarWidth, boardHeightTemp, Black);
+    this->window.fillRectangle(alignNextBlocks, paddingPixels, sidebarWidth, this->nextBlocksHeight, Black);
     this->window.drawString(nextBlockGridStartLeft, pixelsDown, "Next:");
 
     pixelsDown += sidebarPadding;

@@ -6,7 +6,7 @@
 #include "./window.h"
 
 const int WINDOW_WIDTH = 800;
-const int PIXELS_PER_SQUARE = 32;
+const int PIXELS_PER_SQUARE = 28;
 
 class GraphicsView : public DisplayObserver {
 
@@ -15,10 +15,12 @@ class GraphicsView : public DisplayObserver {
         std::map<char, int> charColorMap;
         const int blockGapPixels = 4;
         const int paddingPixels = 40;
-        const int gapBetweenGridsPixels = 72;
-        const int sidebarWidth = 188;
-        const int boardWidthTemp = 400;
-        const int boardHeightTemp = 576;
+        const int gapBetweenGridsPixels = 24;
+        const int sidebarWidth = 4 * PIXELS_PER_SQUARE + 40;
+        const int sidebarPadding = 20;
+        const int nextBlocksHeight = sidebarPadding * 2 + 16 * PIXELS_PER_SQUARE + 8 * blockGapPixels;
+        const int holdBlocksHeight = sidebarPadding * 2 + 2 * PIXELS_PER_SQUARE + 1 * blockGapPixels;
+        const int fontHeight = 20;
 
     public:
 
