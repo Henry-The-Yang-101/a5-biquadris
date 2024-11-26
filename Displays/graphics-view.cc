@@ -18,6 +18,7 @@ void GraphicsView::render() {
 
     int Black = 1;
 
+
     // vertical start position
     int shiftDown = paddingPixels;
 
@@ -139,7 +140,8 @@ void GraphicsView::render() {
 
     }
 
-    // draw second player's board
+
+    // second player hold block container
 
     // reset vertical start position
     shiftDown = paddingPixels;
@@ -147,7 +149,41 @@ void GraphicsView::render() {
     // horizontal shift to the right (points to left corner of second player's board)
     shiftLeft += boardWidth + this->blockGapPixels + sidebarWidth + gapBetweenGridsPixels;
 
+    this->window.fillRectangle(shiftLeft, shiftDown, sidebarWidth, this->holdBlocksHeight, Black);
+
+    holdBlockGridStartLeft = shiftLeft + sidebarPadding;
+
+    shiftDown += sidebarPadding + this->fontHeight;
+    this->window.drawString(holdBlockGridStartLeft, shiftDown, "Hold:");
+
+    shiftDown += sidebarPadding ;
+
+    for (int r = 0; r < this->holdGridRows; r++) {
+
+        int pixelsLeft = holdBlockGridStartLeft;
+
+        for (int c = 0; c < this->holdGridCols; c++) {
+
+            char currentBlockChar = this->p2HoldGrid[r][c];
+            int colour = this->charColorMap.at(currentBlockChar);
+
+            // if the background is black, we can remove drawing the gridlines <-- DELETE THIS COMMENT LATER PLUH
+            this->window.fillRectangle(pixelsLeft, shiftDown, PIXELS_PER_SQUARE, PIXELS_PER_SQUARE, colour);
+            pixelsLeft += PIXELS_PER_SQUARE + this->blockGapPixels;
+
+        }
+
+        shiftDown += PIXELS_PER_SQUARE + this->blockGapPixels;
+
+    }
+
     shiftLeft += sidebarWidth + this->blockGapPixels;
+
+
+    // draw second player's board
+
+    // reset vertical start position
+    shiftDown = paddingPixels;
     
     for (int r = 0; r < this->gameGridRows; r++) {
         this->window.fillRectangle(shiftLeft, shiftDown, boardWidth, this->blockGapPixels, Black);
