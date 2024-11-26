@@ -5,7 +5,6 @@
 #include "./display-observer.h"
 #include "./window.h"
 
-const int WINDOW_WIDTH = 800;
 const int PIXELS_PER_SQUARE = 28;
 
 class GraphicsView : public DisplayObserver {
