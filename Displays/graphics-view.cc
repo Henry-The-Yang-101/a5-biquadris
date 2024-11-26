@@ -4,8 +4,6 @@ GraphicsView::GraphicsView(DisplayProxy &displayProxy, bool enhanced) :
     DisplayObserver{displayProxy, enhanced}, 
     window{1352, 720} {
 
-        std::cout << "Creating window with width: " << 2 * (this->boardWidthTemp + this->paddingPixels) << " and height: 1000" << std::endl;
-
         this->charColorMap[' '] = 1;
         this->charColorMap['I'] = 2;
         this->charColorMap['J'] = 3;
@@ -64,9 +62,40 @@ void GraphicsView::render() {
     }
     this->window.fillRectangle(paddingPixels, pixelsDown, boardWidth, this->blockGapPixels, Black);
 
-    int sidebarStart = boardWidth + paddingPixels + this->blockGapPixels;
-    this->window.fillRectangle(sidebarStart, paddingPixels, sidebarWidth, boardHeightTemp, Black);
-    
+    // next blocks 
+    int alignNextBlocks = boardWidth + paddingPixels + this->blockGapPixels;
+    int sidebarPadding = 24;
+
+    int nextBlockGridStartLeft = boardWidth + paddingPixels + this->blockGapPixels + sidebarPadding;
+    pixelsDown = paddingPixels + sidebarPadding;
+    this->window.fillRectangle(alignNextBlocks, paddingPixels, sidebarWidth, boardHeightTemp, Black);
+
+    for (int r = 0; r < this->nextGridRows; r++) {
+
+        int pixelsLeft = nextBlockGridStartLeft;
+
+        for (int c = 0; c < this->nextGridCols; c++) {
+            char currentBlockChar = this->p1NextGrid[r][c];
+            int colour = 0;
+
+            try {
+                colour = this->charColorMap.at(currentBlockChar); 
+            } catch (const std::out_of_range&) {
+                colour = 1;
+            }
+
+            // logging for debugging
+            // std::cout << c << ", " << r << endl;
+            // std::cout << "colour: " << colour << std::endl;
+
+            this->window.fillRectangle(pixelsLeft, pixelsDown, PIXELS_PER_SQUARE, PIXELS_PER_SQUARE, colour);
+            pixelsLeft += PIXELS_PER_SQUARE + this->blockGapPixels;
+
+        }
+
+        pixelsDown += PIXELS_PER_SQUARE + this->blockGapPixels;
+
+    }
 
 
 

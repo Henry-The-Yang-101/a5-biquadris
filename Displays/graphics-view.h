@@ -16,7 +16,7 @@ class GraphicsView : public DisplayObserver {
         const int blockGapPixels = 4;
         const int paddingPixels = 40;
         const int gapBetweenGridsPixels = 72;
-        const int sidebarWidth = 32 * 5 + 4;
+        const int sidebarWidth = 188;
         const int boardWidthTemp = 400;
         const int boardHeightTemp = 576;
 
