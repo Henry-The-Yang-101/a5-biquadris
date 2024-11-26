@@ -31,7 +31,7 @@ class InformGameStateProxy : public BiQuadrisProxy {
 
 class BiQuadris : public Subject {
   public:
-    BiQuadris(std::string sequenceFile1 = "sequence1.txt", std::string sequenceFile2 = "sequence2.txt", bool devMode = false, bool bonusFeatures = true, int initLevelNum = 0);
+    BiQuadris(std::string sequenceFile1 = "sequence1.txt", std::string sequenceFile2 = "sequence2.txt", int initLevelNum = 0, bool bonusFeatures = true);
     enum class PlayerTurn {PLAYER1, PLAYER2};
 
     void moveBlockLeft(int multiplier);
@@ -77,7 +77,7 @@ class BiQuadris : public Subject {
     void informGameOver();
     void endSpecialActionMove();
 
-    ~BiQuadris();
+    ~BiQuadris() = default;
   
   private:
     static const int MIN_REQUIRED_ROWS_CLEARED_TO_TRIGGER_SPECIAL_ACTION = 2;
@@ -89,8 +89,8 @@ class BiQuadris : public Subject {
 
     // Game State variables
     PlayerTurn currentPlayerTurn = PlayerTurn::PLAYER1;
+    bool bonusFeatures;
     bool devMode = true;
-    bool bonusFeatures = true;
     bool isGameOver = false;
     bool canUseSpecialAction = false;
     bool currentBoardPlacedBlockThisMove = false;

@@ -1,7 +1,7 @@
 #ifndef ALL_LEVELS_H
 #define ALL_LEVELS_H
 
-#include "../level.h"
+#include "level.h"
 
 class LevelZero : public Level {
   private:

@@ -17,8 +17,8 @@
 #include "CommandTree/OutputCommands/all-output-commands.h"
 #include "CommandTree/VisualEffectCommands/all-visual-effect-commands.h"
 
-#include "Displays/console-view.h"
-#include "Displays/graphics-view.h"
+// #include "Displays/console-view.h"
+// #include "Displays/graphics-view.h"
 
 const int I_LOVE_CS{246};
 const std::vector<char> POSSIBLE_TETROMINOES = {'I', 'J', 'L', 'O', 'S', 'Z', 'T'};
@@ -29,13 +29,14 @@ int main (int argc, char* argv[]) {
   int randomSeed = I_LOVE_CS;
   int initLevelNum = 0;
   bool showGraphicsView = true;
+  bool initBonusEnabled = true;
 
   // Process command line arguments
   for (int i = 1; i < argc; i++) {
     std::string arg = argv[i];
 
     if (arg == "-text") {
-        showGraphicsView = false;
+      showGraphicsView = false;
     } else if (arg == "-seed" && i + 1 < argc) {
       i++;
       std::string nextArg = argv[i];
@@ -58,12 +59,15 @@ int main (int argc, char* argv[]) {
       if (ss.fail()) {
         initLevelNum = 0;
       }
+    } else if (arg == "-disableBonusFeatures") {
+      initBonusEnabled = false;
     }
   }
+
   std::srand(randomSeed);
 
 
-  BiQuadris gameEngine{};
+  BiQuadris gameEngine{blockSequenceFile1, blockSequenceFile2, initLevelNum, initBonusEnabled};
 
   // Setting up commandsTree:
   CommandTree commandDecisionTree;
@@ -116,15 +120,15 @@ int main (int argc, char* argv[]) {
 
   DisplayProxy displayProxy{gameEngine};
 
-  std::shared_ptr<ConsoleView> consoleView = std::make_shared<ConsoleView>(displayProxy);
-  std::shared_ptr<GraphicsView> graphicsView;
+  // std::shared_ptr<ConsoleView> consoleView = std::make_shared<ConsoleView>(displayProxy);
+  // std::shared_ptr<GraphicsView> graphicsView;
 
-  gameEngine.attach(consoleView);
+  // gameEngine.attach(consoleView);
 
-  if (showGraphicsView) {
-    graphicsView = std::make_shared<GraphicsView>(displayProxy);
-    gameEngine.attach(graphicsView);
-  }
+  // if (showGraphicsView) {
+  //   graphicsView = std::make_shared<GraphicsView>(displayProxy);
+  //   gameEngine.attach(graphicsView);
+  // }
 
   // Game loop:
   std::string userInput;
