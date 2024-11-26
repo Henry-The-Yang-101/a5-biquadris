@@ -18,9 +18,11 @@ void BoardProxy::increaseScore(int points) {
 int BoardProxy::getBoardWidth() {
     return this->board.getWidth();
 }
+
 int BoardProxy::getBoardHeight() {
     return this->board.getHeight();
 }
+
 int BoardProxy::getNumBlocksPlacedWithoutClearing() {
     return this->board.getNumBlocksPlacedWithoutClearing();
 }
