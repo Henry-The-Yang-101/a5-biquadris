@@ -2,7 +2,7 @@
 
 GraphicsView::GraphicsView(DisplayProxy &displayProxy, bool enhanced) :
     DisplayObserver{displayProxy, enhanced}, 
-    window{1352, 720} {
+    window{1736, 720} {
 
         this->charColorMap[' '] = 1;
         this->charColorMap['I'] = 2;
@@ -16,8 +16,6 @@ GraphicsView::GraphicsView(DisplayProxy &displayProxy, bool enhanced) :
 
 void GraphicsView::render() {
 
-    // TO DO: change font color / size, standarize spacing in sidebar (easier when we can control font size)
-
     int Black = 1;
 
     // vertical start position
@@ -25,6 +23,8 @@ void GraphicsView::render() {
 
     // dynamic calculation of boardwidth, necessary for rendering second player's board and grid lines
     const int boardWidth = this->gameGridCols * (PIXELS_PER_SQUARE + this->blockGapPixels) + this->blockGapPixels;
+
+    int shiftLeft = paddingPixels + sidebarWidth + this->blockGapPixels;
 
     for (int r = 0; r < this->gameGridRows; r++) {
 
@@ -35,7 +35,7 @@ void GraphicsView::render() {
         pixelsDown += this->blockGapPixels;
 
         // horizontal start position (resets every row)
-        int pixelsLeft = paddingPixels;
+        int pixelsLeft = shiftLeft;
 
         for (int c = 0; c < this->gameGridCols; c++) {
 
@@ -93,13 +93,7 @@ void GraphicsView::render() {
 
         for (int c = 0; c < this->nextGridCols; c++) {
             char currentBlockChar = this->p1NextGrid[r][c];
-            int colour = 0;
-
-            try {
-                colour = this->charColorMap.at(currentBlockChar); 
-            } catch (const std::out_of_range&) {
-                colour = 1;
-            }
+            int colour = this->charColorMap.at(currentBlockChar);
 
             this->window.fillRectangle(pixelsLeft, pixelsDown, PIXELS_PER_SQUARE, PIXELS_PER_SQUARE, colour);
             pixelsLeft += PIXELS_PER_SQUARE + this->blockGapPixels;
@@ -141,7 +135,9 @@ void GraphicsView::render() {
     pixelsDown = paddingPixels;
 
     // horizontal shift to the right (points to left corner of second player's board)
-    int shiftLeft = boardWidth + gapBetweenGridsPixels + sidebarWidth + paddingPixels;
+    shiftLeft += boardWidth + gapBetweenGridsPixels + sidebarWidth;
+
+    shiftLeft += sidebarWidth + this->blockGapPixels;
     
     for (int r = 0; r < this->gameGridRows; r++) {
         this->window.fillRectangle(shiftLeft, pixelsDown, boardWidth, this->blockGapPixels, Black);
@@ -172,12 +168,12 @@ void GraphicsView::render() {
     alignNextBlocks += shiftLeft - paddingPixels; // account for double counting padding
     nextBlockGridStartLeft += shiftLeft - paddingPixels;
 
-    pixelsDown = paddingPixels + sidebarPadding;
+    pixelsDown = paddingPixels + sidebarPadding + this->fontHeight;
 
-    this->window.fillRectangle(alignNextBlocks, paddingPixels, sidebarWidth, boardHeightTemp, 0);
+    this->window.fillRectangle(alignNextBlocks, paddingPixels, sidebarWidth, boardHeightTemp, Black);
     this->window.drawString(nextBlockGridStartLeft, pixelsDown, "Next:");
 
-    pixelsDown += sidebarPadding * 2;
+    pixelsDown += sidebarPadding;
 
     for (int r = 0; r < this->nextGridRows; r++) {
 
@@ -196,10 +192,10 @@ void GraphicsView::render() {
 
     }
 
-    pixelsDown += sidebarPadding;
+    pixelsDown += sidebarPadding + this->fontHeight;
     this->window.drawString(nextBlockGridStartLeft, pixelsDown, "Hold:");
 
-    pixelsDown += sidebarPadding * 2;
+    pixelsDown += sidebarPadding;
 
     for (int r = 0; r < this->holdGridRows; r++) {
 
