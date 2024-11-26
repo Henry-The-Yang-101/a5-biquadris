@@ -2,28 +2,28 @@
 #define GRAPHICS_VIEW_H
 
 #include <map>
-#include "../Miscellaneous/observer.h"
-#include "./test/biquadris-proxies.h"
 #include "./display-observer.h"
 #include "./window.h"
+
+const int WINDOW_WIDTH = 800;
+const int PIXELS_PER_SQUARE = 32;
 
 class GraphicsView : public DisplayObserver {
 
     private:
         Xwindow window;
+        std::map<char, int> charColorMap;
+        const int blockGapPixels = 4;
 
     public:
 
-        GraphicsView(DisplayProxy &displayProxy);
+        GraphicsView(DisplayProxy &displayProxy, bool enhanced);
         ~GraphicsView() = default;
 
-        // void render();
+        void render();
         // void fillRectangle();
         // void drawString();
 
-
-
-    
 
 };
 
