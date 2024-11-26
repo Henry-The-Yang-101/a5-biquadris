@@ -25,8 +25,44 @@ void GraphicsView::render() {
     const int boardWidth = this->gameGridCols * (PIXELS_PER_SQUARE + this->blockGapPixels) + this->blockGapPixels;
 
     int shiftLeft = paddingPixels;
+    
+    // hold block container 
+
+    this->window.fillRectangle(shiftLeft, shiftDown, sidebarWidth, this->holdBlocksHeight, Black);
+
+    int holdBlockGridStartLeft = shiftLeft + sidebarPadding;
+
+    shiftDown += sidebarPadding + this->fontHeight;
+    this->window.drawString(holdBlockGridStartLeft, shiftDown, "Hold:");
+
+    shiftDown += sidebarPadding ;
+
+    for (int r = 0; r < this->holdGridRows; r++) {
+
+        int pixelsLeft = holdBlockGridStartLeft;
+
+        for (int c = 0; c < this->holdGridCols; c++) {
+
+            char currentBlockChar = this->p1HoldGrid[r][c];
+            int colour = this->charColorMap.at(currentBlockChar);
+
+            // if the background is black, we can remove drawing the gridlines <-- DELETE THIS COMMENT LATER PLUH
+            this->window.fillRectangle(pixelsLeft, shiftDown, PIXELS_PER_SQUARE, PIXELS_PER_SQUARE, colour);
+            pixelsLeft += PIXELS_PER_SQUARE + this->blockGapPixels;
+
+        }
+
+        shiftDown += PIXELS_PER_SQUARE + this->blockGapPixels;
+
+    }
 
     shiftLeft += sidebarWidth + this->blockGapPixels;
+
+
+    // draw first player's board
+
+    // reset vertical start position
+    shiftDown = paddingPixels;
 
     for (int r = 0; r < this->gameGridRows; r++) {
 
@@ -102,31 +138,6 @@ void GraphicsView::render() {
         shiftDown += PIXELS_PER_SQUARE + this->blockGapPixels;
 
     }
-
-    shiftDown += sidebarPadding + this->fontHeight;
-    this->window.drawString(nextBlockGridStartLeft, shiftDown, "Hold:");
-
-    shiftDown += sidebarPadding ;
-
-    for (int r = 0; r < this->holdGridRows; r++) {
-
-        int pixelsLeft = nextBlockGridStartLeft;
-
-        for (int c = 0; c < this->holdGridCols; c++) {
-
-            char currentBlockChar = this->p1HoldGrid[r][c];
-            int colour = this->charColorMap.at(currentBlockChar);
-
-            // if the background is black, we can remove drawing the gridlines <-- DELETE THIS COMMENT LATER PLUH
-            this->window.fillRectangle(pixelsLeft, shiftDown, PIXELS_PER_SQUARE, PIXELS_PER_SQUARE, colour);
-            pixelsLeft += PIXELS_PER_SQUARE + this->blockGapPixels;
-
-        }
-
-        shiftDown += PIXELS_PER_SQUARE + this->blockGapPixels;
-
-    }
-
 
     // draw second player's board
 
