@@ -19,8 +19,8 @@ class GraphicsView : public DisplayObserver {
         const int fontHeight = 20;
         const int sidebarPadding = 20;
         const int sidebarWidth = 4 * PIXELS_PER_SQUARE + 3 * blockGapPixels + sidebarPadding * 2;
-        const int nextBlocksHeight = sidebarPadding * 2 + 16 * PIXELS_PER_SQUARE + 8 * blockGapPixels + fontHeight;
-        const int holdBlocksHeight = sidebarPadding * 2 + 2 * PIXELS_PER_SQUARE + 1 * blockGapPixels + fontHeight;
+        const int nextBlocksHeight = 3 * sidebarPadding + 16 * PIXELS_PER_SQUARE + 8 * blockGapPixels + fontHeight;
+        const int holdBlocksHeight = 3 * sidebarPadding + 2 * PIXELS_PER_SQUARE + 1 * blockGapPixels + fontHeight;
 
     public:
 
