@@ -70,6 +70,7 @@ void GraphicsView::render() {
     pixelsDown = paddingPixels + sidebarPadding;
     this->window.fillRectangle(alignNextBlocks, paddingPixels, sidebarWidth, boardHeightTemp, 0);
     this->window.drawString(nextBlockGridStartLeft, pixelsDown, "Next:");
+
     pixelsDown += sidebarPadding * 2;
 
     for (int r = 0; r < this->nextGridRows; r++) {
@@ -86,9 +87,33 @@ void GraphicsView::render() {
                 colour = 1;
             }
 
-            // logging for debugging
-            // std::cout << c << ", " << r << endl;
-            // std::cout << "colour: " << colour << std::endl;
+            this->window.fillRectangle(pixelsLeft, pixelsDown, PIXELS_PER_SQUARE, PIXELS_PER_SQUARE, colour);
+            pixelsLeft += PIXELS_PER_SQUARE + this->blockGapPixels;
+
+        }
+
+        pixelsDown += PIXELS_PER_SQUARE + this->blockGapPixels;
+
+    }
+
+    pixelsDown += sidebarPadding;
+    this->window.drawString(nextBlockGridStartLeft, pixelsDown, "Hold:");
+
+    pixelsDown += sidebarPadding * 2;
+
+    for (int r = 0; r < this->holdGridRows; r++) {
+
+        int pixelsLeft = nextBlockGridStartLeft;
+
+        for (int c = 0; c < this->holdGridCols; c++) {
+            char currentBlockChar = this->p1HoldGrid[r][c];
+            int colour = 0;
+
+            try {
+                colour = this->charColorMap.at(currentBlockChar); 
+            } catch (const std::out_of_range&) {
+                colour = 1;
+            }
 
             this->window.fillRectangle(pixelsLeft, pixelsDown, PIXELS_PER_SQUARE, PIXELS_PER_SQUARE, colour);
             pixelsLeft += PIXELS_PER_SQUARE + this->blockGapPixels;
