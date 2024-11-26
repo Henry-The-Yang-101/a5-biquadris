@@ -1,8 +1,9 @@
 #include <stdexcept>
 #include "board.h"
-#include "./Level/level.h"
-#include "./Level/all-levels.h"
-#include "./Block/block-types.h"
+#include "Level/level.h"
+#include "Level/all-levels.h"
+#include "Block/block-types.h"
+#include "../biquadris-proxies.h"
 
 using CellCoordinate = std::pair<int, int>;
 using BlockCellCoordinates = std::vector<CellCoordinate>;
