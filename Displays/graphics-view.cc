@@ -3,6 +3,7 @@
 GraphicsView::GraphicsView(DisplayProxy &displayProxy, bool enhanced) :
     DisplayObserver{displayProxy, enhanced}, 
     window{1800, 1000} {
+        this->charColorMap[' '] = 1;
         this->charColorMap['I'] = 2;
         this->charColorMap['J'] = 3;
         this->charColorMap['L'] = 4;
@@ -39,7 +40,7 @@ void GraphicsView::render() {
             try {
                 colour = this->charColorMap.at(currentBlockChar); 
             } catch (const std::out_of_range&) {
-                colour = 0;
+                colour = 1;
             }
 
             this->window.fillRectangle(pixelsLeft, pixelsDown, this->blockGapPixels, PIXELS_PER_SQUARE, Black);
