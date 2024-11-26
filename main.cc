@@ -129,11 +129,14 @@ int main (int argc, char* argv[]) {
   // Game loop:
   std::string userInput;
 
+  gameEngine.notifyObservers();
+
   while (std::getline(std::cin, userInput)) {
     try {
       commandDecisionTree.findAndExecute(userInput);
     } catch (std::runtime_error & error) {
       std::cerr << error.what() << std::endl;
     }
+    gameEngine.notifyObservers();
   }
 } 
