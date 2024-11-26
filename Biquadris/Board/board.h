@@ -4,7 +4,6 @@
 #include <vector>
 #include <memory>
 #include "board-proxy.h"
-#include "../biquadris-proxies.h"
 #include "Block/block.h"
 #include "Level/level.h"
 
@@ -12,6 +11,8 @@ using CellCoordinate = std::pair<int, int>;
 using BlockCellCoordinates = std::vector<CellCoordinate>;
 using BlockAttributes = std::pair<BlockCellCoordinates, char>;
 using CharGrid = std::vector<std::vector<char>>;
+
+class InformGameStateProxy;
 
 class Board {
     private:

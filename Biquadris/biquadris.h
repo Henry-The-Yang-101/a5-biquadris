@@ -6,7 +6,7 @@
 #include <string>
 #include <unordered_map>
 #include "../Miscellaneous/subject.h"
-#include "./Board/board.h"
+#include "Board/board.h"
 
 using CellCoordinate = std::pair<int, int>;
 using BlockAttributes = std::pair<std::vector<CellCoordinate>, char>;
