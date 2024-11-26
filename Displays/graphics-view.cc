@@ -18,6 +18,11 @@ void GraphicsView::render() {
 
     int Black = 1;
 
+    this->window.drawString(0, 0, "");
+    this->window.drawString(0, 0, "");
+    this->window.drawString(0, 0, "");
+    this->window.drawString(0, 0, "");
+    this->window.drawString(0, 0, "");
 
     // vertical start position
     int shiftDown = paddingPixels;
