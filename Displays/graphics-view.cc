@@ -68,7 +68,9 @@ void GraphicsView::render() {
 
     int nextBlockGridStartLeft = boardWidth + paddingPixels + this->blockGapPixels + sidebarPadding;
     pixelsDown = paddingPixels + sidebarPadding;
-    this->window.fillRectangle(alignNextBlocks, paddingPixels, sidebarWidth, boardHeightTemp, Black);
+    this->window.fillRectangle(alignNextBlocks, paddingPixels, sidebarWidth, boardHeightTemp, 0);
+    this->window.drawString(nextBlockGridStartLeft, pixelsDown, "Next:");
+    pixelsDown += sidebarPadding * 2;
 
     for (int r = 0; r < this->nextGridRows; r++) {
 

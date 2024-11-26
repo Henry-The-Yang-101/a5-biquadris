@@ -40,7 +40,8 @@ Xwindow::Xwindow(int width, int height) : width{width}, height{height} {
       colours[i]=xcolour.pixel;
   }
 
-  XSetForeground(d,gc,colours[Black]);
+
+  XSetForeground(d,gc,colours[White]);
   XSetWindowBackground(d, w, colours[9]);
 
 
@@ -67,10 +68,11 @@ int Xwindow::getHeight() const { return height; }
 void Xwindow::fillRectangle(int x, int y, int width, int height, int colour) {
   XSetForeground(d, gc, colours[colour]);
   XFillRectangle(d, w, gc, x, y, width, height);
-  XSetForeground(d, gc, colours[Black]);
+  XSetForeground(d, gc, colours[White]);
 }
 
 void Xwindow::drawString(int x, int y, string msg) {
+  XSetForeground(d, gc, colours[White]);
   XDrawString(d, w, DefaultGC(d, s), x, y, msg.c_str(), msg.length());
 }
 
