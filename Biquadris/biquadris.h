@@ -12,7 +12,22 @@ using CellCoordinate = std::pair<int, int>;
 using BlockAttributes = std::pair<std::vector<CellCoordinate>, char>;
 using CharGrid = std::vector<std::vector<char>>;
 
-class InformGameStateProxy;
+class BiQuadris;
+
+class BiQuadrisProxy {
+  protected:
+    BiQuadris & gameEngine;
+    BiQuadrisProxy(BiQuadris & gameEngine) : gameEngine{gameEngine} {}
+    virtual ~BiQuadrisProxy() = default;
+};
+
+class InformGameStateProxy : public BiQuadrisProxy {
+  public:
+    InformGameStateProxy(BiQuadris & gameEngine);
+
+    void informCurrentBoardPlacedBlock(int rowsCleared);
+    void informGameOver();
+};
 
 class BiQuadris : public Subject {
   public:
@@ -96,13 +111,6 @@ class BiQuadris : public Subject {
     void assertSpecialActionMove() const;
 
     void updateGameStateAfterBlockAction();
-};
-
-class BiQuadrisProxy {
-  protected:
-    BiQuadris & gameEngine;
-    BiQuadrisProxy(BiQuadris & gameEngine) : gameEngine{gameEngine} {}
-    virtual ~BiQuadrisProxy() = default;
 };
 
 #endif

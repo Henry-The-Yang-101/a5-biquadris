@@ -28,13 +28,15 @@ class DropCommand : public BoardActionCommand {
 };
 
 class ClockwiseCommand : public BoardActionCommand {
-  ClockwiseCommand(BoardActionProxy & biquadrisProxy, std::string commandName);
-  void execute(int multiplier) override;
+  public:
+    ClockwiseCommand(BoardActionProxy & biquadrisProxy, std::string commandName);
+    void execute(int multiplier) override;
 };
 
 class CounterClockwiseCommand : public BoardActionCommand {
-  CounterClockwiseCommand(BoardActionProxy & biquadrisProxy, std::string commandName);
-  void execute(int multiplier) override;
+  public:
+    CounterClockwiseCommand(BoardActionProxy & biquadrisProxy, std::string commandName);
+    void execute(int multiplier) override;
 };
 
 class HoldCommand : public BoardActionCommand {

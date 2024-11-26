@@ -90,7 +90,6 @@ class Board {
         BlockCellCoordinates getCurrentBlockDropPreviewCellCoordinates() const;
         BlockAttributes getCurrentBlockAttributes() const;
         BlockAttributes getNextBlockAttributes() const;
-        BlockAttributes getNextBlockAttributes() const;
         BlockAttributes getHeldBlockAttributes() const;
         std::vector<BlockAttributes> getBlockAttributesBacklog() const;
 
