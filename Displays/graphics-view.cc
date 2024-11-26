@@ -16,7 +16,8 @@ GraphicsView::GraphicsView(DisplayProxy &displayProxy, bool enhanced) :
 
 void GraphicsView::render() {
 
-     // horizontal order l to r: {p1 header, p1 board} {p1 hold, next}
+    // TO DO: change font color / size, standarize spacing in sidebar (easier when we can control font size)
+
     int Black = 1;
     int pixelsDown = paddingPixels;
     int boardWidth = this->gameGridCols * (PIXELS_PER_SQUARE + this->blockGapPixels) + this->blockGapPixels;
@@ -62,7 +63,9 @@ void GraphicsView::render() {
     }
     this->window.fillRectangle(paddingPixels, pixelsDown, boardWidth, this->blockGapPixels, Black);
 
+
     // next blocks 
+
     int alignNextBlocks = boardWidth + paddingPixels + this->blockGapPixels;
     int sidebarPadding = 24;
 
@@ -128,8 +131,7 @@ void GraphicsView::render() {
 
 
     pixelsDown = paddingPixels;
-    // temporary to simulate spacing in between
-    int shiftLeft = boardWidth + gapBetweenGridsPixels + paddingPixels + sidebarWidth;
+    int shiftLeft = boardWidth + gapBetweenGridsPixels + sidebarWidth + paddingPixels;
     
     for (int r = 0; r < this->gameGridRows; r++) {
         this->window.fillRectangle(shiftLeft, pixelsDown, boardWidth, this->blockGapPixels, Black);
@@ -164,6 +166,75 @@ void GraphicsView::render() {
 
     }
     this->window.fillRectangle(shiftLeft, pixelsDown, boardWidth, this->blockGapPixels, Black);
+
+
+
+
+    alignNextBlocks += shiftLeft - paddingPixels; // account for double counting padding
+    nextBlockGridStartLeft += shiftLeft - paddingPixels;
+
+    pixelsDown = paddingPixels + sidebarPadding;
+
+    this->window.fillRectangle(alignNextBlocks, paddingPixels, sidebarWidth, boardHeightTemp, 0);
+    this->window.drawString(nextBlockGridStartLeft, pixelsDown, "Next:");
+
+    pixelsDown += sidebarPadding * 2;
+
+    for (int r = 0; r < this->nextGridRows; r++) {
+
+        int pixelsLeft = nextBlockGridStartLeft;
+
+        for (int c = 0; c < this->nextGridCols; c++) {
+            char currentBlockChar = this->p2NextGrid[r][c];
+            int colour = 0;
+
+            try {
+                colour = this->charColorMap.at(currentBlockChar); 
+            } catch (const std::out_of_range&) {
+                colour = 1;
+            }
+
+            this->window.fillRectangle(pixelsLeft, pixelsDown, PIXELS_PER_SQUARE, PIXELS_PER_SQUARE, colour);
+            pixelsLeft += PIXELS_PER_SQUARE + this->blockGapPixels;
+
+        }
+
+        pixelsDown += PIXELS_PER_SQUARE + this->blockGapPixels;
+
+    }
+
+    pixelsDown += sidebarPadding;
+    this->window.drawString(nextBlockGridStartLeft, pixelsDown, "Hold:");
+
+    pixelsDown += sidebarPadding * 2;
+
+    for (int r = 0; r < this->holdGridRows; r++) {
+
+        int pixelsLeft = nextBlockGridStartLeft;
+
+        for (int c = 0; c < this->holdGridCols; c++) {
+            char currentBlockChar = this->p2HoldGrid[r][c];
+            int colour = 0;
+
+            try {
+                colour = this->charColorMap.at(currentBlockChar); 
+            } catch (const std::out_of_range&) {
+                colour = 1;
+            }
+
+            this->window.fillRectangle(pixelsLeft, pixelsDown, PIXELS_PER_SQUARE, PIXELS_PER_SQUARE, colour);
+            pixelsLeft += PIXELS_PER_SQUARE + this->blockGapPixels;
+
+        }
+
+        pixelsDown += PIXELS_PER_SQUARE + this->blockGapPixels;
+
+    }
+
+
+
+
+
 
 }
 
