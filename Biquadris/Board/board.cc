@@ -7,6 +7,7 @@
 using CellCoordinate = std::pair<int, int>;
 using BlockCellCoordinates = std::vector<CellCoordinate>;
 using BlockAttributes = std::pair<BlockCellCoordinates, char>;
+using CharGrid = std::vector<std::vector<char>>;
 
 Board::Board(InformGameStateProxy & informGameStateProxy, int initLevelNum, std::string blockSequenceFileName) : 
     initLevelNum{initLevelNum}, boardProxy{*this}, informGameStateProxy{informGameStateProxy}, blockSequenceFileName{blockSequenceFileName} {
@@ -234,6 +235,18 @@ int Board::getWidth() const {
 
 int Board::getNumBlocksPlacedWithoutClearing() const {
     return this->numBlocksPlacedWithoutClearing;
+}
+
+CharGrid Board::getCharGrid() const {
+    CharGrid charGrid;
+
+    for (size_t i = 0; i < this->grid.size(); i++) {
+        charGrid.emplace_back();
+        for (size_t j = 0; j < this->grid[i].size(); j++) {
+            charGrid[i].push_back(this->grid[i][j]->type);
+        }
+    }
+    return charGrid;
 }
 
 BlockCellCoordinates Board::getCurrentBlockDropPreviewCellCoordinates() const {

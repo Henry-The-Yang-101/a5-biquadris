@@ -2,6 +2,7 @@
 
 using CellCoordinate = std::pair<int, int>;
 using BlockAttributes = std::pair<std::vector<CellCoordinate>, char>;
+using CharGrid = std::vector<std::vector<char>>;
 
 // InformGameStateProxy definitions
 
@@ -109,6 +110,10 @@ void LevelBlockGenProxy::forceEffect(char blockType) {
 
 // DisplayProxy definitions
 DisplayProxy::DisplayProxy(BiQuadris & gameEngine) : BiQuadrisProxy{gameEngine} {}
+
+CharGrid DisplayProxy::getCharGrid(BiQuadris::PlayerTurn whichPlayerTurn) const {
+  return this->gameEngine.getCharGrid(whichPlayerTurn);
+}
 
 BlockCellCoordinates DisplayProxy::getCurrentBlockDropPreviewCellCoordinates(BiQuadris::PlayerTurn whichPlayerTurn) const {
   return this->gameEngine.getCurrentBlockDropPreviewCellCoordinates(whichPlayerTurn);

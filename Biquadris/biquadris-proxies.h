@@ -6,6 +6,7 @@
 using CellCoordinate = std::pair<int, int>;
 using BlockCellCoordinates = std::vector<CellCoordinate>;
 using BlockAttributes = std::pair<BlockCellCoordinates, char>;
+using CharGrid = std::vector<std::vector<char>>;
 
 class InformGameStateProxy : public BiQuadrisProxy {
   public:
@@ -62,6 +63,8 @@ class LevelBlockGenProxy : public BiQuadrisProxy {
 class DisplayProxy : public BiQuadrisProxy {
   public:
     DisplayProxy(BiQuadris & gameEngine);
+
+    CharGrid getCharGrid(BiQuadris::PlayerTurn whichPlayerTurn) const;
 
     BlockCellCoordinates getCurrentBlockDropPreviewCellCoordinates(BiQuadris::PlayerTurn whichPlayerTurn) const;
     BlockAttributes getCurrentBlockAttributes(BiQuadris::PlayerTurn whichPlayerTurn) const;

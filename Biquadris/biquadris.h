@@ -10,6 +10,7 @@
 
 using CellCoordinate = std::pair<int, int>;
 using BlockAttributes = std::pair<std::vector<CellCoordinate>, char>;
+using CharGrid = std::vector<std::vector<char>>;
 
 class BiQuadris : public Subject {
   public:
@@ -37,6 +38,8 @@ class BiQuadris : public Subject {
     void forceEffect(char blockType);
 
     // getters
+    CharGrid getCharGrid(PlayerTurn whichPlayerTurn) const;
+
     BlockCellCoordinates getCurrentBlockDropPreviewCellCoordinates(PlayerTurn whichPlayerTurn) const;
     BlockAttributes getCurrentBlockAttributes(PlayerTurn whichPlayerTurn) const;
     BlockAttributes getNextBlockAttributes(PlayerTurn whichPlayerTurn) const;

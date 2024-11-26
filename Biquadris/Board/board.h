@@ -11,6 +11,7 @@
 using CellCoordinate = std::pair<int, int>;
 using BlockCellCoordinates = std::vector<CellCoordinate>;
 using BlockAttributes = std::pair<BlockCellCoordinates, char>;
+using CharGrid = std::vector<std::vector<char>>;
 
 class Board {
     private:
@@ -82,6 +83,8 @@ class Board {
         int getLevelNum() const;
 
         bool getBlindEffectEnabled() const;
+
+        CharGrid getCharGrid() const;
 
         BlockCellCoordinates getCurrentBlockDropPreviewCellCoordinates() const;
         BlockAttributes getCurrentBlockAttributes() const;
