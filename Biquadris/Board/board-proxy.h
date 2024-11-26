@@ -5,6 +5,8 @@
 #include "./Block/block.h"
 #include <memory>
 
+class Board;
+
 class BoardProxy {
     
     private:

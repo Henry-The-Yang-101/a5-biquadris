@@ -7,6 +7,8 @@
 using CellCoordinate = std::pair<int, int>;
 using BlockCellCoordinates = std::vector<CellCoordinate>;
 
+class BoardProxy;
+
 class BlockCell {
     private:
         BoardProxy & boardProxy;

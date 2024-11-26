@@ -8,6 +8,7 @@ using BlockCellCoordinates = std::vector<CellCoordinate>;
 using BlockAttributes = std::pair<BlockCellCoordinates, char>;
 using CharGrid = std::vector<std::vector<char>>;
 
+
 class InformGameStateProxy : public BiQuadrisProxy {
   public:
     InformGameStateProxy(BiQuadris & gameEngine);
