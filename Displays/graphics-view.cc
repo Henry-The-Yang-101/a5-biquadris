@@ -243,27 +243,6 @@ void GraphicsView::render() {
 
     }
 
-    shiftDown += sidebarPadding + this->fontHeight;
-    this->window.drawString(nextBlockGridStartLeft, shiftDown, "Hold:");
-
-    shiftDown += sidebarPadding;
-
-    for (int r = 0; r < this->holdGridRows; r++) {
-
-        int pixelsLeft = nextBlockGridStartLeft;
-
-        for (int c = 0; c < this->holdGridCols; c++) {
-            char currentBlockChar = this->p2HoldGrid[r][c];
-            int colour = this->charColorMap.at(currentBlockChar);
-
-            this->window.fillRectangle(pixelsLeft, shiftDown, PIXELS_PER_SQUARE, PIXELS_PER_SQUARE, colour);
-            pixelsLeft += PIXELS_PER_SQUARE + this->blockGapPixels;
-
-        }
-
-        shiftDown += PIXELS_PER_SQUARE + this->blockGapPixels;
-    }
-
 }
 
 
