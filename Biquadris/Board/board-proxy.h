@@ -2,7 +2,7 @@
 #define BOARD_PROXY_H
 
 #include "board.h"
-#include "./Block/block.h"
+#include "Block/block.h"
 #include <memory>
 
 class Board;

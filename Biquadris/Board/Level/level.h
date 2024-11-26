@@ -27,10 +27,8 @@ class Level {
 
     Level(int levelNum, bool heavy, BoardProxy & boardProxy, const std::string & blockSequenceFileName);
     virtual char chooseBlockType() const;
-    virtual ~Level() = default;
 
   public:
-
     int getLevelNum() const;
     bool getHeavy() const;
     std::vector<BlockAttributes> getBlockAttributesBacklog() const;
@@ -38,6 +36,7 @@ class Level {
     std::unique_ptr<Block> cycleBlock();
     virtual bool checkCustomRuleCondition() const;
     virtual void executeCustomRuleAction();
+    virtual ~Level() = default;
 };
 
 class RandomizedLevel : public Level {
@@ -52,11 +51,11 @@ class RandomizedLevel : public Level {
   protected:
     RandomizedLevel(int levelNum, bool heavy, BoardProxy & boardProxy, const std::string & blockSequenceFileName, const std::vector<int> & distribution);
     char chooseBlockType() const override;
-    virtual ~RandomizedLevel() = default;
 
   public:
     static const std::unordered_set<int> RANDOMIZED_LEVEL_NUMS;
     void setRandomEnabled(bool enabled);
+    virtual ~RandomizedLevel() = default;
 };
 
 const std::unordered_set<int> RandomizedLevel::RANDOMIZED_LEVEL_NUMS = {1, 2, 3, 4};

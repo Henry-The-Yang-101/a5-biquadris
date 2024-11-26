@@ -28,8 +28,6 @@ class Block {
 
         Block(BoardProxy& boardProxy, int numLevel);
 
-        virtual ~Block() = default;
-
     private:
         const int numLevel;
         Rotation rotation;
@@ -58,8 +56,8 @@ class Block {
         BlockCellCoordinates getDropPreviewCellCoordinates() const;
         virtual char getType() const = 0;
 
-        bool isValidPosition() const; // This is how board is gonna check if its game over
-        // board should run this right after constructing Block
+        bool isValidPosition() const;
+        virtual ~Block() = default;
 };
 
 #endif

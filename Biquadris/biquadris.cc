@@ -1,16 +1,14 @@
 #include <iostream>
 #include <stdexcept>
 #include "biquadris.h"
-#include "./biquadris-proxies.h"
+#include "biquadris-proxies.h"
 
 using CellCoordinate = std::pair<int, int>;
 using BlockAttributes = std::pair<std::vector<CellCoordinate>, char>;
 using CharGrid = std::vector<std::vector<char>>;
 
-BiQuadris::BiQuadris(std::string sequenceFile1, std::string sequenceFile2, bool devMode, bool bonusFeatures, int initLevelNum) :
-    devMode{devMode}, bonusFeatures{bonusFeatures}, informGameStateProxy{*this}, 
+BiQuadris::BiQuadris(std::string sequenceFile1, std::string sequenceFile2, int initLevelNum, bool bonusFeatures) : bonusFeatures{bonusFeatures}, informGameStateProxy{*this}, 
     player1Board{this->informGameStateProxy, initLevelNum, sequenceFile1}, player2Board{this->informGameStateProxy, initLevelNum, sequenceFile2} {}
-
 
 BiQuadris::PlayerTurn BiQuadris::getOpponentTurn(PlayerTurn whichPlayerTurn) {
     return (whichPlayerTurn == PlayerTurn::PLAYER1) ? PlayerTurn::PLAYER2 : PlayerTurn::PLAYER1;
