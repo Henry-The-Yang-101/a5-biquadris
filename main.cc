@@ -1,12 +1,13 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-#include <cstdlib>
 #include <memory>
 #include <utility>
 #include <stdexcept>
+#include <cstdlib>
 
 #include "Biquadris/biquadris.h"
+#include "Biquadris/biquadris-proxies.h"
 
 #include "CommandTree/command-tree.h"
 #include "CommandTree/BoardActionCommands/all-board-action-commands.h"
