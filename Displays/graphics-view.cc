@@ -73,9 +73,6 @@ void GraphicsView::render() {
     // left position of start of sidebar
     int alignNextBlocks = shiftLeft + boardWidth + this->blockGapPixels;
 
-    // constant for styling
-    int sidebarPadding = 24;
-
     // left position of start of next block grid inside of sidebar
     int nextBlockGridStartLeft = alignNextBlocks + sidebarPadding;
 
@@ -135,7 +132,7 @@ void GraphicsView::render() {
     pixelsDown = paddingPixels;
 
     // horizontal shift to the right (points to left corner of second player's board)
-    shiftLeft += boardWidth + gapBetweenGridsPixels + sidebarWidth;
+    shiftLeft += boardWidth + this->blockGapPixels + sidebarWidth + gapBetweenGridsPixels;
 
     shiftLeft += sidebarWidth + this->blockGapPixels;
     
@@ -165,8 +162,8 @@ void GraphicsView::render() {
     this->window.fillRectangle(shiftLeft, pixelsDown, boardWidth, this->blockGapPixels, Black);
 
 
-    alignNextBlocks += shiftLeft - paddingPixels; // account for double counting padding
-    nextBlockGridStartLeft += shiftLeft - paddingPixels;
+    alignNextBlocks += shiftLeft - paddingPixels - sidebarWidth - this->blockGapPixels; // account for double counting padding
+    nextBlockGridStartLeft += shiftLeft - paddingPixels - sidebarWidth - this->blockGapPixels;
 
     pixelsDown = paddingPixels + sidebarPadding + this->fontHeight;
 
