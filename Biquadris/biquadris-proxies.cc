@@ -110,6 +110,10 @@ void LevelBlockGenProxy::forceEffect(char blockType) {
 // DisplayProxy definitions
 DisplayProxy::DisplayProxy(BiQuadris & gameEngine) : BiQuadrisProxy{gameEngine} {}
 
+BlockCellCoordinates DisplayProxy::getCurrentBlockDropPreviewCellCoordinates(BiQuadris::PlayerTurn whichPlayerTurn) const {
+  return this->gameEngine.getCurrentBlockDropPreviewCellCoordinates(whichPlayerTurn);
+}
+
 BlockAttributes DisplayProxy::getCurrentBlockAttributes(BiQuadris::PlayerTurn whichPlayerTurn) const {
   return this->gameEngine.getCurrentBlockAttributes(whichPlayerTurn);
 }

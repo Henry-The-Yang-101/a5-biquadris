@@ -63,8 +63,8 @@ class DisplayProxy : public BiQuadrisProxy {
   public:
     DisplayProxy(BiQuadris & gameEngine);
 
+    BlockCellCoordinates getCurrentBlockDropPreviewCellCoordinates(BiQuadris::PlayerTurn whichPlayerTurn) const;
     BlockAttributes getCurrentBlockAttributes(BiQuadris::PlayerTurn whichPlayerTurn) const;
-    BlockAttributes getCurrentBlockDropPreviewAttributes(BiQuadris::PlayerTurn whichPlayerTurn) const;
     BlockAttributes getNextBlockAttributes(BiQuadris::PlayerTurn whichPlayerTurn) const;
     BlockAttributes getHeldBlockAttributes(BiQuadris::PlayerTurn whichPlayerTurn) const;
     

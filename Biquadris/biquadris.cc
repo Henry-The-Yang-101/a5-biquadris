@@ -209,6 +209,10 @@ BlockAttributes BiQuadris::getCurrentBlockAttributes(PlayerTurn whichPlayerTurn)
     return this->getPlayerBoard(whichPlayerTurn).getCurrentBlockAttributes();
 }
 
+BlockCellCoordinates BiQuadris::getCurrentBlockDropPreviewCellCoordinates(PlayerTurn whichPlayerTurn) const {
+    return this->getPlayerBoard(whichPlayerTurn).getCurrentBlockDropPreviewCellCoordinates();
+}
+
 BlockAttributes BiQuadris::getNextBlockAttributes(PlayerTurn whichPlayerTurn) const {
     return this->getPlayerBoard(whichPlayerTurn).getNextBlockAttributes();
 }

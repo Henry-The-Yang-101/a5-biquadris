@@ -37,6 +37,7 @@ class BiQuadris : public Subject {
     void forceEffect(char blockType);
 
     // getters
+    BlockCellCoordinates getCurrentBlockDropPreviewCellCoordinates(PlayerTurn whichPlayerTurn) const;
     BlockAttributes getCurrentBlockAttributes(PlayerTurn whichPlayerTurn) const;
     BlockAttributes getNextBlockAttributes(PlayerTurn whichPlayerTurn) const;
     BlockAttributes getHeldBlockAttributes(PlayerTurn whichPlayerTurn) const;
