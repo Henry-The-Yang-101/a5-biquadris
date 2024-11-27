@@ -55,20 +55,23 @@ class BiQuadris : public Subject {
     void forceEffect(char blockType);
 
     // getters
-    CharGrid getCharGrid(PlayerTurn whichPlayerTurn) const;
-
-    BlockCellCoordinates getCurrentBlockDropPreviewCellCoordinates(PlayerTurn whichPlayerTurn) const;
-    BlockAttributes getCurrentBlockAttributes(PlayerTurn whichPlayerTurn) const;
-    BlockAttributes getNextBlockAttributes(PlayerTurn whichPlayerTurn) const;
-    BlockAttributes getHeldBlockAttributes(PlayerTurn whichPlayerTurn) const;
-    std::vector<BlockAttributes> getBlockAttributesBacklog(PlayerTurn whichPlayerTurn) const;
+    int getGridWidth() const;
+    int getGridHeight() const;
+    int getGridNumReserveRows() const;
     int getCurrentScore(PlayerTurn whichPlayerTurn) const;
     int getHighScore(PlayerTurn whichPlayerTurn) const;
     int getLevelNum(PlayerTurn whichPlayerTurn) const;
     bool getBlindEffectEnabled(PlayerTurn whichPlayerTurn) const;
     bool getIsGameOver() const;
-    PlayerTurn getCurrentPlayerTurn() const;
     bool getCanUseSpecialAction() const;
+    bool getBonusFeaturesEnabled() const;
+    PlayerTurn getCurrentPlayerTurn() const;
+    CharGrid getCharGrid(PlayerTurn whichPlayerTurn) const;
+    BlockCellCoordinates getCurrentBlockDropPreviewCellCoordinates(PlayerTurn whichPlayerTurn) const;
+    BlockAttributes getCurrentBlockAttributes(PlayerTurn whichPlayerTurn) const;
+    BlockAttributes getNextBlockAttributes(PlayerTurn whichPlayerTurn) const;
+    BlockAttributes getHeldBlockAttributes(PlayerTurn whichPlayerTurn) const;
+    std::vector<BlockAttributes> getBlockAttributesBacklog(PlayerTurn whichPlayerTurn) const;
 
     // mutators
     void setBonusFeatures(bool isOn);

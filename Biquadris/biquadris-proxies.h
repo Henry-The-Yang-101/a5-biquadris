@@ -56,6 +56,20 @@ class DisplayProxy : public BiQuadrisProxy {
   public:
     DisplayProxy(BiQuadris & gameEngine);
 
+    int getGridWidth() const;
+    int getGridHeight() const;
+    int getGridNumReserveRows() const;
+    int getCurrentScore(BiQuadris::PlayerTurn whichPlayerTurn) const;
+    int getHighScore(BiQuadris::PlayerTurn whichPlayerTurn) const;
+    int getLevelNum(BiQuadris::PlayerTurn whichPlayerTurn) const;
+
+    bool getBlindEffectEnabled(BiQuadris::PlayerTurn whichPlayerTurn) const;
+    bool getIsGameOver() const;
+    bool getCanUseSpecialAction() const;
+    bool getBonusFeaturesEnabled() const;
+
+    BiQuadris::PlayerTurn getCurrentPlayerTurn() const;
+
     CharGrid getCharGrid(BiQuadris::PlayerTurn whichPlayerTurn) const;
 
     BlockCellCoordinates getCurrentBlockDropPreviewCellCoordinates(BiQuadris::PlayerTurn whichPlayerTurn) const;
@@ -64,14 +78,6 @@ class DisplayProxy : public BiQuadrisProxy {
     BlockAttributes getHeldBlockAttributes(BiQuadris::PlayerTurn whichPlayerTurn) const;
     
     std::vector<BlockAttributes> getBlockAttributesBacklog(BiQuadris::PlayerTurn whichPlayerTurn) const;
-
-    int getCurrentScore(BiQuadris::PlayerTurn whichPlayerTurn) const;
-    int getHighScore(BiQuadris::PlayerTurn whichPlayerTurn) const;
-    int getLevelNum(BiQuadris::PlayerTurn whichPlayerTurn) const;
-    bool getBlindEffectEnabled(BiQuadris::PlayerTurn whichPlayerTurn) const;
-    bool getIsGameOver() const;
-    BiQuadris::PlayerTurn getCurrentPlayerTurn() const;
-    bool getCanUseSpecialAction() const;
 };
 
 #endif

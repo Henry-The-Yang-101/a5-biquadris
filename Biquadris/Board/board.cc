@@ -83,8 +83,7 @@ int Board::calculateScoreIncrease(int linesCleared) {
 }
 
 bool Board::cellAvailable(int column, int row) const {
-    row += this->NUM_RESERVE_ROWS;
-    return this->grid[row][column] == nullptr;
+    return this->grid[row + NUM_RESERVE_ROWS][column] == nullptr;
 }
 
 void Board::applyLevelHeaviness() {
@@ -102,7 +101,7 @@ void Board::applyHeavyEffect() {
 }
 
 void Board::insertBlockCell(int column, int row, std::shared_ptr<BlockCell> cell) {
-    this->grid[row][column] = cell;
+    this->grid[row + NUM_RESERVE_ROWS][column] = cell;
 }
 
 void Board::moveBlockLeft(int multiplier) {
@@ -228,14 +227,6 @@ void Board::setBlindEffect(bool enabled) {
 
 void Board::setHeavyEffect() {
     this->currentBlockHeavyEffect = true;
-}
-
-int Board::getHeight() const {
-    return this->HEIGHT + this->NUM_RESERVE_ROWS;
-}
-
-int Board::getWidth() const {
-    return this->WIDTH;
 }
 
 int Board::getNumBlocksPlacedWithoutClearing() const {

@@ -16,10 +16,6 @@ class InformGameStateProxy;
 
 class Board {
     private:
-        static const int WIDTH;
-        static const int HEIGHT;
-        static const int NUM_RESERVE_ROWS;
-
         const int initLevelNum;
 
         std::string blockSequenceFileName;
@@ -50,7 +46,10 @@ class Board {
 
     public:
         Board(InformGameStateProxy & informGameStateProxy, int initLevelNum, std::string blockSequenceFileName);
-        ~Board() = default;
+        
+        static const int WIDTH;
+        static const int HEIGHT;
+        static const int NUM_RESERVE_ROWS;
 
         bool cellAvailable(int column, int row) const;
         void insertBlockCell(int column, int row, std::shared_ptr<BlockCell> cell);
@@ -75,10 +74,7 @@ class Board {
         void setLevelRandomEnabled(bool enabled);
         void setBlockSequenceFile(std::string & blockSequenceFile);
 
-        int getWidth() const;
-        int getHeight() const;
         int getNumBlocksPlacedWithoutClearing() const;
-
         int getCurrentScore() const;
         int getHighScore() const;
         int getLevelNum() const;

@@ -17,11 +17,11 @@ void BoardProxy::increaseScore(int points) {
 }
 
 int BoardProxy::getBoardWidth() {
-    return this->board.getWidth();
+    return Board::WIDTH;
 }
 
 int BoardProxy::getBoardHeight() {
-    return this->board.getHeight();
+    return Board::HEIGHT;
 }
 
 int BoardProxy::getLevelNum() {

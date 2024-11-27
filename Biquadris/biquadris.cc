@@ -203,6 +203,18 @@ void BiQuadris::disableRandom(std::string & blockSequenceFile) {
     this->getCurrentPlayerBoard().setBlockSequenceFile(blockSequenceFile);
 }
 
+int BiQuadris::getGridWidth() const {
+    return Board::WIDTH;
+}
+
+int BiQuadris::getGridHeight() const {
+    return Board::HEIGHT;
+}
+
+int BiQuadris::getGridNumReserveRows() const {
+    return Board::NUM_RESERVE_ROWS;
+}
+
 CharGrid BiQuadris::getCharGrid(PlayerTurn whichPlayerTurn) const {
     return this->getPlayerBoard(whichPlayerTurn).getCharGrid();
 }

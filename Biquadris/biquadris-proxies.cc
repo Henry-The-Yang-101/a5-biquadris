@@ -111,28 +111,16 @@ void LevelBlockGenProxy::forceEffect(char blockType) {
 // DisplayProxy definitions
 DisplayProxy::DisplayProxy(BiQuadris & gameEngine) : BiQuadrisProxy{gameEngine} {}
 
-CharGrid DisplayProxy::getCharGrid(BiQuadris::PlayerTurn whichPlayerTurn) const {
-  return this->gameEngine.getCharGrid(whichPlayerTurn);
+int DisplayProxy::getGridWidth() const {
+  return this->gameEngine.getGridWidth();
 }
 
-BlockCellCoordinates DisplayProxy::getCurrentBlockDropPreviewCellCoordinates(BiQuadris::PlayerTurn whichPlayerTurn) const {
-  return this->gameEngine.getCurrentBlockDropPreviewCellCoordinates(whichPlayerTurn);
+int DisplayProxy::getGridHeight() const {
+  return this->gameEngine.getGridHeight();
 }
 
-BlockAttributes DisplayProxy::getCurrentBlockAttributes(BiQuadris::PlayerTurn whichPlayerTurn) const {
-  return this->gameEngine.getCurrentBlockAttributes(whichPlayerTurn);
-}
-
-BlockAttributes DisplayProxy::getNextBlockAttributes(BiQuadris::PlayerTurn whichPlayerTurn) const {
-  return this->gameEngine.getNextBlockAttributes(whichPlayerTurn);
-}
-
-BlockAttributes DisplayProxy::getHeldBlockAttributes(BiQuadris::PlayerTurn whichPlayerTurn) const {
-  return this->gameEngine.getHeldBlockAttributes(whichPlayerTurn);
-}
-
-std::vector<BlockAttributes> DisplayProxy::getBlockAttributesBacklog(BiQuadris::PlayerTurn whichPlayerTurn) const {
-  return this->gameEngine.getBlockAttributesBacklog(whichPlayerTurn);
+int DisplayProxy::getGridNumReserveRows() const {
+  return this->gameEngine.getGridNumReserveRows();
 }
 
 int DisplayProxy::getCurrentScore(BiQuadris::PlayerTurn whichPlayerTurn) const {
@@ -155,10 +143,38 @@ bool DisplayProxy::getIsGameOver() const {
   return this->gameEngine.getIsGameOver();
 }
 
+bool DisplayProxy::getCanUseSpecialAction() const {
+  return this->gameEngine.getCanUseSpecialAction();
+}
+
+bool DisplayProxy::getBonusFeaturesEnabled() const {
+  return this->gameEngine.getBonusFeaturesEnabled();
+}
+
 BiQuadris::PlayerTurn DisplayProxy::getCurrentPlayerTurn() const {
   return this->gameEngine.getCurrentPlayerTurn();
 }
 
-bool DisplayProxy::getCanUseSpecialAction() const {
-  return this->gameEngine.getCanUseSpecialAction();
+CharGrid DisplayProxy::getCharGrid(BiQuadris::PlayerTurn whichPlayerTurn) const {
+  return this->gameEngine.getCharGrid(whichPlayerTurn);
+}
+
+BlockCellCoordinates DisplayProxy::getCurrentBlockDropPreviewCellCoordinates(BiQuadris::PlayerTurn whichPlayerTurn) const {
+  return this->gameEngine.getCurrentBlockDropPreviewCellCoordinates(whichPlayerTurn);
+}
+
+BlockAttributes DisplayProxy::getCurrentBlockAttributes(BiQuadris::PlayerTurn whichPlayerTurn) const {
+  return this->gameEngine.getCurrentBlockAttributes(whichPlayerTurn);
+}
+
+BlockAttributes DisplayProxy::getNextBlockAttributes(BiQuadris::PlayerTurn whichPlayerTurn) const {
+  return this->gameEngine.getNextBlockAttributes(whichPlayerTurn);
+}
+
+BlockAttributes DisplayProxy::getHeldBlockAttributes(BiQuadris::PlayerTurn whichPlayerTurn) const {
+  return this->gameEngine.getHeldBlockAttributes(whichPlayerTurn);
+}
+
+std::vector<BlockAttributes> DisplayProxy::getBlockAttributesBacklog(BiQuadris::PlayerTurn whichPlayerTurn) const {
+  return this->gameEngine.getBlockAttributesBacklog(whichPlayerTurn);
 }
