@@ -1,13 +1,14 @@
 #ifndef DISPLAYOBSERVER
 #define DISPLAYOBSERVER
 #include "../Miscellaneous/observer.h"
-#include "./test/biquadris-proxies.h"
+#include "./test-graphics/biquadris-proxies.h"
 
 using namespace std;
 
 using CellCoordinate = pair<int, int>;
 using BlockAttributes = pair<vector<CellCoordinate>, char>;
 using CharGrid = vector<vector<char>>;
+using BlockCellCoordinates = std::vector<CellCoordinate>;
 
 class DisplayObserver: public Observer{
     

@@ -125,13 +125,36 @@ void GraphicsView::render() {
             char currentBlockChar = this->p1GameGrid[r][c];
 
             if (currentPlayer == 1) {
-                BlockAttributes blockAttributes = this->displayProxy.getCurrentBlockAttributes(1);
-                for (const auto &coord : blockAttributes.first) {
+                BlockAttributes blockAttributesCurrent = this->displayProxy.getCurrentBlockAttributes(1);
+                for (const auto &coord : blockAttributesCurrent.first) {
                     if (coord.first == c && coord.second + 1 == r) {
-                        currentBlockChar = blockAttributes.second;
+                        currentBlockChar = blockAttributesCurrent.second;
                         break;
                     }
                 }
+
+                BlockCellCoordinates previewCoordinates = this->displayProxy.getCurrentBlockDropPreviewCellCoordinates(1);
+                for (const auto &coord : previewCoordinates) {
+                    if (coord.first == c && coord.second + 1 == r) {
+                        this->window.fillRectangle(pixelsLeft, shiftDown, this->blockGapPixels, PIXELS_PER_SQUARE, Black);
+                        pixelsLeft += this->blockGapPixels;
+
+                        // fill in with black
+                        this->window.fillRectangle(pixelsLeft, shiftDown, PIXELS_PER_SQUARE, PIXELS_PER_SQUARE, Black);
+
+                        // draw border
+                        this->window.fillRectangle(pixelsLeft, shiftDown, this->blockGapPixels, PIXELS_PER_SQUARE, 0);
+                        this->window.fillRectangle(pixelsLeft, shiftDown, PIXELS_PER_SQUARE, this->blockGapPixels, 0);
+                        this->window.fillRectangle(pixelsLeft, shiftDown + PIXELS_PER_SQUARE - this->blockGapPixels, PIXELS_PER_SQUARE, this->blockGapPixels, 0);
+                        this->window.fillRectangle(pixelsLeft + PIXELS_PER_SQUARE - this->blockGapPixels, shiftDown, this->blockGapPixels, PIXELS_PER_SQUARE, 0);
+                        pixelsLeft += PIXELS_PER_SQUARE;
+                        currentBlockChar = 'X';
+                    }
+                }
+            }
+
+            if (currentBlockChar == 'X') {
+                continue;
             }
 
             int colour = this->charColorMap.at(currentBlockChar);
