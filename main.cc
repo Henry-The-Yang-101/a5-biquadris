@@ -137,10 +137,10 @@ int main (int argc, char* argv[]) {
 
   while (std::getline(std::cin, userInput)) {
     try {
+      gameEngine.notifyObservers();
       commandDecisionTree.findAndExecute(userInput);
     } catch (std::runtime_error & error) {
       std::cerr << error.what() << std::endl;
     }
-    gameEngine.notifyObservers();
   }
-} 
+}
