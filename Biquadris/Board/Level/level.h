@@ -7,6 +7,7 @@
 #include <map>
 #include <unordered_set>
 #include "../board-proxy.h"
+#include "../Block/block.h"
 
 using CellCoordinate = std::pair<int, int>;
 using BlockCellCoordinates = std::vector<CellCoordinate>;
@@ -26,7 +27,7 @@ class Level {
     BoardProxy & boardProxy;
 
     Level(int levelNum, bool heavy, BoardProxy & boardProxy, const std::string & blockSequenceFileName);
-    virtual char chooseBlockType() const;
+    virtual char chooseBlockType();
 
   public:
     int getLevelNum() const;
@@ -50,7 +51,7 @@ class RandomizedLevel : public Level {
 
   protected:
     RandomizedLevel(int levelNum, bool heavy, BoardProxy & boardProxy, const std::string & blockSequenceFileName, const std::vector<int> & distribution);
-    char chooseBlockType() const override;
+    char chooseBlockType() override;
 
   public:
     static const std::unordered_set<int> RANDOMIZED_LEVEL_NUMS;

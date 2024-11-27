@@ -1,8 +1,8 @@
 #ifndef BLOCK_H
 #define BLOCK_H
 
+#include <vector>
 #include <utility>
-#include "../board-proxy.h"
 
 using CellCoordinate = std::pair<int, int>;
 using BlockCellCoordinates = std::vector<CellCoordinate>;
@@ -26,7 +26,7 @@ class Block {
         enum class Rotation {UP, RIGHT, DOWN, LEFT};
         BoardProxy & boardProxy;
 
-        Block(BoardProxy& boardProxy, int numLevel);
+        Block(BoardProxy& boardProxy);
 
     private:
         const int numLevel;

@@ -13,7 +13,7 @@ class IBlock : public Block {
         
         BlockCellCoordinates getBaseShape(Rotation rotation) const override;
     public:
-        IBlock(BoardProxy& board, int level);      
+        IBlock(BoardProxy& board);      
         char getType() const override;
 };
 
@@ -23,7 +23,7 @@ class JBlock : public Block {
     
         BlockCellCoordinates getBaseShape(Rotation rotation) const override;
     public:
-        JBlock(BoardProxy& board, int level);
+        JBlock(BoardProxy& board);
         char getType() const override;
 };
 
@@ -34,7 +34,7 @@ class LBlock : public Block {
         BlockCellCoordinates getBaseShape(Rotation rotation) const override;
 
     public:
-        LBlock(BoardProxy& board, int level);
+        LBlock(BoardProxy& board);
         char getType() const override;
 };
 
@@ -43,7 +43,7 @@ class OBlock : public Block {
         BlockCellCoordinates getBaseShape(Rotation rotation) const override;
 
     public:
-        OBlock(BoardProxy& board, int level);
+        OBlock(BoardProxy& board);
         char getType() const override;
 };
 
@@ -54,7 +54,7 @@ class SBlock : public Block {
         BlockCellCoordinates getBaseShape(Rotation rotation) const override;
 
     public:
-        SBlock(BoardProxy& board, int level);
+        SBlock(BoardProxy& board);
         char getType() const override;
 };
 
@@ -65,7 +65,7 @@ class ZBlock : public Block {
         BlockCellCoordinates getBaseShape(Rotation rotation) const override;
 
     public:
-        ZBlock(BoardProxy& board, int level);
+        ZBlock(BoardProxy& board);
         char getType() const override;
 };
 
@@ -76,7 +76,7 @@ class TBlock : public Block {
         BlockCellCoordinates getBaseShape(Rotation rotation) const override;
 
     public:
-        TBlock(BoardProxy& board, int level);
+        TBlock(BoardProxy& board);
         char getType() const override;
 };
 
@@ -87,7 +87,7 @@ class StarBlock : public Block {
         BlockCellCoordinates getBaseShape(Rotation rotation) const override;
 
     public:
-        StarBlock(BoardProxy& board, int level);
+        StarBlock(BoardProxy& board);
         char getType() const override;
 };
 

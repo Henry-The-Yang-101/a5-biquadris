@@ -1,4 +1,5 @@
 #include "board-proxy.h"
+#include "board.h"
 
 BoardProxy::BoardProxy(Board & board) : board{board} {}
 BoardProxy::~BoardProxy() {}
@@ -21,6 +22,10 @@ int BoardProxy::getBoardWidth() {
 
 int BoardProxy::getBoardHeight() {
     return this->board.getHeight();
+}
+
+int BoardProxy::getLevelNum() {
+    return this->board.getLevelNum();
 }
 
 int BoardProxy::getNumBlocksPlacedWithoutClearing() {

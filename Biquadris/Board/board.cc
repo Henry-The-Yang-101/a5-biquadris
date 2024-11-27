@@ -19,6 +19,10 @@ Board::Board(InformGameStateProxy & informGameStateProxy, int initLevelNum, std:
     this->nextBlock = std::move(this->currentLevel->cycleBlock());
 }
 
+const int Board::WIDTH = 11;
+const int Board::HEIGHT = 15;
+const int Board::NUM_RESERVE_ROWS = 3;
+
 void Board::setUpEmptyGrid() {
     this->grid = std::vector<std::vector<std::shared_ptr<BlockCell>>>{HEIGHT + NUM_RESERVE_ROWS, std::vector<std::shared_ptr<BlockCell>>{WIDTH, nullptr}};
 }
@@ -272,13 +276,13 @@ std::vector<BlockAttributes> Board::getBlockAttributesBacklog() const {
 
 void Board::replaceCurrentBlock(char blockType) {
     switch (blockType) {
-        case 'I': this->currentBlock = std::make_unique<IBlock>(this->boardProxy, blockSequenceFileName); break;
-        case 'J': this->currentBlock = std::make_unique<JBlock>(this->boardProxy, blockSequenceFileName); break;
-        case 'L': this->currentBlock = std::make_unique<LBlock>(this->boardProxy, blockSequenceFileName); break;
-        case 'O': this->currentBlock = std::make_unique<OBlock>(this->boardProxy, blockSequenceFileName); break;
-        case 'S': this->currentBlock = std::make_unique<SBlock>(this->boardProxy, blockSequenceFileName); break;
-        case 'Z': this->currentBlock = std::make_unique<ZBlock>(this->boardProxy, blockSequenceFileName); break;
-        case 'T': this->currentBlock = std::make_unique<TBlock>(this->boardProxy, blockSequenceFileName); break;
+        case 'I': this->currentBlock = std::make_unique<IBlock>(this->boardProxy); break;
+        case 'J': this->currentBlock = std::make_unique<JBlock>(this->boardProxy); break;
+        case 'L': this->currentBlock = std::make_unique<LBlock>(this->boardProxy); break;
+        case 'O': this->currentBlock = std::make_unique<OBlock>(this->boardProxy); break;
+        case 'S': this->currentBlock = std::make_unique<SBlock>(this->boardProxy); break;
+        case 'Z': this->currentBlock = std::make_unique<ZBlock>(this->boardProxy); break;
+        case 'T': this->currentBlock = std::make_unique<TBlock>(this->boardProxy); break;
     }
 
     if (!this->currentBlock->isValidPosition()) {

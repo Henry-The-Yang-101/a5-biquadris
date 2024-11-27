@@ -1,5 +1,6 @@
 #include <memory>
 #include "block.h"
+#include "../board-proxy.h"
 
 using CellCoordinate = std::pair<int, int>;
 using BlockCellCoordinates = std::vector<CellCoordinate>;
@@ -14,7 +15,7 @@ BlockCell::~BlockCell() {
 
 
 // Block definitions
-Block::Block(BoardProxy& boardProxy, int numLevel) : boardProxy{boardProxy}, numLevel{numLevel}, rotation{Rotation::UP} {}
+Block::Block(BoardProxy& boardProxy) : boardProxy{boardProxy}, numLevel{this->boardProxy.getLevelNum()}, rotation{Rotation::UP} {}
 
 Block::Rotation Block::rotationAfterRotatedClockwise(Rotation rotation) {
   switch(rotation) {

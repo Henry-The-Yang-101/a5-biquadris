@@ -16,9 +16,9 @@ class InformGameStateProxy;
 
 class Board {
     private:
-        static const int WIDTH = 11;
-        static const int HEIGHT = 15;
-        static const int NUM_RESERVE_ROWS = 3;
+        static const int WIDTH;
+        static const int HEIGHT;
+        static const int NUM_RESERVE_ROWS;
 
         const int initLevelNum;
 

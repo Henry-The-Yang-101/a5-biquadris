@@ -32,7 +32,7 @@ bool LevelFour::checkCustomRuleCondition() const {
 }
 
 void LevelFour::executeCustomRuleAction() {
-  std::unique_ptr<Block> starBlock = std::make_unique<StarBlock>(this->boardProxy, this->getLevelNum());
+  std::unique_ptr<Block> starBlock = std::make_unique<StarBlock>(this->boardProxy);
   
   if (starBlock->isValidPosition()) {
     starBlock->drop();

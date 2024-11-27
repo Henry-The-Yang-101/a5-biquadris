@@ -26,24 +26,24 @@ Level::Level(int levelNum, bool heavy, BoardProxy & boardProxy, const std::strin
 
 std::unique_ptr<Block> Level::generateBlock(char blockType) const {
   switch (blockType) {
-    case 'I': return std::make_unique<IBlock>(this->boardProxy, this->levelNum);
-    case 'J': return std::make_unique<JBlock>(this->boardProxy, this->levelNum);
-    case 'L': return std::make_unique<LBlock>(this->boardProxy, this->levelNum);
-    case 'O': return std::make_unique<OBlock>(this->boardProxy, this->levelNum);
-    case 'S': return std::make_unique<SBlock>(this->boardProxy, this->levelNum);
-    case 'Z': return std::make_unique<ZBlock>(this->boardProxy, this->levelNum);
-    case 'T': return std::make_unique<TBlock>(this->boardProxy, this->levelNum);
-    case 'i': return std::make_unique<IBlock>(this->boardProxy, this->levelNum);
-    case 'j': return std::make_unique<JBlock>(this->boardProxy, this->levelNum);
-    case 'l': return std::make_unique<LBlock>(this->boardProxy, this->levelNum);
-    case 'o': return std::make_unique<OBlock>(this->boardProxy, this->levelNum);
-    case 's': return std::make_unique<SBlock>(this->boardProxy, this->levelNum);
-    case 'z': return std::make_unique<ZBlock>(this->boardProxy, this->levelNum);
-    case 't': return std::make_unique<TBlock>(this->boardProxy, this->levelNum);
+    case 'I': return std::make_unique<IBlock>(this->boardProxy);
+    case 'J': return std::make_unique<JBlock>(this->boardProxy);
+    case 'L': return std::make_unique<LBlock>(this->boardProxy);
+    case 'O': return std::make_unique<OBlock>(this->boardProxy);
+    case 'S': return std::make_unique<SBlock>(this->boardProxy);
+    case 'Z': return std::make_unique<ZBlock>(this->boardProxy);
+    case 'T': return std::make_unique<TBlock>(this->boardProxy);
+    case 'i': return std::make_unique<IBlock>(this->boardProxy);
+    case 'j': return std::make_unique<JBlock>(this->boardProxy);
+    case 'l': return std::make_unique<LBlock>(this->boardProxy);
+    case 'o': return std::make_unique<OBlock>(this->boardProxy);
+    case 's': return std::make_unique<SBlock>(this->boardProxy);
+    case 'z': return std::make_unique<ZBlock>(this->boardProxy);
+    case 't': return std::make_unique<TBlock>(this->boardProxy);
   }
 }
 
-char Level::chooseBlockType() const {
+char Level::chooseBlockType() {
   char blockType;
 
   this->blockSequenceFileStream >> std::ws;
@@ -129,7 +129,7 @@ int RandomizedLevel::calculateTotal(const std::vector<int> & distribution) {
   return total;
 }
 
-char RandomizedLevel::chooseBlockType() const {
+char RandomizedLevel::chooseBlockType() {
   if (this->randomEnabled) {
     int randomChoice = rand() % this->distributionTotal;
 

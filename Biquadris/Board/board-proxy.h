@@ -1,7 +1,6 @@
 #ifndef BOARD_PROXY_H
 #define BOARD_PROXY_H
 
-#include "board.h"
 #include "Block/block.h"
 #include <memory>
 
@@ -20,6 +19,7 @@ class BoardProxy {
         void increaseScore(int points);
         int getBoardWidth();
         int getBoardHeight();
+        int getLevelNum();
         int getNumBlocksPlacedWithoutClearing();
 };
 
