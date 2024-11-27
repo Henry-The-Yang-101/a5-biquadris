@@ -27,8 +27,9 @@ void GraphicsView::render() {
     // dynamic calculation of boardwidth, necessary for rendering second player's board and grid lines
     const int boardWidth = this->gameGridCols * (PIXELS_PER_SQUARE + this->blockGapPixels) + this->blockGapPixels;
 
-    // constant for vertical shift down for scoreboard
+    // constant for vertical/horizontal shift down for scoreboard
     const int scoreboardShiftDown = this->paddingPixels;
+    const int scoreboardShiftLeft = paddingPixels + sidebarWidth + this->blockGapPixels;
 
     // constant for vertical shift down for game grid and objects in line with game grid
     const int gameGridShiftDown = this->paddingPixels + this->scoreboardHeight;
@@ -37,7 +38,14 @@ void GraphicsView::render() {
     int shiftDown = scoreboardShiftDown;
 
     // left position, starting at scoreboard left edge
-    int shiftLeft = paddingPixels + sidebarWidth + this->blockGapPixels;
+    int shiftLeft = scoreboardShiftLeft;
+
+    const std::string playerOneTitle = "Player 1";
+
+    shiftLeft += boardWidth / 2 - playerOneTitle.size() * this->fontWidth / 2;
+    this->window.drawString(shiftLeft, shiftDown - this->scoreboardSpacing, playerOneTitle, 1);
+
+    shiftLeft = scoreboardShiftLeft;
 
     // render scoreboard
     this->window.fillRectangle(shiftLeft, shiftDown, boardWidth, this->scoreboardHeight, 10);
