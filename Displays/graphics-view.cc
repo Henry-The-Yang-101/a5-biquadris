@@ -18,6 +18,8 @@ void GraphicsView::render() {
 
     int Black = 1;
 
+    const int currentPlayer = this->displayProxy.getCurrentBoardTurn();
+
     this->window.drawString(0, 0, "", 0);
     this->window.drawString(0, 0, "", 0);
     this->window.drawString(0, 0, "", 0);
@@ -33,6 +35,7 @@ void GraphicsView::render() {
 
     // constant for vertical shift down for game grid and objects in line with game grid
     const int gameGridShiftDown = this->paddingPixels + this->scoreboardHeight;
+    const int gameGridShiftLeft = scoreboardShiftLeft;
 
     // vertical start position
     int shiftDown = scoreboardShiftDown;
@@ -41,7 +44,7 @@ void GraphicsView::render() {
     int shiftLeft = scoreboardShiftLeft;
 
     std::string playerOneTitle = "Player 1";
-    if (this->displayProxy.getCurrentBoardTurn() == 1) {
+    if (currentPlayer == 1) {
         playerOneTitle = "--> Player 1 <--";
     }
 
@@ -120,6 +123,17 @@ void GraphicsView::render() {
         for (int c = 0; c < this->gameGridCols; c++) {
 
             char currentBlockChar = this->p1GameGrid[r][c];
+
+            if (currentPlayer == 1) {
+                BlockAttributes blockAttributes = this->displayProxy.getCurrentBlockAttributes(1);
+                for (const auto &coord : blockAttributes.first) {
+                    if (coord.first == r && coord.second== c) {
+                        currentBlockChar = blockAttributes.second;
+                        break;
+                    }
+                }
+            }
+
             int colour = this->charColorMap.at(currentBlockChar);
 
             // try { // idk maybe this isnt necessary @debugged-rat @raywang1265
