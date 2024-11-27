@@ -182,6 +182,34 @@ void GraphicsView::render() {
     }
 
 
+    // second player scoreboard rendering
+
+    // reset vertical start position
+    shiftDown = scoreboardShiftDown;
+    int secondScoreboardShiftLeft = scoreboardShiftLeft + boardWidth + 2 * this->blockGapPixels + sidebarWidth + sidebarWidth + gapBetweenGridsPixels;
+
+    std::string playerTwoTitle = "Player 2";
+    if (this->displayProxy.getCurrentBoardTurn() == 2) {
+        playerTwoTitle = "--> Player 2 <--";
+    }
+
+    int secondTitleShiftLeft = secondScoreboardShiftLeft + boardWidth / 2 - playerTwoTitle.size() * this->fontWidth / 2;
+    this->window.drawString(secondTitleShiftLeft, shiftDown - this->scoreboardSpacing, playerTwoTitle, 1);
+
+    // render scoreboard
+    this->window.fillRectangle(secondScoreboardShiftLeft, shiftDown, boardWidth, this->scoreboardHeight, 10);
+
+    shiftDown += this->fontHeight + this->scoreboardPadding - 2;
+    secondScoreboardShiftLeft += this->scoreboardPadding;
+
+    int p2Level = this->displayProxy.getLevel(2);
+    int p2Score = this->displayProxy.getCurrentScore(2);
+    int p2HighScore = this->displayProxy.getHighScore(2);
+
+    std::string player2Stats = "Level: " + std::to_string(p2Level) + " Score: " + std::to_string(p2Score) + " High Score: " + std::to_string(p2HighScore);
+
+    this->window.drawString(secondScoreboardShiftLeft, shiftDown, player2Stats, 1);
+
     // second player hold block container
 
     // reset vertical start position
@@ -278,6 +306,8 @@ void GraphicsView::render() {
         shiftDown += PIXELS_PER_SQUARE + this->blockGapPixels;
 
     }
+
+    this->displayProxy.getCurrentBlockAttributes(1);
 
 }
 
