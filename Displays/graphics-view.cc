@@ -40,7 +40,10 @@ void GraphicsView::render() {
     // left position, starting at scoreboard left edge
     int shiftLeft = scoreboardShiftLeft;
 
-    const std::string playerOneTitle = "Player 1";
+    std::string playerOneTitle = "Player 1";
+    if (this->displayProxy.getCurrentBoardTurn() == 1) {
+        playerOneTitle = "--> Player 1 <--";
+    }
 
     shiftLeft += boardWidth / 2 - playerOneTitle.size() * this->fontWidth / 2;
     this->window.drawString(shiftLeft, shiftDown - this->scoreboardSpacing, playerOneTitle, 1);
