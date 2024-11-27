@@ -118,7 +118,7 @@ int main (int argc, char* argv[]) {
   // Output commands:
   commandDecisionTree.addCommand(std::make_unique<HintCommand>(std::cout, "hint"));
 
-  DisplayProxy displayProxy{gameEngine};
+  const DisplayProxy displayProxy{gameEngine};
 
   // std::shared_ptr<ConsoleView> consoleView = std::make_shared<ConsoleView>(displayProxy);
   // std::shared_ptr<GraphicsView> graphicsView;
@@ -135,9 +135,14 @@ int main (int argc, char* argv[]) {
 
   gameEngine.notifyObservers();
 
-  while (std::getline(std::cin, userInput)) {
+  while (true) {
+    gameEngine.notifyObservers();
+
+    if (!std::getline(std::cin, userInput)) {
+      break;
+    }
+
     try {
-      gameEngine.notifyObservers();
       commandDecisionTree.findAndExecute(userInput);
     } catch (std::runtime_error & error) {
       std::cerr << error.what() << std::endl;
