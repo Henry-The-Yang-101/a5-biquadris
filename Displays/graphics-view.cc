@@ -24,15 +24,30 @@ void GraphicsView::render() {
     this->window.drawString(0, 0, "");
     this->window.drawString(0, 0, "");
 
-    // vertical start position
-    int shiftDown = paddingPixels;
-
     // dynamic calculation of boardwidth, necessary for rendering second player's board and grid lines
     const int boardWidth = this->gameGridCols * (PIXELS_PER_SQUARE + this->blockGapPixels) + this->blockGapPixels;
 
-    int shiftLeft = paddingPixels;
+    // constant for vertical shift down for scoreboard
+    const int scoreboardShiftDown = this->paddingPixels;
+
+    // constant for vertical shift down for game grid and objects in line with game grid
+    const int gameGridShiftDown = this->paddingPixels + this->scoreboardHeight;
+
+    // vertical start position
+    int shiftDown = scoreboardShiftDown;
+
+    // left position, starting at scoreboard left edge
+    int shiftLeft = paddingPixels + sidebarWidth + gapBetweenGridsPixels;
+
+    // render scoreboard
+    this->window.fillRectangle(shiftLeft, paddingPixels, boardWidth, this->scoreboardHeight, 0);
+
     
     // hold block container 
+
+    shiftDown = gameGridShiftDown;
+
+    shiftLeft = paddingPixels;
 
     this->window.fillRectangle(shiftLeft, shiftDown, sidebarWidth, this->holdBlocksHeight, Black);
 
@@ -68,7 +83,7 @@ void GraphicsView::render() {
     // draw first player's board
 
     // reset vertical start position
-    shiftDown = paddingPixels;
+    shiftDown = gameGridShiftDown;
 
     for (int r = 0; r < this->gameGridRows; r++) {
 
@@ -121,8 +136,8 @@ void GraphicsView::render() {
     int nextBlockGridStartLeft = alignNextBlocks + sidebarPadding;
 
     // vertical start position inside of sidebar
-    shiftDown = paddingPixels + sidebarPadding + this->fontHeight;
-    this->window.fillRectangle(alignNextBlocks, paddingPixels, sidebarWidth, this->nextBlocksHeight, 1);
+    shiftDown = gameGridShiftDown + sidebarPadding + this->fontHeight;
+    this->window.fillRectangle(alignNextBlocks, gameGridShiftDown, sidebarWidth, this->nextBlocksHeight, 1);
     this->window.drawString(nextBlockGridStartLeft, shiftDown, "Next:");
 
     // gap between text and grid
@@ -149,7 +164,7 @@ void GraphicsView::render() {
     // second player hold block container
 
     // reset vertical start position
-    shiftDown = paddingPixels;
+    shiftDown = gameGridShiftDown;
 
     // horizontal shift to the right (points to left corner of second player's board)
     shiftLeft += boardWidth + this->blockGapPixels + sidebarWidth + gapBetweenGridsPixels;
@@ -188,7 +203,7 @@ void GraphicsView::render() {
     // draw second player's board
 
     // reset vertical start position
-    shiftDown = paddingPixels;
+    shiftDown = gameGridShiftDown;
     
     for (int r = 0; r < this->gameGridRows; r++) {
         this->window.fillRectangle(shiftLeft, shiftDown, boardWidth, this->blockGapPixels, Black);
@@ -219,9 +234,9 @@ void GraphicsView::render() {
     alignNextBlocks += shiftLeft - paddingPixels - sidebarWidth - this->blockGapPixels; // account for double counting padding
     nextBlockGridStartLeft += shiftLeft - paddingPixels - sidebarWidth - this->blockGapPixels;
 
-    shiftDown = paddingPixels + sidebarPadding + this->fontHeight;
+    shiftDown = gameGridShiftDown + sidebarPadding + this->fontHeight;
 
-    this->window.fillRectangle(alignNextBlocks, paddingPixels, sidebarWidth, this->nextBlocksHeight, Black);
+    this->window.fillRectangle(alignNextBlocks, gameGridShiftDown, sidebarWidth, this->nextBlocksHeight, Black);
     this->window.drawString(nextBlockGridStartLeft, shiftDown, "Next:");
 
     shiftDown += sidebarPadding;
