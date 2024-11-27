@@ -15,7 +15,8 @@ using BlockAttributes = std::pair<BlockCellCoordinates, char>;
 
 class Level {
   private:
-    static const size_t BACKLOG_SIZE = 4;
+    static const std::string BLOCK_SEQUENCE_FILES_PATH_PREFIX;
+    static const size_t BACKLOG_SIZE;
     const int levelNum;
     const bool heavy;
     std::string blockSequenceFileName;

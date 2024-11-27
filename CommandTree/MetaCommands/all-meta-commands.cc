@@ -41,9 +41,11 @@ void MacroInstanceCommand::execute(int multiplier) {
 // SequenceCommand definitions
 SequenceCommand::SequenceCommand(CommandTree & commandTree, std::string commandName) : MetaCommand{commandTree, commandName, true} {}
 
+const std::string SequenceCommand::COMMAND_SEQUENCE_FILES_PATH_PREFIX = "CommandTree/CommandSequenceFiles/";
+
 void SequenceCommand::execute(int multiplier, std::vector<std::string> && args) {
   if (args.size() > 0) {
-    std::string commandSequenceFilePath = SequenceCommand::filePathPrefix + args[0];
+    std::string commandSequenceFilePath = SequenceCommand::COMMAND_SEQUENCE_FILES_PATH_PREFIX + args[0];
     for (int i = 0; i < multiplier; i++) {
       std::fstream commandSequenceFile{commandSequenceFilePath};
 

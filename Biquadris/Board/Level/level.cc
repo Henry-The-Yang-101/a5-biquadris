@@ -12,17 +12,21 @@ using BlockAttributes = std::pair<BlockCellCoordinates, char>;
 
 // Level definitions
 Level::Level(int levelNum, bool heavy, BoardProxy & boardProxy, const std::string & blockSequenceFileName) :
-  levelNum{levelNum}, heavy{heavy}, boardProxy{boardProxy}, blockSequenceFileName{std::move(blockSequenceFileName)}, 
+  levelNum{levelNum}, heavy{heavy}, boardProxy{boardProxy}, blockSequenceFileName{BLOCK_SEQUENCE_FILES_PATH_PREFIX + blockSequenceFileName}, 
   blockSequenceFileStream{std::ifstream{blockSequenceFileName}} {
 
   if (!blockSequenceFileStream.is_open()) {
-    throw std::runtime_error("Failed to open \"" + blockSequenceFileName + "\" block sequence file");
+    throw std::runtime_error("Failed to open \"" + blockSequenceFileName + "\" block sequence file!");
   }
 
   for (size_t i = 0; i < BACKLOG_SIZE; i++) {
     this->blockBacklog.push_back(this->generateBlock(this->chooseBlockType()));
   }
 }
+
+const std::string Level::BLOCK_SEQUENCE_FILES_PATH_PREFIX = "Biquadris/Board/Level/BlockSequenceFiles/";
+
+const size_t Level::BACKLOG_SIZE = 4;
 
 std::unique_ptr<Block> Level::generateBlock(char blockType) const {
   switch (blockType) {
@@ -75,10 +79,10 @@ std::vector<BlockAttributes> Level::getBlockAttributesBacklog() const {
 }
 
 void Level::setBlockSequenceFile(std::string & blockSequenceFile) {
-  std::ifstream tempFileStream{blockSequenceFile};
+  std::ifstream tempFileStream{BLOCK_SEQUENCE_FILES_PATH_PREFIX + blockSequenceFile};
 
   if (!tempFileStream.is_open()) {
-    throw std::runtime_error("Failed to open \"" + blockSequenceFile + "\" block sequence file; using \"" + this->blockSequenceFileName + "\" instead");
+    throw std::runtime_error("Failed to open \"" + BLOCK_SEQUENCE_FILES_PATH_PREFIX + blockSequenceFile + "\" block sequence file; using \"" + this->blockSequenceFileName + "\" instead");
   }
 
   this->blockSequenceFileName = blockSequenceFile;
