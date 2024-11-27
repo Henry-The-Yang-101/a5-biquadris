@@ -40,9 +40,19 @@ void GraphicsView::render() {
     int shiftLeft = paddingPixels + sidebarWidth + this->blockGapPixels;
 
     // render scoreboard
-    this->window.fillRectangle(shiftLeft, paddingPixels, boardWidth, this->scoreboardHeight, 0);
+    this->window.fillRectangle(shiftLeft, shiftDown, boardWidth, this->scoreboardHeight, 10);
 
-    
+    shiftDown += this->fontHeight + this->scoreboardPadding - 2;
+    shiftLeft += this->scoreboardPadding;
+
+    int p1Level = this->displayProxy.getLevel(1);
+    int p1Score = this->displayProxy.getCurrentScore(1);
+    int p1HighScore = this->displayProxy.getHighScore(1);
+
+    std::string player1Stats = "Level: " + std::to_string(p1Level) + " Score: " + std::to_string(p1Score) + " High Score: " + std::to_string(p1HighScore);
+
+    this->window.drawString(shiftLeft, shiftDown, player1Stats, 1);
+
     // hold block container 
 
     shiftDown = gameGridShiftDown;

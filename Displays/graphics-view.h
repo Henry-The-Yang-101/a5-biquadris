@@ -16,13 +16,14 @@ class GraphicsView : public DisplayObserver {
         const int paddingPixels = 24;
         const int gapBetweenGridsPixels = 24;
         const int fontHeight = 20;
+        const int fontWidth = 10;
         const int sidebarPadding = 20;
         const int sidebarWidth = 4 * PIXELS_PER_SQUARE + 3 * blockGapPixels + sidebarPadding * 2;
         const int nextBlocksHeight = 3 * sidebarPadding + 16 * PIXELS_PER_SQUARE + 8 * blockGapPixels + fontHeight;
         const int holdBlocksHeight = 3 * sidebarPadding + 2 * PIXELS_PER_SQUARE + 1 * blockGapPixels + fontHeight;
-        const int scoreboardSpacing = 12;
-        const int scoreboardPadding = 16;
-        const int scoreboardHeight = scoreboardPadding * 2 + 3 * fontHeight + 2 * scoreboardSpacing;
+        const int scoreboardSpacing = 4;
+        const int scoreboardPadding = 8;
+        const int scoreboardHeight = scoreboardPadding * 2 + fontHeight;
 
     public:
 
