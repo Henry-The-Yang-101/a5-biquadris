@@ -2,7 +2,7 @@
 
 GraphicsView::GraphicsView(DisplayProxy &displayProxy, bool enhanced) :
     DisplayObserver{displayProxy, enhanced}, 
-    window{1736, 720} {
+    window{1736, 744} {
 
         this->charColorMap[' '] = 1;
         this->charColorMap['I'] = 2;
@@ -18,11 +18,11 @@ void GraphicsView::render() {
 
     int Black = 1;
 
-    this->window.drawString(0, 0, "");
-    this->window.drawString(0, 0, "");
-    this->window.drawString(0, 0, "");
-    this->window.drawString(0, 0, "");
-    this->window.drawString(0, 0, "");
+    this->window.drawString(0, 0, "", 0);
+    this->window.drawString(0, 0, "", 0);
+    this->window.drawString(0, 0, "", 0);
+    this->window.drawString(0, 0, "", 0);
+    this->window.drawString(0, 0, "", 0);
 
     // dynamic calculation of boardwidth, necessary for rendering second player's board and grid lines
     const int boardWidth = this->gameGridCols * (PIXELS_PER_SQUARE + this->blockGapPixels) + this->blockGapPixels;
@@ -37,7 +37,7 @@ void GraphicsView::render() {
     int shiftDown = scoreboardShiftDown;
 
     // left position, starting at scoreboard left edge
-    int shiftLeft = paddingPixels + sidebarWidth + gapBetweenGridsPixels;
+    int shiftLeft = paddingPixels + sidebarWidth + this->blockGapPixels;
 
     // render scoreboard
     this->window.fillRectangle(shiftLeft, paddingPixels, boardWidth, this->scoreboardHeight, 0);
@@ -54,7 +54,7 @@ void GraphicsView::render() {
     int holdBlockGridStartLeft = shiftLeft + sidebarPadding;
 
     shiftDown += sidebarPadding + this->fontHeight;
-    this->window.drawString(holdBlockGridStartLeft, shiftDown, "Hold:");
+    this->window.drawString(holdBlockGridStartLeft, shiftDown, "Hold:", 0);
 
     shiftDown += sidebarPadding ;
 
@@ -138,7 +138,7 @@ void GraphicsView::render() {
     // vertical start position inside of sidebar
     shiftDown = gameGridShiftDown + sidebarPadding + this->fontHeight;
     this->window.fillRectangle(alignNextBlocks, gameGridShiftDown, sidebarWidth, this->nextBlocksHeight, 1);
-    this->window.drawString(nextBlockGridStartLeft, shiftDown, "Next:");
+    this->window.drawString(nextBlockGridStartLeft, shiftDown, "Next:", 0);
 
     // gap between text and grid
     shiftDown += sidebarPadding;
@@ -174,7 +174,7 @@ void GraphicsView::render() {
     holdBlockGridStartLeft = shiftLeft + sidebarPadding;
 
     shiftDown += sidebarPadding + this->fontHeight;
-    this->window.drawString(holdBlockGridStartLeft, shiftDown, "Hold:");
+    this->window.drawString(holdBlockGridStartLeft, shiftDown, "Hold:", 0);
 
     shiftDown += sidebarPadding ;
 
@@ -237,7 +237,7 @@ void GraphicsView::render() {
     shiftDown = gameGridShiftDown + sidebarPadding + this->fontHeight;
 
     this->window.fillRectangle(alignNextBlocks, gameGridShiftDown, sidebarWidth, this->nextBlocksHeight, Black);
-    this->window.drawString(nextBlockGridStartLeft, shiftDown, "Next:");
+    this->window.drawString(nextBlockGridStartLeft, shiftDown, "Next:", 0);
 
     shiftDown += sidebarPadding;
 

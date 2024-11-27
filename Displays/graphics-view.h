@@ -13,7 +13,7 @@ class GraphicsView : public DisplayObserver {
         Xwindow window;
         std::map<char, int> charColorMap;
         const int blockGapPixels = 4;
-        const int paddingPixels = 40;
+        const int paddingPixels = 24;
         const int gapBetweenGridsPixels = 24;
         const int fontHeight = 20;
         const int sidebarPadding = 20;
