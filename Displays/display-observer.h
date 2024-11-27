@@ -10,21 +10,20 @@ using BlockAttributes = pair<vector<CellCoordinate>, char>;
 using CharGrid = vector<vector<char>>;
 using BlockCellCoordinates = std::vector<CellCoordinate>;
 
-class DisplayObserver: public Observer{
+class DisplayObserver: public Observer {
     
     protected:
-        DisplayProxy &displayProxy;
+        const DisplayProxy &displayProxy;
 
-        const int holdGridRows = 2, 
-                holdGridCols = 4, 
-                enhancedNextGridRows = 14, 
-                enhancedNextGridCols = 4, 
-                nextGridRows = 2,
-                nextGridCols = 4,
-                gameGridRows = 18, 
-                gameGridCols = 11,
-
-                blockCoordAdjustment = 1;
+        const int holdGridRows = 2; 
+        const int holdGridCols = 4; 
+        const int enhancedNextGridRows = 14; 
+        const int enhancedNextGridCols = 4; 
+        const int nextGridRows = 2;
+        const int nextGridCols = 4;
+        const int gameGridRows = 18;
+        const int gameGridCols = 11;
+        const int blockCoordAdjustment = 1;
 
         bool enhanced;
         
@@ -36,10 +35,10 @@ class DisplayObserver: public Observer{
         CharGrid p2HoldGrid;
         CharGrid p2NextGrid;
 
+        virtual void render() = 0;
     public:
-        DisplayObserver(DisplayProxy &displayProxy, bool enhanced);
+        DisplayObserver(const DisplayProxy & displayProxy, bool enhanced);
         void notify();
-        void render();
 };
 
 #endif

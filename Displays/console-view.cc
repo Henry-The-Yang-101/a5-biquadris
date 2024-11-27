@@ -4,7 +4,7 @@
 
 using namespace std;
 
-ConsoleView::ConsoleView(DisplayProxy &displayProxy, bool enhanced): 
+ConsoleView::ConsoleView(const DisplayProxy & displayProxy, bool enhanced): 
     DisplayObserver{displayProxy, enhanced} {}
 
 void ConsoleView::render() {

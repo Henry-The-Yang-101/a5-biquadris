@@ -4,7 +4,7 @@
 
 using namespace std;
 
-DisplayObserver::DisplayObserver(DisplayProxy &displayProxy, bool enhanced): displayProxy{displayProxy}, enhanced{enhanced}  {
+DisplayObserver::DisplayObserver(const DisplayProxy & displayProxy, bool enhanced): displayProxy{displayProxy}, enhanced{enhanced}  {
     p1GameGrid = displayProxy.getGrid(1);
     p2GameGrid = displayProxy.getGrid(2);
 
@@ -102,8 +102,6 @@ DisplayObserver::DisplayObserver(DisplayProxy &displayProxy, bool enhanced): dis
     }
 
 }
-
-void DisplayObserver::render() {}
 
 void DisplayObserver::notify() {
     this->render();

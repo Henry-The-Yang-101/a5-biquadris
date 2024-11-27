@@ -26,12 +26,11 @@ class GraphicsView : public DisplayObserver {
         const int scoreboardHeight = scoreboardPadding * 2 + fontHeight;
         const int previewBlockWeight = 1;
 
+        void render() override;
+
     public:
+        GraphicsView(const DisplayProxy & displayProxy, bool enhanced);
 
-        GraphicsView(DisplayProxy &displayProxy, bool enhanced);
-        ~GraphicsView() = default;
-
-        void render();
         // void fillRectangle();
         // void drawString();
 

@@ -1,6 +1,6 @@
 #include "graphics-view.h"
 
-GraphicsView::GraphicsView(DisplayProxy &displayProxy, bool enhanced) :
+GraphicsView::GraphicsView(const DisplayProxy & displayProxy, bool enhanced) :
     DisplayObserver{displayProxy, enhanced}, 
     window{1736, 744} {
 
