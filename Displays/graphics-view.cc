@@ -143,10 +143,10 @@ void GraphicsView::render() {
                         this->window.fillRectangle(pixelsLeft, shiftDown, PIXELS_PER_SQUARE, PIXELS_PER_SQUARE, Black);
 
                         // draw border
-                        this->window.fillRectangle(pixelsLeft, shiftDown, this->blockGapPixels, PIXELS_PER_SQUARE, 0);
-                        this->window.fillRectangle(pixelsLeft, shiftDown, PIXELS_PER_SQUARE, this->blockGapPixels, 0);
-                        this->window.fillRectangle(pixelsLeft, shiftDown + PIXELS_PER_SQUARE - this->blockGapPixels, PIXELS_PER_SQUARE, this->blockGapPixels, 0);
-                        this->window.fillRectangle(pixelsLeft + PIXELS_PER_SQUARE - this->blockGapPixels, shiftDown, this->blockGapPixels, PIXELS_PER_SQUARE, 0);
+                        this->window.fillRectangle(pixelsLeft, shiftDown, this->previewBlockWeight, PIXELS_PER_SQUARE, 0);
+                        this->window.fillRectangle(pixelsLeft, shiftDown, PIXELS_PER_SQUARE, this->previewBlockWeight, 0);
+                        this->window.fillRectangle(pixelsLeft, shiftDown + PIXELS_PER_SQUARE - this->previewBlockWeight, PIXELS_PER_SQUARE, this->previewBlockWeight, 0);
+                        this->window.fillRectangle(pixelsLeft + PIXELS_PER_SQUARE - this->previewBlockWeight, shiftDown, this->previewBlockWeight, PIXELS_PER_SQUARE, 0);
                         pixelsLeft += PIXELS_PER_SQUARE;
                         currentBlockChar = 'X';
                     }

@@ -24,6 +24,7 @@ class GraphicsView : public DisplayObserver {
         const int scoreboardSpacing = 4;
         const int scoreboardPadding = 8;
         const int scoreboardHeight = scoreboardPadding * 2 + fontHeight;
+        const int previewBlockWeight = 1;
 
     public:
 
