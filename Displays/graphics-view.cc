@@ -127,7 +127,7 @@ void GraphicsView::render() {
             if (currentPlayer == 1) {
                 BlockAttributes blockAttributes = this->displayProxy.getCurrentBlockAttributes(1);
                 for (const auto &coord : blockAttributes.first) {
-                    if (coord.first == r && coord.second== c) {
+                    if (coord.first == c && coord.second + 1 == r) {
                         currentBlockChar = blockAttributes.second;
                         break;
                     }
