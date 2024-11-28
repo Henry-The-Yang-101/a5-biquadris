@@ -24,8 +24,8 @@ const int I_LOVE_CS{246};
 const std::vector<char> POSSIBLE_TETROMINOES = {'I', 'J', 'L', 'O', 'S', 'Z', 'T'};
 
 int main (int argc, char* argv[]) {
-  std::string blockSequenceFile1 = "sequence1.txt";
-  std::string blockSequenceFile2 = "sequence2.txt";
+  std::string blockSequenceFile1 = "./Biquadris/Board/Level/BlockSequenceFiles/sequence1.txt";
+  std::string blockSequenceFile2 = "./Biquadris/Board/Level/BlockSequenceFiles/sequence2.txt";
   int randomSeed = I_LOVE_CS;
   int initLevelNum = 0;
   bool showGraphicsView = true;
