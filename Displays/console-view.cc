@@ -4,17 +4,17 @@
 
 using namespace std;
 
-ConsoleView::ConsoleView(const DisplayProxy & displayProxy, bool enhanced): 
-    DisplayObserver{displayProxy, enhanced} {}
+ConsoleView::ConsoleView(const DisplayProxy & displayProxy): 
+    DisplayObserver{displayProxy} {}
 
 void ConsoleView::render() {
 
-    if (enhanced) {
+    if (displayProxy.getBonusFeaturesEnabled()) {
         
         //printing player and top padding of board
         cout << endl;
         for (int i = 0; i < holdContainerWidth; i++) cout << " ";
-        if (displayProxy.getCurrentBoardTurn() == 1) {
+        if (displayProxy.getCurrentPlayerTurn() == BiQuadris::PlayerTurn::PLAYER1) {
             for (int i = 0; i < (gameContainerWidth - 18)/2; i++) cout << " ";
             cout << "-->  Player 1  <--";
             for (int i = 0; i < (gameContainerWidth - 18)/2 + 1; i++) cout << " ";
@@ -26,7 +26,7 @@ void ConsoleView::render() {
         for (int i = 0; i < nextContainerWidth + leftInteriorPadding; i++) cout << " ";
         cout << "|";
         for (int i = 0; i < rightInteriorPadding + holdContainerWidth; i++) cout << " ";
-        if (displayProxy.getCurrentBoardTurn() == 2) {
+        if (displayProxy.getCurrentPlayerTurn() == BiQuadris::PlayerTurn::PLAYER2) {
             for (int i = 0; i < (gameContainerWidth - 18)/2; i++) cout << " ";
             cout << "-->  Player 2  <--";
             for (int i = 0; i < (gameContainerWidth - 18)/2 + 1; i++) cout << " ";
@@ -47,8 +47,8 @@ void ConsoleView::render() {
         cout << endl;
 
         //printing level text
-        string p1LevelText = "Level: " + to_string(displayProxy.getLevel(1));
-        string p2LevelText = "Level: " + to_string(displayProxy.getLevel(2));
+        string p1LevelText = "Level: " + to_string(displayProxy.getLevelNum(BiQuadris::PlayerTurn::PLAYER1));
+        string p2LevelText = "Level: " + to_string(displayProxy.getLevelNum(BiQuadris::PlayerTurn::PLAYER2));
         for (int i = 0; i < holdContainerWidth; i++) cout << " ";
         cout << "| " << p1LevelText;
         for (int i = 0; i < gameContainerWidth - 3 - p1LevelText.length(); i++)  cout << " ";
@@ -62,8 +62,8 @@ void ConsoleView::render() {
         cout << endl;
 
         //printing high score text
-        string p1HighScoreText = "High Score: " + to_string(displayProxy.getHighScore(1));
-        string p2HighScoreText = "High Score: " + to_string(displayProxy.getHighScore(2));
+        string p1HighScoreText = "High Score: " + to_string(displayProxy.getHighScore(BiQuadris::PlayerTurn::PLAYER1));
+        string p2HighScoreText = "High Score: " + to_string(displayProxy.getHighScore(BiQuadris::PlayerTurn::PLAYER2));
         for (int i = 0; i < holdContainerWidth; i++) cout << " ";
         cout << "| " << p1HighScoreText;
         for (int i = 0; i < gameContainerWidth - 3 - p1HighScoreText.length(); i++)  cout << " ";
@@ -77,8 +77,8 @@ void ConsoleView::render() {
         cout << endl; 
 
         //printing score text
-        string p1ScoreText = "Score: " + to_string(displayProxy.getCurrentScore(1));
-        string p2ScoreText = "Score: " + to_string(displayProxy.getCurrentScore(2));
+        string p1ScoreText = "Score: " + to_string(displayProxy.getCurrentScore(BiQuadris::PlayerTurn::PLAYER1));
+        string p2ScoreText = "Score: " + to_string(displayProxy.getCurrentScore(BiQuadris::PlayerTurn::PLAYER2));
         for (int i = 0; i < holdContainerWidth; i++) cout << " ";
         cout << "| " << p1ScoreText;
         for (int i = 0; i < gameContainerWidth - 3 - p1ScoreText.length(); i++)  cout << " ";
@@ -300,8 +300,8 @@ void ConsoleView::render() {
         cout << endl;
 
         //printing level text
-        string p1LevelText = "Level: " + to_string(displayProxy.getLevel(1));
-        string p2LevelText = "Level: " + to_string(displayProxy.getLevel(2));
+        string p1LevelText = "Level: " + to_string(displayProxy.getLevelNum(BiQuadris::PlayerTurn::PLAYER1));
+        string p2LevelText = "Level: " + to_string(displayProxy.getLevelNum(BiQuadris::PlayerTurn::PLAYER2));
         for (int i = 0; i < holdContainerWidth; i++) cout << " ";
         cout << "| " << p1LevelText;
         for (int i = 0; i < gameContainerWidth - 3 - p1LevelText.length(); i++)  cout << " ";
@@ -315,8 +315,8 @@ void ConsoleView::render() {
         cout << endl;
 
         //printing high score text
-        string p1HighScoreText = "High Score: " + to_string(displayProxy.getHighScore(1));
-        string p2HighScoreText = "High Score: " + to_string(displayProxy.getHighScore(2));
+        string p1HighScoreText = "High Score: " + to_string(displayProxy.getHighScore(BiQuadris::PlayerTurn::PLAYER1));
+        string p2HighScoreText = "High Score: " + to_string(displayProxy.getHighScore(BiQuadris::PlayerTurn::PLAYER2));
         for (int i = 0; i < holdContainerWidth; i++) cout << " ";
         cout << "| " << p1HighScoreText;
         for (int i = 0; i < gameContainerWidth - 3 - p1HighScoreText.length(); i++)  cout << " ";
@@ -330,8 +330,8 @@ void ConsoleView::render() {
         cout << endl; 
 
         //printing score text
-        string p1ScoreText = "Score: " + to_string(displayProxy.getCurrentScore(1));
-        string p2ScoreText = "Score: " + to_string(displayProxy.getCurrentScore(2));
+        string p1ScoreText = "Score: " + to_string(displayProxy.getCurrentScore(BiQuadris::PlayerTurn::PLAYER1));
+        string p2ScoreText = "Score: " + to_string(displayProxy.getCurrentScore(BiQuadris::PlayerTurn::PLAYER2));
         for (int i = 0; i < holdContainerWidth; i++) cout << " ";
         cout << "| " << p1ScoreText;
         for (int i = 0; i < gameContainerWidth - 3 - p1ScoreText.length(); i++)  cout << " ";

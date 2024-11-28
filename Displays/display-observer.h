@@ -1,7 +1,7 @@
 #ifndef DISPLAYOBSERVER
 #define DISPLAYOBSERVER
 #include "../Miscellaneous/observer.h"
-#include "./test-graphics/biquadris-proxies.h"
+#include "./test/biquadris-proxies.h"
 
 using namespace std;
 
@@ -24,8 +24,15 @@ class DisplayObserver: public Observer {
         const int gameGridRows = 18;
         const int gameGridCols = 11;
         const int blockCoordAdjustment = 1;
+        const int reserveRowHeight = 3;
 
-        bool enhanced;
+        const int blindRowStart = 2 + reserveRowHeight;
+        const int blindRowEnd = 11 + reserveRowHeight;
+        const int blindColStart = 2;
+        const int blindColEnd = 8;
+
+        const char blockPreviewChar = '*';
+        const char blindEffectChar = '?';
         
         CharGrid p1GameGrid;
         CharGrid p1HoldGrid;
@@ -37,7 +44,7 @@ class DisplayObserver: public Observer {
 
         virtual void render() = 0;
     public:
-        DisplayObserver(const DisplayProxy & displayProxy, bool enhanced);
+        DisplayObserver(const DisplayProxy & displayProxy);
         void notify();
 };
 

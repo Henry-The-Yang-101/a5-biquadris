@@ -18,6 +18,7 @@ class BiQuadris {
   public:
     BiQuadris(string sequenceFile1 = "sequence1.txt", string sequenceFile2 = "sequence2.txt", bool devMode = false, bool bonusFeatures = true, int randomSeed = 0);
     ~BiQuadris();
+    enum class PlayerTurn {PLAYER1, PLAYER2};
 };
 
 class BiQuadrisProxy {

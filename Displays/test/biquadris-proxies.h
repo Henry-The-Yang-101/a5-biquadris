@@ -5,6 +5,7 @@
 
 using CellCoordinate = pair<int, int>;
 using BlockAttributes = pair<vector<CellCoordinate>, char>;
+using BlockCellCoordinates = std::vector<CellCoordinate>;
 using CharGrid = vector<vector<char>>;
 
 
@@ -12,17 +13,29 @@ class DisplayProxy : public BiQuadrisProxy {
   public:
     DisplayProxy(BiQuadris & gameEngine);
 
-    CharGrid getGrid(int whichBoard) const;
-    BlockAttributes getCurrentBlockAttributes(int whichBoard) const;
-    BlockAttributes getNextBlockAttributes(int whichBoard) const;
-    BlockAttributes getHeldBlockAttributes(int whichBoard) const;
-    vector<BlockAttributes> getBlockAttributesBacklog(int whichBoard) const;
-    int getCurrentScore(int whichBoard) const;
-    int getHighScore(int whichBoard) const;
-    int getLevel(int whichBoard) const;
+    int getGridWidth() const;
+    int getGridHeight() const;
+    int getGridNumReserveRows() const;
+    int getCurrentScore(BiQuadris::PlayerTurn whichPlayerTurn) const;
+    int getHighScore(BiQuadris::PlayerTurn whichPlayerTurn) const;
+    int getLevelNum(BiQuadris::PlayerTurn whichPlayerTurn) const;
+
+    bool getBlindEffectEnabled(BiQuadris::PlayerTurn whichPlayerTurn) const;
     bool getIsGameOver() const;
-    int getCurrentBoardTurn() const;
     bool getCanUseSpecialAction() const;
+    bool getBonusFeaturesEnabled() const;
+
+    BiQuadris::PlayerTurn getCurrentPlayerTurn() const;
+
+    CharGrid getCharGrid(BiQuadris::PlayerTurn whichPlayerTurn) const;
+
+    BlockCellCoordinates getCurrentBlockDropPreviewCellCoordinates(BiQuadris::PlayerTurn whichPlayerTurn) const;
+    BlockAttributes getCurrentBlockAttributes(BiQuadris::PlayerTurn whichPlayerTurn) const;
+    BlockAttributes getNextBlockAttributes(BiQuadris::PlayerTurn whichPlayerTurn) const;
+    BlockAttributes getHeldBlockAttributes(BiQuadris::PlayerTurn whichPlayerTurn) const;
+    
+    std::vector<BlockAttributes> getBlockAttributesBacklog(BiQuadris::PlayerTurn whichPlayerTurn) const;
+
 };
 
 #endif

@@ -25,7 +25,7 @@ class ConsoleView: public DisplayObserver {
     void render() override;
 
     public:
-        ConsoleView(const DisplayProxy & displayProxy, bool enhanced);
+        ConsoleView(const DisplayProxy & displayProxy);
 };
 
 #endif
