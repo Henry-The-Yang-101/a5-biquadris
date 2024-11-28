@@ -267,6 +267,10 @@ bool BiQuadris::getCanUseSpecialAction() const {
     return this->canUseSpecialAction;
 }
 
+bool BiQuadris::getBonusFeaturesEnabled() const {
+    return this->bonusFeatures;
+}
+
 // mutators
 void BiQuadris::setBonusFeatures(bool isOn) {
     this->bonusFeatures = isOn;

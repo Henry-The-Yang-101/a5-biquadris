@@ -1,7 +1,7 @@
 #include "graphics-view.h"
 
-GraphicsView::GraphicsView(const DisplayProxy & displayProxy, bool enhanced) :
-    DisplayObserver{displayProxy, enhanced}, 
+GraphicsView::GraphicsView(const DisplayProxy & displayProxy) :
+    DisplayObserver{displayProxy}, 
     window{1736, 744} {
 
         this->charColorMap[' '] = 1;
@@ -18,7 +18,7 @@ void GraphicsView::render() {
 
     int Black = 1;
 
-    const int currentPlayer = this->displayProxy.getCurrentBoardTurn();
+    const BiQuadris::PlayerTurn currentPlayer = this->displayProxy.getCurrentPlayerTurn();
 
     this->window.drawString(0, 0, "", 0);
     this->window.drawString(0, 0, "", 0);
@@ -44,7 +44,7 @@ void GraphicsView::render() {
     int shiftLeft = scoreboardShiftLeft;
 
     std::string playerOneTitle = "Player 1";
-    if (currentPlayer == 1) {
+    if (currentPlayer == BiQuadris::PlayerTurn::PLAYER1) {
         playerOneTitle = "--> Player 1 <--";
     }
 
@@ -59,9 +59,9 @@ void GraphicsView::render() {
     shiftDown += this->fontHeight + this->scoreboardPadding - 2;
     shiftLeft += this->scoreboardPadding;
 
-    int p1Level = this->displayProxy.getLevel(1);
-    int p1Score = this->displayProxy.getCurrentScore(1);
-    int p1HighScore = this->displayProxy.getHighScore(1);
+    int p1Level = this->displayProxy.getLevelNum(BiQuadris::PlayerTurn::PLAYER1);
+    int p1Score = this->displayProxy.getCurrentScore(BiQuadris::PlayerTurn::PLAYER1);
+    int p1HighScore = this->displayProxy.getHighScore(BiQuadris::PlayerTurn::PLAYER1);
 
     std::string player1Stats = "Level: " + std::to_string(p1Level) + " Score: " + std::to_string(p1Score) + " High Score: " + std::to_string(p1HighScore);
 
@@ -124,8 +124,8 @@ void GraphicsView::render() {
 
             char currentBlockChar = this->p1GameGrid[r][c];
 
-            if (currentPlayer == 1) {
-                BlockAttributes blockAttributesCurrent = this->displayProxy.getCurrentBlockAttributes(1);
+            if (currentPlayer == BiQuadris::PlayerTurn::PLAYER1) {
+                BlockAttributes blockAttributesCurrent = this->displayProxy.getCurrentBlockAttributes(BiQuadris::PlayerTurn::PLAYER1);
                 for (const auto &coord : blockAttributesCurrent.first) {
                     if (coord.first == c && coord.second + 1 == r) {
                         currentBlockChar = blockAttributesCurrent.second;
@@ -133,7 +133,7 @@ void GraphicsView::render() {
                     }
                 }
 
-                BlockCellCoordinates previewCoordinates = this->displayProxy.getCurrentBlockDropPreviewCellCoordinates(1);
+                BlockCellCoordinates previewCoordinates = this->displayProxy.getCurrentBlockDropPreviewCellCoordinates(BiQuadris::PlayerTurn::PLAYER1);
                 for (const auto &coord : previewCoordinates) {
                     if (coord.first == c && coord.second + 1 == r) {
                         this->window.fillRectangle(pixelsLeft, shiftDown, this->blockGapPixels, PIXELS_PER_SQUARE, Black);
@@ -226,7 +226,7 @@ void GraphicsView::render() {
     int secondScoreboardShiftLeft = scoreboardShiftLeft + boardWidth + 2 * this->blockGapPixels + sidebarWidth + sidebarWidth + gapBetweenGridsPixels;
 
     std::string playerTwoTitle = "Player 2";
-    if (this->displayProxy.getCurrentBoardTurn() == 2) {
+    if (this->displayProxy.getCurrentPlayerTurn() == BiQuadris::PlayerTurn::PLAYER2) {
         playerTwoTitle = "--> Player 2 <--";
     }
 
@@ -239,9 +239,9 @@ void GraphicsView::render() {
     shiftDown += this->fontHeight + this->scoreboardPadding - 2;
     secondScoreboardShiftLeft += this->scoreboardPadding;
 
-    int p2Level = this->displayProxy.getLevel(2);
-    int p2Score = this->displayProxy.getCurrentScore(2);
-    int p2HighScore = this->displayProxy.getHighScore(2);
+    int p2Level = this->displayProxy.getLevelNum(BiQuadris::PlayerTurn::PLAYER2);
+    int p2Score = this->displayProxy.getCurrentScore(BiQuadris::PlayerTurn::PLAYER2);
+    int p2HighScore = this->displayProxy.getHighScore(BiQuadris::PlayerTurn::PLAYER2);
 
     std::string player2Stats = "Level: " + std::to_string(p2Level) + " Score: " + std::to_string(p2Score) + " High Score: " + std::to_string(p2HighScore);
 
@@ -301,8 +301,8 @@ void GraphicsView::render() {
 
             char currentBlockChar = this->p2GameGrid[r][c];
 
-            if (currentPlayer == 2) {
-                BlockAttributes blockAttributesCurrent = this->displayProxy.getCurrentBlockAttributes(2);
+            if (currentPlayer == BiQuadris::PlayerTurn::PLAYER2) {
+                BlockAttributes blockAttributesCurrent = this->displayProxy.getCurrentBlockAttributes(BiQuadris::PlayerTurn::PLAYER2);
                 for (const auto &coord : blockAttributesCurrent.first) {
                     if (coord.first == c && coord.second + 1 == r) {
                         currentBlockChar = blockAttributesCurrent.second;
@@ -310,7 +310,7 @@ void GraphicsView::render() {
                     }
                 }
 
-                BlockCellCoordinates previewCoordinates = this->displayProxy.getCurrentBlockDropPreviewCellCoordinates(2);
+                BlockCellCoordinates previewCoordinates = this->displayProxy.getCurrentBlockDropPreviewCellCoordinates(BiQuadris::PlayerTurn::PLAYER2);
                 for (const auto &coord : previewCoordinates) {
                     if (coord.first == c && coord.second + 1 == r) {
                         this->window.fillRectangle(pixelsLeft, shiftDown, this->blockGapPixels, PIXELS_PER_SQUARE, Black);
@@ -379,7 +379,7 @@ void GraphicsView::render() {
 
     }
 
-    this->displayProxy.getCurrentBlockAttributes(1);
+    this->displayProxy.getCurrentBlockAttributes(BiQuadris::PlayerTurn::PLAYER1);
 
 }
 

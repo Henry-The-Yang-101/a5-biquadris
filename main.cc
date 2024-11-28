@@ -17,7 +17,7 @@
 #include "CommandTree/OutputCommands/all-output-commands.h"
 #include "CommandTree/VisualEffectCommands/all-visual-effect-commands.h"
 
-// #include "Displays/console-view.h"
+#include "Displays/console-view.h"
 // #include "Displays/graphics-view.h"
 
 const int I_LOVE_CS{246};
@@ -120,10 +120,10 @@ int main (int argc, char* argv[]) {
 
   const DisplayProxy displayProxy{gameEngine};
 
-  // std::shared_ptr<ConsoleView> consoleView = std::make_shared<ConsoleView>(displayProxy);
+  std::shared_ptr<ConsoleView> consoleView = std::make_shared<ConsoleView>(displayProxy);
   // std::shared_ptr<GraphicsView> graphicsView;
 
-  // gameEngine.attach(consoleView);
+  gameEngine.attach(consoleView);
 
   // if (showGraphicsView) {
   //   graphicsView = std::make_shared<GraphicsView>(displayProxy);

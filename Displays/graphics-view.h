@@ -29,7 +29,7 @@ class GraphicsView : public DisplayObserver {
         void render() override;
 
     public:
-        GraphicsView(const DisplayProxy & displayProxy, bool enhanced);
+        GraphicsView(const DisplayProxy & displayProxy);
 
         // void fillRectangle();
         // void drawString();
